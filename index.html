@@ -26,8 +26,8 @@
               }
             },
             fontFamily: {
-              sans: ['"Space Grotesk"', 'Inter', 'sans-serif'],
-              mono: ['"JetBrains Mono"', 'monospace']
+              sans: ['"Space Grotesk"', 'sans-serif'],
+              mono: ['"Space Grotesk"', 'sans-serif']
             }
           }
         }
@@ -36,61 +36,56 @@
     <!-- Lucide icons package CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
-  <body class="min-h-screen relative overflow-hidden bg-brand-surface text-brand-text flex flex-col justify-between selection:bg-brand-orange selection:text-brand-orange-light scanlines" id="body-root">
+  <body class="min-h-screen relative overflow-hidden bg-brand-surface text-brand-text flex flex-col justify-between selection:bg-brand-orange selection:text-brand-orange-light" id="body-root">
 
     <!-- Interactive Top Console Controls & Navigation -->
-    <nav class="fixed top-0 left-0 w-full bg-transparent flex justify-between items-center px-6 md:px-12 py-6 font-mono text-xs z-50 text-white mix-blend-difference">
+    <nav class="fixed top-0 left-0 w-full bg-transparent flex flex-row items-center justify-between px-6 md:px-12 py-6 font-sans text-sm z-50 text-white mix-blend-difference gap-4">
       
       <!-- Brand Logo / Scroll to Welcome -->
       <button 
         onclick="scrollToSegment(0)"
-        class="scale-95 transition-all hover:scale-100 text-left h-8 flex items-center justify-start cursor-pointer bg-transparent border-0"
+        class="transition-all hover:scale-105 text-left h-10 flex items-center justify-start cursor-pointer bg-transparent border-0 shrink-0"
         id="branding-logo"
       >
         <img 
-          src="raf-logo.png" 
-          alt="raf-logo" 
-          class="h-[18px] md:h-[24px] w-auto object-contain block" 
-          onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='inline-block';"
+          src="raf-logo-1.png" 
+          alt="raf-logo-1" 
+          class="h-[32px] md:h-[24px] w-auto object-contain block" 
         />
-        <span id="logo-fallback" class="hidden font-sans font-black text-lg md:text-xl tracking-tighter text-brand-orange">.raf</span>
       </button>
 
-      <!-- Central Quick Nav anchors (Desktop) -->
-      <div class="hidden md:flex justify-between items-center space-x-8 max-w-2xl">
+      <!-- Central Quick Nav anchors (Desktop) stretched in full width of the midsection -->
+      <div class="hidden md:flex flex-1 justify-between items-center max-w-none px-[4vw]">
         <button 
           onclick="scrollToSegment(1)" 
           id="nav-branding"
-          class="nav-anchor transition-colors py-1 lowercase cursor-pointer bg-transparent border-0 text-zinc-400 hover:text-white"
+          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase"
         >
           .branding
         </button>
         <button 
           onclick="scrollToSegment(2)" 
           id="nav-interface"
-          class="nav-anchor transition-colors py-1 lowercase cursor-pointer bg-transparent border-0 text-zinc-400 hover:text-white"
+          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase"
         >
           .interface
         </button>
         <button 
           onclick="scrollToSegment(3)" 
           id="nav-print"
-          class="nav-anchor transition-colors py-1 lowercase cursor-pointer bg-transparent border-0 text-zinc-400 hover:text-white"
+          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase"
         >
           .print
         </button>
         <button 
           onclick="scrollToSegment(4)" 
           id="nav-worked-for"
-          class="nav-anchor transition-colors py-1 lowercase cursor-pointer bg-transparent border-0 text-zinc-400 hover:text-white"
+          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase"
         >
           .worked for
         </button>
       </div>
 
-      <!-- Live Interface Status & Controls toggles -->
-      <div class="flex items-center space-x-4 font-mono text-[10px] tracking-wider">
-      </div>
     </nav>
 
     <!-- Ambient backdrop overlay -->
@@ -100,20 +95,34 @@
 
     <!-- Primary Vertical Scroll Snap container -->
     <main id="scroll-container" class="scroll-container z-10 w-full">
+      <!-- Unified CRT Scanline Filter (Layered between backgrounds and active interactive text items/nav views) -->
+      <div class="scanline-overlay"></div>
       
       <!-- SECTION 1: .welcome -->
       <section class="scroll-section px-[5vw]">
-        <!-- Tokyo atmospheric backdrop picture -->
+        <!-- Tokyo atmospheric backdrop picture (Grayscale Base and dynamic Color revealing Spotlight) -->
         <div 
-          class="section-bg absolute inset-0 pointer-events-none -z-10 bg-cover bg-center opacity-80" 
-          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDwfUY_00Hylj7Y6Asv5HUSgAHuo_jwWHn0EaulumQ63Otb5ckywi7cVNSkAaWXYnZ-zMMtOfoNquGyAvnZ6b-AS7HWLEw7-MVoSIpkwp2CeP6FeNbWLcmJdSrrrUvhwGn1fjNaSB0wttv82gM8TEANuGjnCW6Yia6-HTneGrgaUtLYclMEVToS8rfXGiIbgYs3w2n6qZjFwcQj52KdXLRqaOxtRpR05EqkrlK2NNwXzxZZcIy79cpKmTV_pUAwnzMF-dsK8dc-pZk')"
+          class="section-bg absolute inset-0 pointer-events-none -z-20 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-background.jpg');"
+        ></div>
+        <div 
+          class="section-bg-color absolute inset-0 pointer-events-none -z-10 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-background.jpg');"
         ></div>
         
-        <div class="max-w-4xl pb-16 animate-fade-in-up">
-          <h1 class="font-sans text-5xl md:text-8xl font-black mb-4 lowercase tracking-tight leading-none text-brand-text">
-            .hi, i'm raf
-          </h1>
-          <p class="font-sans text-sm md:text-base text-brand-text-muted max-w-xl lowercase leading-relaxed">
+        <!-- Welcome content padded accurately above footer -->
+        <div class="max-w-4xl pb-[calc(32px+56px)] animate-fade-in-up">
+          <!-- Dynamic Ticker Titles changing every 3 seconds with vertical slide -->
+          <div class="h-[60px] md:h-[120px] overflow-hidden relative mb-6" id="hero-title-container">
+            <div id="hero-title-slider" class="transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col">
+              <div class="h-[60px] md:h-[120px] flex items-center font-sans text-4xl md:text-[85px] font-black lowercase tracking-tight leading-none text-brand-text">.visual designer</div>
+              <div class="h-[60px] md:h-[120px] flex items-center font-sans text-4xl md:text-[85px] font-black lowercase tracking-tight leading-none text-brand-text">.branding designer</div>
+              <div class="h-[60px] md:h-[120px] flex items-center font-sans text-4xl md:text-[85px] font-black lowercase tracking-tight leading-none text-brand-text">.interface designer</div>
+              <div class="h-[60px] md:h-[120px] flex items-center font-sans text-4xl md:text-[85px] font-black lowercase tracking-tight leading-none text-brand-text">.print designer</div>
+            </div>
+          </div>
+          
+          <p class="font-sans text-lg md:text-[22px] text-brand-text-muted max-w-2xl lowercase leading-relaxed">
             spain-based graphic designer with +10 years of experience. worked in advertising for +3 years with both national and international clients.
           </p>
         </div>
@@ -123,17 +132,21 @@
       <section class="scroll-section px-[5vw]">
         <!-- Branding abstract geometry backdrop -->
         <div 
-          class="section-bg absolute inset-0 pointer-events-none -z-10 bg-cover bg-center" 
-          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDPR2ceREfrUqOiDOWxvdgBY-t-kaK7N015t8BbT3golrdXt4BPitzPuDmc24DL9GgOUSHBDEl8IH1n-hxg5JNPEYfXiFMr0jxriNoxsKk2AxCJ-Aqnpq_T6AzIHkiHMRvRIZIDhNhL3epqUljB7x6A-VA7LhRBhd8N1O1n4irO11LVBQ2ZD8Z46z5kM--2wQwLGTaXgrTGjB04DwviFZ-pVi8cBzPt02Tuf65MdTUql_WEXneClCGUIRe-Xz8wJk-B5AeqaYJNVdk')"
+          class="section-bg absolute inset-0 pointer-events-none -z-20 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-branding.jpg');"
+        ></div>
+        <div 
+          class="section-bg-color absolute inset-0 pointer-events-none -z-10 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-branding.jpg');"
         ></div>
 
-        <div class="max-w-4xl pb-16 w-full">
-          <h1 class="font-sans text-4xl md:text-7xl font-black mb-6 lowercase tracking-tight text-brand-text">
-            .branding design <span class="text-brand-orange">/</span>
+        <div class="max-w-4xl pb-[calc(32px+56px)] w-full">
+          <h1 class="font-sans text-5xl md:text-[75px] font-black mb-8 lowercase tracking-tight text-brand-text">
+            .branding design
           </h1>
           
-          <!-- Projects insertion point (rendered via JS) -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2" id="branding-grid">
+          <!-- Projects stacked vertically as clean horizontal rows -->
+          <div class="flex flex-col gap-1.5 w-full mt-4" id="branding-grid">
             <!-- Dynamic Category cards go here -->
           </div>
         </div>
@@ -143,17 +156,21 @@
       <section class="scroll-section px-[5vw]">
         <!-- Archaeological UI layout backdrop -->
         <div 
-          class="section-bg absolute inset-0 pointer-events-none -z-10 bg-cover bg-center" 
-          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCjQlGjlj6wqxyQsjIfUz2O88Nlm9hbdwwL95uckVFs40DJd_eZQj9k5JPpLDNfxWHk1GhYM2QrKV2ETWMbuSK6w8txcHcVviWYz-1JzCckJIHykbb1Ytw9yacHO8Ly73ABmRwf8nkh0bHiS48h6MVhMbZLPAmNJx31VygP2RD41mFF7H0TPyWMiIhmFVtCBgMNpptGK8eSilAbzBhHjMVgBu5RkEW6AwWqjRuysAdIiVqthwvJklrq5vODUYhu0eXBbJR8LINc_2o')"
+          class="section-bg absolute inset-0 pointer-events-none -z-20 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-ui.jpg');"
+        ></div>
+        <div 
+          class="section-bg-color absolute inset-0 pointer-events-none -z-10 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-ui.jpg');"
         ></div>
 
-        <div class="max-w-4xl pb-16 w-full">
-          <h1 class="font-sans text-4xl md:text-7xl font-black mb-6 lowercase tracking-tight text-brand-text">
-            .interface design <span class="text-brand-orange">/</span>
+        <div class="max-w-4xl pb-[calc(32px+56px)] w-full">
+          <h1 class="font-sans text-5xl md:text-[75px] font-black mb-8 lowercase tracking-tight text-brand-text">
+            .interface design
           </h1>
 
-          <!-- Interface grid insertion point -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2" id="interface-grid">
+          <!-- Interface row list -->
+          <div class="flex flex-col gap-1.5 w-full mt-4" id="interface-grid">
             <!-- Dynamic interface files cards go here -->
           </div>
         </div>
@@ -163,17 +180,21 @@
       <section class="scroll-section px-[5vw]">
         <!-- Concrete print tactile backdrop -->
         <div 
-          class="section-bg absolute inset-0 pointer-events-none -z-10 bg-cover bg-center" 
-          style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaByw4CHO7rq-4v0cLqhiQnlH7Sv5Qk0Oef8lEhiL0l4lgt1XIVg5F7lQPu8ABK6Rvh2AzQJizwxngjn-iMgjp11byFyLw0OzCylXbZbCS6_nx8TfTwJp_W9QW7PCDu2ios8oma5VNGg2bJW4C96O4Y1RRh1R2Ypnjp3J2pA502GgTwFatZjufNZjbodhvb4PMLsv1M0uPjf1vxlZ2JjxCw-z4_KDfcvHH8BZ_PGb3rwxnEnVQIJ_EC_YYpfzJcPcEy9qb1APXjz0')"
+          class="section-bg absolute inset-0 pointer-events-none -z-20 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-print.png');"
+        ></div>
+        <div 
+          class="section-bg-color absolute inset-0 pointer-events-none -z-10 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-print.png');"
         ></div>
 
-        <div class="max-w-4xl pb-16 w-full">
-          <h1 class="font-sans text-4xl md:text-7xl font-black mb-6 lowercase tracking-tight text-brand-text">
-            .print design <span class="text-brand-orange">/</span>
+        <div class="max-w-4xl pb-[calc(32px+56px)] w-full">
+          <h1 class="font-sans text-5xl md:text-[75px] font-black mb-8 lowercase tracking-tight text-brand-text">
+            .print design
           </h1>
 
-          <!-- Print grid insertion point -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2" id="print-grid">
+          <!-- Print row list -->
+          <div class="flex flex-col gap-1.5 w-full mt-4" id="print-grid">
             <!-- Dynamic physical print layout goes here -->
           </div>
         </div>
@@ -181,15 +202,25 @@
 
       <!-- SECTION 5: .worked for -->
       <section class="scroll-section px-[5vw]">
-        <div class="w-full max-w-6xl pb-24 grid grid-cols-1 lg:grid-cols-5 gap-8 items-end">
-          <div class="lg:col-span-2">
-            <h1 class="font-sans text-5xl md:text-8xl font-black lowercase tracking-tight text-brand-text leading-none">
+        <!-- Custom generated backdrop picture mapped exactly to specs -->
+        <div 
+          class="section-bg absolute inset-0 pointer-events-none -z-20 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-background.jpg');"
+        ></div>
+        <div 
+          class="section-bg-color absolute inset-0 pointer-events-none -z-10 bg-cover bg-center opacity-45" 
+          style="background-image: url('./assets/hero-background.jpg');"
+        ></div>
+
+        <div class="w-full max-w-6xl pb-[calc(32px+56px)] mt-12 flex flex-col justify-end">
+          <div class="mb-8">
+            <h1 class="font-sans text-5xl md:text-[75px] font-black lowercase tracking-tight text-brand-text leading-none">
               .worked for
             </h1>
           </div>
 
-          <!-- Worked for brands insertion point -->
-          <div class="lg:col-span-3 grid grid-cols-2 gap-x-12 gap-y-3 font-sans text-sm md:text-base text-brand-text-muted lowercase" id="worked-for-grid">
+          <!-- Worked for brands insertion point - fluid wrap that stays strictly within screen limits -->
+          <div class="flex flex-wrap gap-x-10 gap-y-4 font-sans text-base md:text-xl text-brand-text-muted lowercase w-full" id="worked-for-grid">
             <!-- Dynamic brand names list goes here -->
           </div>
         </div>
@@ -197,35 +228,26 @@
 
     </main>
 
-    <!-- Persistent Orange Footer conforming precisely to specs -->
-    <footer class="fixed bottom-0 left-0 w-full bg-brand-orange flex justify-between items-center px-6 md:px-[5vw] py-4 z-40 text-brand-orange-light font-sans text-xs">
-      <button
-        onclick="openResumeModal()"
-        class="font-sans text-2xl font-black text-brand-orange-light opacity-80 hover:opacity-100 transition-opacity bg-transparent border-0 cursor-pointer"
-        title="See designer credentials"
-      >
-        ®
-      </button>
-
-      <!-- Footer action options -->
-      <div class="flex justify-end space-x-6 md:space-x-12 font-mono text-[11px] lowercase tracking-wider">
+    <!-- Persistent Orange Footer conforming precisely to specs with white box hover buttons -->
+    <footer class="fixed bottom-0 left-0 w-full bg-brand-orange flex items-center px-6 md:px-[5vw] py-2.5 z-40 text-brand-orange-light font-sans text-sm md:text-base">
+      <!-- Footer horizontal action options spaced perfectly -->
+      <div class="flex justify-between items-center w-full lowercase tracking-wider font-bold">
         <a 
           href="mailto:hello@raf.design"
-          onclick="playTick()"
-          class="hover:text-white transition-colors duration-300 scale-95 hover:scale-100 lowercase"
+          class="transition-all duration-300 py-1.5 px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange lowercase"
         >
           .mail
         </a>
         <button 
-          onclick="openResumeModal()"
-          class="hover:text-white transition-colors duration-300 scale-95 hover:scale-100 lowercase cursor-pointer bg-transparent border-0 font-mono"
+          onclick="alert('.curriculum printed dossier dispatch completed!');"
+          class="transition-all duration-300 py-1.5 px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange cursor-pointer bg-transparent border-0 font-sans font-bold lowercase"
         >
           .curriculum
         </button>
         <a 
           href="#"
           id="behance-link"
-          class="hover:text-white transition-colors duration-300 scale-95 hover:scale-100 lowercase flex items-center gap-1"
+          class="transition-all duration-300 py-1.5 px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange lowercase"
         >
           .behance
         </a>
@@ -253,7 +275,7 @@
           <div class="flex justify-between items-center border-b border-brand-outline/10 pb-4 mb-6">
             <div class="flex items-center space-x-2">
               <i data-lucide="folder-kanban" class="w-5 h-5 text-brand-orange"></i>
-              <span class="font-mono text-xs uppercase tracking-wider text-brand-text-muted" id="modal-project-category">
+              <span class="font-sans text-xs md:text-sm uppercase tracking-wider text-brand-text-muted font-bold" id="modal-project-category">
                 case study / BRANDING
               </span>
             </div>
@@ -270,7 +292,7 @@
           <h2 class="font-sans text-4xl md:text-5xl font-extrabold tracking-tight text-brand-text lowercase mb-2">
             <span id="modal-project-title">project title</span> <span class="text-brand-orange">/</span>
           </h2>
-          <p class="font-sans text-lg text-brand-orange font-medium mb-6" id="modal-project-subtitle">
+          <p class="font-sans text-lg md:text-xl text-brand-orange font-medium mb-6" id="modal-project-subtitle">
             branding, identity design and guidelines
           </p>
 
@@ -289,23 +311,23 @@
           </div>
 
           <!-- Overview & stats -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-base md:text-lg">
             <div class="md:col-span-2">
-              <h3 class="font-mono text-xs uppercase text-brand-orange mb-2 tracking-wider">.the overview</h3>
-              <p class="font-sans text-brand-text-muted text-sm leading-relaxed lowercase" id="modal-project-desc">
+              <h3 class="font-sans text-sm md:text-base uppercase text-brand-orange mb-2 tracking-wider font-bold">.the overview</h3>
+              <p class="font-sans text-brand-text-muted leading-relaxed lowercase" id="modal-project-desc">
                 full comprehensive overview
               </p>
             </div>
             <div class="space-y-4">
               <div>
-                <h4 class="font-mono text-xs uppercase text-brand-orange tracking-wider flex items-center gap-1">
-                  <i data-lucide="calendar" class="w-3.5 h-3.5"></i> .timeline
+                <h4 class="font-sans text-sm md:text-base uppercase text-brand-orange tracking-wider flex items-center gap-1 font-bold">
+                  <i data-lucide="calendar" class="w-4 h-4"></i> .timeline
                 </h4>
-                <p class="font-sans text-brand-text text-sm lowercase" id="modal-project-year">2025 / completed</p>
+                <p class="font-sans text-brand-text lowercase" id="modal-project-year">2025 / completed</p>
               </div>
               <div>
-                <h4 class="font-mono text-xs uppercase text-brand-orange tracking-wider flex items-center gap-1">
-                  <i data-lucide="wrench" class="w-3.5 h-3.5"></i> .toolkit
+                <h4 class="font-sans text-sm md:text-base uppercase text-brand-orange tracking-wider flex items-center gap-1 font-bold">
+                  <i data-lucide="wrench" class="w-4 h-4"></i> .toolkit
                 </h4>
                 <div class="flex flex-wrap gap-1 mt-1" id="modal-project-toolkit">
                   <!-- Tools pill tags go here -->
@@ -316,8 +338,8 @@
 
           <!-- Custom Deliverables checklist list -->
           <div class="border-t border-brand-outline/10 pt-6 mb-6">
-            <h3 class="font-mono text-xs uppercase text-brand-orange tracking-wider mb-4 flex items-center gap-1">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> .designed deliverables
+            <h3 class="font-sans text-sm md:text-base uppercase text-brand-orange tracking-wider mb-4 flex items-center gap-1 font-bold">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> .designed deliverables
             </h3>
             <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="modal-project-features">
               <!-- Feature list elements list -->
@@ -327,129 +349,15 @@
 
         <!-- Footer -->
         <div class="border-t border-brand-outline/10 pt-6 mt-8 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
-          <div class="font-mono text-[10px] text-brand-text-muted/60 lowercase">
+          <div class="font-sans text-xs md:text-sm text-brand-text-muted/60 lowercase">
             ® 2026. all digital files secure.
           </div>
           <button
             onclick="closeProjectModal()"
-            class="px-6 py-2 bg-brand-orange hover:bg-brand-orange-hover text-brand-orange-light font-sans text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors text-center cursor-pointer border-0"
+            class="px-6 py-2 bg-brand-orange hover:bg-brand-orange-hover text-brand-orange-light font-sans text-sm font-semibold uppercase tracking-wider rounded-sm transition-colors text-center cursor-pointer border-0"
           >
             .close publication view
           </button>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- INTERACTIVE CURRICULUM VITÆ RESUME MODAL   -->
-    <!-- ========================================== -->
-    <div id="resume-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm p-4 overflow-y-auto hidden">
-      <!-- Modal card popup -->
-      <div class="relative w-full max-w-4xl bg-brand-surface-card border border-brand-outline/20 p-6 md:p-8 rounded shadow-2xl overflow-y-auto max-h-[90vh] scale-95 transition-all duration-300" id="resume-modal-content">
-        
-        <!-- Header -->
-        <div class="flex justify-between items-center border-b border-brand-outline/10 pb-4 mb-6">
-          <div class="flex items-center space-x-2">
-            <i data-lucide="award" class="w-5 h-5 text-brand-orange"></i>
-            <span class="font-mono text-xs uppercase tracking-wider text-brand-text-muted">
-              designer credential .curriculum vital
-            </span>
-          </div>
-          <button
-            onclick="closeResumeModal()"
-            class="p-2 border border-brand-outline/20 hover:border-brand-orange hover:text-brand-orange transition-colors rounded-sm bg-transparent"
-            title="Close Panel"
-          >
-            <i data-lucide="x" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-        <!-- CV content bento layout grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-left">
-          
-          <!-- Column 1: Info and Mastered Modules -->
-          <div class="space-y-6">
-            <div class="p-4 bg-brand-surface border border-brand-outline/10 rounded-sm">
-              <h3 class="font-sans text-xl font-bold text-brand-text mb-1 lowercase">raf .</h3>
-              <p class="font-mono text-xs text-brand-text-muted mb-4 font-semibold uppercase">senior graphic & visual media designer</p>
-              
-              <div class="space-y-2 border-t border-brand-outline/10 pt-4 text-xs text-brand-text-muted font-sans lowercase">
-                <div class="flex justify-between">
-                  <span class="font-mono text-brand-orange text-[10px]">location:</span>
-                  <span>valencia, spain</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="font-mono text-brand-orange text-[10px]">experience:</span>
-                  <span>10+ years (self-taught focus)</span>
-                </div>
-                <div class="flex justify-between">
-                  <span class="font-mono text-brand-orange text-[10px]">availability:</span>
-                  <span class="text-emerald-400">● immediate commissions</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Skills matrices lists -->
-            <div>
-              <h3 class="font-mono text-xs uppercase text-brand-orange tracking-wider mb-3 flex items-center gap-1">
-                <i data-lucide="layers" class="w-3.5 h-3.5"></i> .mastered matrices
-              </h3>
-              <div class="space-y-4" id="skills-matrices">
-                <!-- Skill groups filled dynamically via javascript -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Columns 2-3: CV Ledger Timeline with Tabs -->
-          <div class="lg:col-span-2 space-y-6">
-            
-            <!-- Filters Tabs row controls -->
-            <div class="flex flex-wrap items-center gap-2 border-b border-brand-outline/10 pb-4">
-              <span class="font-mono text-xs text-brand-text-muted/60 uppercase mr-2">filter ledger:</span>
-              <button 
-                onclick="filterLedger('all')" 
-                id="filter-all"
-                class="cv-tab-btn px-3 py-1 text-xs font-mono lowercase border transition-all rounded-sm bg-brand-orange border-brand-orange text-brand-orange-light"
-              >
-                .all
-              </button>
-              <button 
-                onclick="filterLedger('experience')" 
-                id="filter-experience"
-                class="cv-tab-btn px-3 py-1 text-xs font-mono lowercase border transition-all rounded-sm border-brand-outline/20 hover:border-brand-orange text-brand-text-muted"
-              >
-                .experience
-              </button>
-              <button 
-                onclick="filterLedger('education')" 
-                id="filter-education"
-                class="cv-tab-btn px-3 py-1 text-xs font-mono lowercase border transition-all rounded-sm border-brand-outline/20 hover:border-brand-orange text-brand-text-muted"
-              >
-                .education
-              </button>
-            </div>
-
-            <!-- Scrollable Timeline listing -->
-            <div class="space-y-6 overflow-y-auto max-h-[45vh] pr-2 scrollbar-thin" id="timeline-list">
-              <!-- Timeline Items lists built dynamically -->
-            </div>
-
-            <!-- CV Footer elements -->
-            <div class="border-t border-brand-outline/10 pt-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-              <div class="flex items-center gap-2 text-xs font-mono text-brand-text-muted/70">
-                <i data-lucide="graduation-cap" class="h-4 w-4 text-brand-orange"></i>
-                <span>accredited curriculum format active.</span>
-              </div>
-              <button
-                onclick="downloadPDF()"
-                class="flex items-center gap-2 px-4 py-2 border border-brand-orange hover:bg-brand-orange/10 text-brand-orange font-sans text-xs font-semibold uppercase tracking-wider rounded-sm cursor-pointer transition-all bg-transparent"
-              >
-                <i data-lucide="download" class="w-3.5 h-3.5"></i> .download printed dossier [pdf]
-              </button>
-            </div>
-
-          </div>
         </div>
       </div>
     </div>

@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;850;900&display=swap');
 
 :root {
-  --font-sans: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
 
   /* Raw Brutalist Colors matching Kinetic Noir Theme with User Custom Specs */
   --color-brand-surface: #191919;
@@ -49,21 +49,40 @@ body {
   justify-content: flex-end;
 }
 
-/* CRT Scanline styling */
-.scanlines {
-  position: relative;
+/* Unified CRT Scanline styling overlay */
+.scanline-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0; /* Over background images (-z-10, -z-20) but under all active layout items, footer, and nav bars */
   overflow: hidden;
 }
 
-.scanlines::before {
+.scanline-overlay::before {
   content: " ";
   display: block;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  z-index: 2;
   background-size: 100% 4px, 6px 100%;
   pointer-events: none;
+}
+
+/* Grayscale background standard */
+.section-bg {
+  filter: grayscale(100%);
+  display: block;
+}
+
+/* Smooth color spotlight overlay */
+.section-bg-color {
+  filter: none;
+  -webkit-mask-image: radial-gradient(circle 200px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 0%, rgba(0, 0, 0, 0.8) 45%, transparent 100%);
+  mask-image: radial-gradient(circle 200px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 0%, rgba(0, 0, 0, 0.8) 45%, transparent 100%);
+  display: block;
 }
 
 /* Custom animation durations */
@@ -92,4 +111,40 @@ body {
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background: var(--color-brand-orange);
   border-radius: 2px;
+}
+
+/* User-requested focus elements to place specifically over the CRT effect */
+nav:nth-of-type(1) > button#branding-logo:nth-of-type(1) > img:nth-of-type(1) {
+  position: relative;
+  z-index: 60 !important;
+}
+
+nav:nth-of-type(1) > div:nth-of-type(1) > button#nav-branding:nth-of-type(1) {
+  position: relative;
+  z-index: 60 !important;
+}
+
+nav:nth-of-type(1) > div:nth-of-type(1) > button#nav-interface:nth-of-type(2) {
+  position: relative;
+  z-index: 60 !important;
+}
+
+nav:nth-of-type(1) > div:nth-of-type(1) > button#nav-print:nth-of-type(3) {
+  position: relative;
+  z-index: 60 !important;
+}
+
+nav:nth-of-type(1) > div:nth-of-type(1) > button#nav-worked-for:nth-of-type(4) {
+  position: relative;
+  z-index: 60 !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(3) > div#hero-title-container:nth-of-type(1) > div#hero-title-slider:nth-of-type(1) > div:nth-of-type(4) {
+  position: relative;
+  z-index: 60 !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(3) > p:nth-of-type(1) {
+  position: relative;
+  z-index: 60 !important;
 }
