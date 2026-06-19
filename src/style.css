@@ -71,17 +71,8 @@ body {
   pointer-events: none;
 }
 
-/* Grayscale background standard */
+/* Section background standard */
 .section-bg {
-  filter: grayscale(100%);
-  display: block;
-}
-
-/* Smooth color spotlight overlay */
-.section-bg-color {
-  filter: none;
-  -webkit-mask-image: radial-gradient(circle 200px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 0%, rgba(0, 0, 0, 0.8) 45%, transparent 100%);
-  mask-image: radial-gradient(circle 200px at var(--mouse-x, -999px) var(--mouse-y, -999px), black 0%, rgba(0, 0, 0, 0.8) 45%, transparent 100%);
   display: block;
 }
 
@@ -147,4 +138,96 @@ main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(
 main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(3) > p:nth-of-type(1) {
   position: relative;
   z-index: 60 !important;
+  width: 800px;
+  font-size: 18px !important;
+}
+
+h3 {
+  font-size: 18px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(3) > div#branding-grid:nth-of-type(1) > div:nth-of-type(1) {
+  height: 40px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(3) > div#branding-grid:nth-of-type(1) > div:nth-of-type(2) {
+  height: 40px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(3) > div#branding-grid:nth-of-type(1) > div:nth-of-type(3) {
+  height: 40px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(3) > div#interface-grid:nth-of-type(1) > div:nth-of-type(1) {
+  height: 40px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(3) > div#interface-grid:nth-of-type(1) > div:nth-of-type(2) {
+  height: 40px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(4) > div:nth-of-type(3) > div#print-grid:nth-of-type(1) > div:nth-of-type(1) {
+  height: 40px !important;
+}
+
+/* 
+ * Interactive Spotlight Overlay for backgrounds 
+ * Keeps base image dark (85% black) elsewhere, reveals base image (20% black) under the cursor.
+ */
+.spotlight-mask::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: #000;
+  -webkit-mask-image: radial-gradient(
+    circle var(--radius, 250px) at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--radius, 250px) at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  will-change: mask-image, -webkit-mask-image;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(2) > p:nth-of-type(1) {
+  font-size: 18px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(2) > div#branding-grid:nth-of-type(1) > div:nth-of-type(1) {
+  height: 48px !important;
+  width: 897px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(2) > div#branding-grid:nth-of-type(1) > div:nth-of-type(2) {
+  height: 48px !important;
+  width: 897px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(2) > div#branding-grid:nth-of-type(1) > div:nth-of-type(3) {
+  height: 48px !important;
+  width: 897px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(2) > div#interface-grid:nth-of-type(1) > div:nth-of-type(1) {
+  height: 48px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(2) > div#interface-grid:nth-of-type(1) > div:nth-of-type(2) {
+  height: 48px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(4) > div:nth-of-type(2) > div#print-grid:nth-of-type(1) > div:nth-of-type(1) {
+  height: 48px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(5) > div:nth-of-type(2) > div#worked-for-grid:nth-of-type(2) > div {
+  font-size: 18px !important;
+}
+
+main#scroll-container:nth-of-type(1) > section:nth-of-type(5) > div:nth-of-type(2) > div#worked-for-grid:nth-of-type(2) {
+  width: 100% !important;
 }
