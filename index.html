@@ -39,48 +39,59 @@
   <body class="min-h-screen relative overflow-hidden bg-brand-surface text-brand-text flex flex-col justify-between selection:bg-brand-orange selection:text-brand-orange-light" id="body-root">
 
     <!-- Interactive Top Console Controls & Navigation -->
-    <nav class="fixed top-0 left-0 w-full bg-transparent flex flex-row items-center justify-between px-6 md:px-12 py-6 font-sans text-sm z-50 text-white mix-blend-difference gap-4">
+    <nav class="fixed top-0 left-0 w-full bg-transparent grid grid-cols-2 md:grid-cols-5 items-center px-6 md:px-12 py-6 font-sans text-sm z-50 text-white mix-blend-normal isolate">
       
       <!-- Brand Logo / Scroll to Welcome -->
-      <button 
-        onclick="scrollToSegment(0)"
-        class="transition-all hover:scale-105 text-left h-10 flex items-center justify-start cursor-pointer bg-transparent border-0 shrink-0"
-        id="branding-logo"
-      >
-        <img 
-          src="raf-logo-1.png" 
-          alt="raf-logo-1" 
-          class="h-[32px] md:h-[24px] w-auto object-contain block" 
-        />
-      </button>
+      <div class="flex items-center justify-self-start">
+        <button 
+          onclick="scrollToSegment(0)"
+          class="transition-all hover:scale-105 text-left h-10 flex items-center justify-start cursor-pointer bg-transparent border-0 shrink-0"
+          id="branding-logo"
+        >
+          <img 
+            src="raf-logo-1.png" 
+            alt="raf-logo-1" 
+            class="h-[32px] md:h-[24px] w-auto object-contain block" 
+          />
+        </button>
+      </div>
 
-      <!-- Central Quick Nav anchors (Desktop) stretched in full width of the midsection -->
-      <div class="hidden md:flex flex-1 justify-between items-center max-w-none px-[4vw]">
+      <!-- Central Quick Nav anchors -->
+      <div class="hidden md:flex items-center justify-self-start">
         <button 
           onclick="scrollToSegment(1)" 
           id="nav-branding"
-          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase"
+          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap"
         >
           .branding
         </button>
+      </div>
+      
+      <div class="hidden md:flex items-center justify-self-start">
         <button 
           onclick="scrollToSegment(2)" 
           id="nav-interface"
-          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase"
+          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap"
         >
           .interface
         </button>
+      </div>
+      
+      <div class="hidden md:flex items-center justify-self-start">
         <button 
           onclick="scrollToSegment(3)" 
           id="nav-print"
-          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase"
+          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap"
         >
           .print
         </button>
+      </div>
+
+      <div class="hidden md:flex items-center justify-self-start">
         <button 
           onclick="scrollToSegment(4)" 
           id="nav-worked-for"
-          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase"
+          class="nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap"
         >
           .worked for
         </button>
@@ -99,7 +110,7 @@
       <div class="scanline-overlay"></div>
       
       <!-- SECTION 1: .welcome -->
-      <section class="scroll-section px-[5vw]">
+      <section class="scroll-section px-6 md:px-12">
         <!-- Tokyo atmospheric backdrop picture (Grayscale Base and dynamic Color revealing Spotlight) -->
         <div 
           class="section-bg spotlight-mask absolute inset-0 pointer-events-none -z-20 bg-cover bg-center" 
@@ -109,12 +120,16 @@
         <!-- Welcome content padded accurately above footer -->
         <div class="max-w-4xl pb-[calc(32px+56px)] animate-fade-in-up">
           <!-- Dynamic Ticker Titles changing every 3 seconds with vertical slide -->
-          <div class="h-[60px] md:h-[120px] overflow-hidden relative mb-6" id="hero-title-container">
-            <div id="hero-title-slider" class="transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col">
-              <div class="h-[60px] md:h-[120px] flex items-center font-sans text-4xl md:text-[85px] font-black lowercase tracking-tight leading-none text-brand-text">.visual designer</div>
-              <div class="h-[60px] md:h-[120px] flex items-center font-sans text-4xl md:text-[85px] font-black lowercase tracking-tight leading-none text-brand-text">.branding designer</div>
-              <div class="h-[60px] md:h-[120px] flex items-center font-sans text-4xl md:text-[85px] font-black lowercase tracking-tight leading-none text-brand-text">.interface designer</div>
-              <div class="h-[60px] md:h-[120px] flex items-center font-sans text-4xl md:text-[85px] font-black lowercase tracking-tight leading-none text-brand-text">.print designer</div>
+          <div class="flex flex-row items-center mb-6 h-[60px] md:h-[120px] justify-start">
+            <div class="font-sans text-4xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text flex items-center h-[60px] md:h-[120px] whitespace-pre shrink-0">designing </div>
+            <div class="h-[60px] md:h-[120px] overflow-hidden relative" id="hero-title-container">
+              <div id="hero-title-slider" class="transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col">
+                <div class="h-[60px] md:h-[120px] flex items-center justify-start font-sans text-4xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text">.visual</div>
+                <div class="h-[60px] md:h-[120px] flex items-center justify-start font-sans text-4xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text">.branding</div>
+                <div class="h-[60px] md:h-[120px] flex items-center justify-start font-sans text-4xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text">.interface</div>
+                <div class="h-[60px] md:h-[120px] flex items-center justify-start font-sans text-4xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text">.print</div>
+                <div class="h-[60px] md:h-[120px] flex items-center justify-start font-sans text-4xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text">.visual</div>
+              </div>
             </div>
           </div>
           
@@ -125,7 +140,7 @@
       </section>
 
       <!-- SECTION 2: .branding design -->
-      <section class="scroll-section px-[5vw]">
+      <section class="scroll-section px-6 md:px-12">
         <!-- Branding abstract geometry backdrop -->
         <div 
           class="section-bg spotlight-mask absolute inset-0 pointer-events-none -z-20 bg-cover bg-center" 
@@ -133,7 +148,7 @@
         ></div>
 
         <div class="max-w-4xl pb-[calc(32px+56px)] w-full">
-          <h1 class="font-sans text-5xl md:text-[75px] font-black mb-8 lowercase tracking-tight text-brand-text">
+          <h1 class="font-sans text-5xl md:text-[96px] font-black mb-8 lowercase tracking-tight text-brand-text">
             .branding design
           </h1>
           
@@ -145,7 +160,7 @@
       </section>
 
       <!-- SECTION 3: .interface design -->
-      <section class="scroll-section px-[5vw]">
+      <section class="scroll-section px-6 md:px-12">
         <!-- Archaeological UI layout backdrop -->
         <div 
           class="section-bg spotlight-mask absolute inset-0 pointer-events-none -z-20 bg-cover bg-center" 
@@ -153,7 +168,7 @@
         ></div>
 
         <div class="max-w-4xl pb-[calc(32px+56px)] w-full">
-          <h1 class="font-sans text-5xl md:text-[75px] font-black mb-8 lowercase tracking-tight text-brand-text">
+          <h1 class="font-sans text-5xl md:text-[96px] font-black mb-8 lowercase tracking-tight text-brand-text">
             .interface design
           </h1>
 
@@ -165,7 +180,7 @@
       </section>
 
       <!-- SECTION 4: .print design -->
-      <section class="scroll-section px-[5vw]">
+      <section class="scroll-section px-6 md:px-12">
         <!-- Concrete print tactile backdrop -->
         <div 
           class="section-bg spotlight-mask absolute inset-0 pointer-events-none -z-20 bg-cover bg-center" 
@@ -173,7 +188,7 @@
         ></div>
 
         <div class="max-w-4xl pb-[calc(32px+56px)] w-full">
-          <h1 class="font-sans text-5xl md:text-[75px] font-black mb-8 lowercase tracking-tight text-brand-text">
+          <h1 class="font-sans text-5xl md:text-[96px] font-black mb-8 lowercase tracking-tight text-brand-text">
             .print design
           </h1>
 
@@ -185,7 +200,7 @@
       </section>
 
       <!-- SECTION 5: .worked for -->
-      <section class="scroll-section px-[5vw]">
+      <section class="scroll-section px-6 md:px-12">
         <!-- Custom generated backdrop picture mapped exactly to specs -->
         <div 
           class="section-bg spotlight-mask absolute inset-0 pointer-events-none -z-20 bg-cover bg-center" 
@@ -194,13 +209,13 @@
 
         <div class="w-full max-w-6xl pb-[calc(32px+56px)] mt-12 flex flex-col justify-end">
           <div class="mb-8">
-            <h1 class="font-sans text-5xl md:text-[75px] font-black lowercase tracking-tight text-brand-text leading-none">
+            <h1 class="font-sans text-5xl md:text-[96px] font-black lowercase tracking-tight text-brand-text leading-none">
               .worked for
             </h1>
           </div>
 
           <!-- Worked for brands insertion point - fluid wrap that stays strictly within screen limits -->
-          <div class="flex flex-wrap gap-x-10 gap-y-4 font-sans text-base md:text-xl text-brand-text-muted lowercase w-full" id="worked-for-grid">
+          <div class="flex flex-wrap gap-2 md:gap-3 font-sans text-brand-text-muted lowercase w-full" id="worked-for-grid">
             <!-- Dynamic brand names list goes here -->
           </div>
         </div>
@@ -209,25 +224,34 @@
     </main>
 
     <!-- Persistent Orange Footer conforming precisely to specs with white box hover buttons -->
-    <footer class="fixed bottom-0 left-0 w-full bg-brand-orange flex items-center px-6 md:px-[5vw] py-2.5 z-40 text-brand-orange-light font-sans text-sm md:text-base">
-      <!-- Footer horizontal action options spaced perfectly -->
-      <div class="flex justify-between items-center w-full lowercase tracking-wider font-bold">
+    <footer class="fixed bottom-0 left-0 w-full bg-brand-orange grid grid-cols-2 md:grid-cols-5 items-center px-6 md:px-12 py-2.5 z-40 text-brand-orange-light font-sans text-xs sm:text-sm md:text-base gap-y-2 md:gap-y-0">
+      <div class="flex items-center justify-self-start -ml-2 md:-ml-4">
         <a 
           href="mailto:hello@raf.design"
-          class="transition-all duration-300 py-1.5 px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange lowercase"
+          class="transition-all duration-300 py-1.5 px-2 md:px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange lowercase tracking-wider font-bold whitespace-nowrap block"
         >
           .mail
         </a>
+      </div>
+
+      <div class="hidden md:block"></div>
+
+      <div class="flex items-center justify-self-start">
         <button 
           onclick="alert('.curriculum printed dossier dispatch completed!');"
-          class="transition-all duration-300 py-1.5 px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange cursor-pointer bg-transparent border-0 font-sans font-bold lowercase"
+          class="transition-all duration-300 py-1.5 px-2 md:px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange cursor-pointer bg-transparent border-0 font-bold lowercase tracking-wider whitespace-nowrap block"
         >
           .curriculum
         </button>
+      </div>
+
+      <div class="hidden md:block"></div>
+
+      <div class="flex items-center justify-self-start">
         <a 
           href="#"
           id="behance-link"
-          class="transition-all duration-300 py-1.5 px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange lowercase"
+          class="transition-all duration-300 py-1.5 px-2 md:px-4 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange lowercase tracking-wider font-bold whitespace-nowrap block"
         >
           .behance
         </a>
@@ -235,7 +259,7 @@
     </footer>
 
     <!-- Screen Pagination Indicator active bar on the right extreme -->
-    <div class="fixed right-6 top-[25vh] w-[3px] h-[50vh] bg-white/5 z-50 rounded-full overflow-hidden">
+    <div class="fixed right-0 top-0 bottom-0 w-[3px] h-[100vh] bg-white/5 z-50 overflow-hidden m-0 p-0">
       <div 
         id="scroll-indicator"
         class="bg-brand-orange w-full rounded-full transition-all duration-75"

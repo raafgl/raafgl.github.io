@@ -63,9 +63,9 @@ const updateNavigationHighlight = () => {
     const el = document.getElementById(ids[seg]);
     if (el && seg !== 'welcome') {
       if (seg === activeSegment) {
-        el.className = "nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm bg-brand-orange text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase";
+        el.className = "nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm bg-brand-orange text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap";
       } else {
-        el.className = "nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase";
+        el.className = "nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap";
       }
     }
   });
@@ -122,9 +122,9 @@ const renderProjectsLists = () => {
   const workedGrid = document.getElementById('worked-for-grid');
   if (workedGrid) {
     workedGrid.innerHTML = WORKED_FOR_BRANDS.map(brand => `
-      <div class="py-1 px-3 border border-white/10 hover:bg-white hover:text-brand-surface hover:border-white rounded-sm transition-all cursor-default text-base md:text-lg lg:text-xl font-bold">
-        ${brand}
-      </div>
+      <a href="${brand.url}" target="_blank" rel="noopener noreferrer" class="py-1 px-3 border border-white/10 hover:bg-white hover:text-brand-surface hover:border-white rounded-sm transition-all cursor-pointer text-[18px] font-bold block">
+        ${brand.name}
+      </a>
     `).join('');
   }
 };
@@ -187,15 +187,29 @@ window.closeProjectModal = function() {
 // Title Rotator slider loop
 const initHeroTitleSlider = () => {
   let currentIndex = 0;
+  // Total 4 unique items. 5th item is a duplicate of the first one for seamless loop.
   const totalItems = 4;
   
   setInterval(() => {
-    currentIndex = (currentIndex + 1) % totalItems;
+    currentIndex++;
     const slider = document.getElementById('hero-title-slider');
     const container = document.getElementById('hero-title-container');
+    
     if (slider && container) {
       const stepHeight = container.clientHeight;
+      slider.style.transition = 'transform 600ms cubic-bezier(0.16, 1, 0.3, 1)';
       slider.style.transform = `translateY(-${currentIndex * stepHeight}px)`;
+      
+      // If we've reached the duplicate 5th item, reset position invisibly after transition
+      if (currentIndex === totalItems) {
+        setTimeout(() => {
+          slider.style.transition = 'none';
+          currentIndex = 0;
+          slider.style.transform = `translateY(0px)`;
+          // Force layout reflow before next transition
+          slider.offsetHeight;
+        }, 600); // match the transition duration
+      }
     }
   }, 3000);
 };
