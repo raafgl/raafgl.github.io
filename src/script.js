@@ -81,11 +81,11 @@ const renderProjectsLists = () => {
     brandingGrid.innerHTML = PROJECTS.filter(p => p.category === 'branding').map(proj => `
       <div 
         onclick="openProjectModal('${proj.id}')"
-        class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-4 transition-all duration-300 cursor-pointer rounded-sm group flex justify-between items-center w-full"
+        class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-2 sm:px-4 transition-all duration-300 cursor-pointer rounded-sm group flex flex-wrap sm:flex-nowrap justify-between items-baseline sm:items-center w-full gap-2"
       >
-        <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight">${proj.title}</h3>
-        <span class="inline-flex items-center gap-1 font-sans text-sm uppercase tracking-wider text-brand-orange group-hover:text-brand-surface font-extrabold transition-all">
-          view project <i data-lucide="arrow-right" class="w-4 h-4 inline"></i>
+        <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight break-words max-w-full">${proj.title}</h3>
+        <span class="inline-flex items-center gap-1 font-sans text-xs sm:text-sm uppercase tracking-wider text-brand-orange group-hover:text-brand-surface font-extrabold transition-all whitespace-nowrap">
+          view project <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4 inline"></i>
         </span>
       </div>
     `).join('');
@@ -95,11 +95,11 @@ const renderProjectsLists = () => {
     interfaceGrid.innerHTML = PROJECTS.filter(p => p.category === 'interface').map(proj => `
       <div 
         onclick="openProjectModal('${proj.id}')"
-        class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-4 transition-all duration-300 cursor-pointer rounded-sm group flex justify-between items-center w-full"
+        class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-2 sm:px-4 transition-all duration-300 cursor-pointer rounded-sm group flex flex-wrap sm:flex-nowrap justify-between items-baseline sm:items-center w-full gap-2"
       >
-        <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight">${proj.title}</h3>
-        <span class="inline-flex items-center gap-1 font-sans text-sm uppercase tracking-wider text-brand-orange group-hover:text-brand-surface font-extrabold transition-all">
-          view project <i data-lucide="arrow-right" class="w-4 h-4 inline"></i>
+        <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight break-words max-w-full">${proj.title}</h3>
+        <span class="inline-flex items-center gap-1 font-sans text-xs sm:text-sm uppercase tracking-wider text-brand-orange group-hover:text-brand-surface font-extrabold transition-all whitespace-nowrap">
+          view project <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4 inline"></i>
         </span>
       </div>
     `).join('');
@@ -109,11 +109,11 @@ const renderProjectsLists = () => {
     printGrid.innerHTML = PROJECTS.filter(p => p.category === 'print').map(proj => `
       <div 
         onclick="openProjectModal('${proj.id}')"
-        class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-4 transition-all duration-300 cursor-pointer rounded-sm group flex justify-between items-center w-full"
+        class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-2 sm:px-4 transition-all duration-300 cursor-pointer rounded-sm group flex flex-wrap sm:flex-nowrap justify-between items-baseline sm:items-center w-full gap-2"
       >
-        <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight">${proj.title}</h3>
-        <span class="inline-flex items-center gap-1 font-sans text-sm uppercase tracking-wider text-brand-orange group-hover:text-brand-surface font-extrabold transition-all">
-          view project <i data-lucide="arrow-right" class="w-4 h-4 inline"></i>
+        <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight break-words max-w-full">${proj.title}</h3>
+        <span class="inline-flex items-center gap-1 font-sans text-xs sm:text-sm uppercase tracking-wider text-brand-orange group-hover:text-brand-surface font-extrabold transition-all whitespace-nowrap">
+          view project <i data-lucide="arrow-right" class="w-3 h-3 sm:w-4 sm:h-4 inline"></i>
         </span>
       </div>
     `).join('');
@@ -122,7 +122,7 @@ const renderProjectsLists = () => {
   const workedGrid = document.getElementById('worked-for-grid');
   if (workedGrid) {
     workedGrid.innerHTML = WORKED_FOR_BRANDS.map(brand => `
-      <a href="${brand.url}" target="_blank" rel="noopener noreferrer" class="py-1 px-3 border border-white/10 hover:bg-white hover:text-brand-surface hover:border-white rounded-sm transition-all cursor-pointer text-[18px] font-bold block">
+      <a href="${brand.url}" target="_blank" rel="noopener noreferrer" class="py-1 px-2.5 text-[14px] md:text-[16px] border border-white/10 hover:bg-white hover:text-brand-surface hover:border-white rounded-sm transition-all cursor-pointer font-bold block">
         ${brand.name}
       </a>
     `).join('');
@@ -251,15 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateSpotlights(lastMouseX, lastMouseY);
       }
     }, { passive: true });
-  }
-
-  // Bind Behance link click prevent default behavior for layout mockup
-  const behanceLink = document.getElementById('behance-link');
-  if (behanceLink) {
-    behanceLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      alert('.behance creative portfolio redirection trigger!');
-    });
   }
 
   // Render Lucide SVGs initially

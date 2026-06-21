@@ -53,7 +53,7 @@ export const PROJECTS = [
   {
     id: 'layton',
     category: 'interface',
-    title: '.layton files',
+    title: '.layton',
     subtitle: 'UX/UI digital archive & database interface',
     description: 'aesthetic portal concept for a dedicated archaeological database and riddle inventory system.',
     longDescription: 'the layton files is a dedicated interactive archive that aggregates complex archeological documentation, riddles, and secret archives. the interface focuses on technical data presentation, incorporating retro scanlines, file cabinet interactions, and micro-animations reminiscent of 90s OS systems.',
@@ -70,7 +70,7 @@ export const PROJECTS = [
   {
     id: 'nintendo-comm',
     category: 'interface',
-    title: '.nintendo community',
+    title: '.nintendo app',
     subtitle: 'community web platform & retro hub page',
     description: 'aesthetic design proposal showcasing events, modern retro forums, and live tournament brackets for active retro players.',
     longDescription: 'a custom graphic interface and dashboard proposed for community-led tournaments. the design blends modern clean spacing with nostalgic 8-bit game console grids, centering tournament brackets, match tickers, and retro cartridge animations.',
@@ -87,7 +87,7 @@ export const PROJECTS = [
   {
     id: 'collection',
     category: 'print',
-    title: '.collection poster series',
+    title: '.poster series',
     subtitle: 'limited screenprint series & typographic study',
     description: 'a premium typographic and layout print collection capturing the minimal architecture of Spanish concrete and brutalist facades.',
     longDescription: 'the collection represents a series of limited physical screenprint poster layouts. emphasizing strong vertical layout grids, heavy negative space, and ink bleed simulations on heavy matte cotton paper. each print was meticulously produced by hand at a classic local studio.',

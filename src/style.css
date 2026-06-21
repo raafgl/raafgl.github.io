@@ -40,7 +40,7 @@ body {
 
 .scroll-section {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   position: relative;
@@ -138,7 +138,7 @@ main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(
 main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(3) > p:nth-of-type(1) {
   position: relative;
   z-index: 60 !important;
-  width: 800px;
+  max-width: 100%;
   font-size: 18px !important;
 }
 
@@ -146,29 +146,7 @@ h3 {
   font-size: 18px !important;
 }
 
-main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(3) > div#branding-grid:nth-of-type(1) > div:nth-of-type(1) {
-  height: 40px !important;
-}
 
-main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(3) > div#branding-grid:nth-of-type(1) > div:nth-of-type(2) {
-  height: 40px !important;
-}
-
-main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(3) > div#branding-grid:nth-of-type(1) > div:nth-of-type(3) {
-  height: 40px !important;
-}
-
-main#scroll-container:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(3) > div#interface-grid:nth-of-type(1) > div:nth-of-type(1) {
-  height: 40px !important;
-}
-
-main#scroll-container:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(3) > div#interface-grid:nth-of-type(1) > div:nth-of-type(2) {
-  height: 40px !important;
-}
-
-main#scroll-container:nth-of-type(1) > section:nth-of-type(4) > div:nth-of-type(3) > div#print-grid:nth-of-type(1) > div:nth-of-type(1) {
-  height: 40px !important;
-}
 
 /* 
  * Interactive Spotlight Overlay for backgrounds 
@@ -197,37 +175,12 @@ main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(
   font-size: 18px !important;
 }
 
-main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(2) > div#branding-grid:nth-of-type(1) > div:nth-of-type(1) {
-  height: 48px !important;
-  width: 897px !important;
+@media (max-width: 767px) {
+  main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > p:nth-of-type(1) {
+    font-size: 16px !important;
+  }
 }
 
-main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(2) > div#branding-grid:nth-of-type(1) > div:nth-of-type(2) {
-  height: 48px !important;
-  width: 897px !important;
-}
 
-main#scroll-container:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(2) > div#branding-grid:nth-of-type(1) > div:nth-of-type(3) {
-  height: 48px !important;
-  width: 897px !important;
-}
 
-main#scroll-container:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(2) > div#interface-grid:nth-of-type(1) > div:nth-of-type(1) {
-  height: 48px !important;
-}
 
-main#scroll-container:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(2) > div#interface-grid:nth-of-type(1) > div:nth-of-type(2) {
-  height: 48px !important;
-}
-
-main#scroll-container:nth-of-type(1) > section:nth-of-type(4) > div:nth-of-type(2) > div#print-grid:nth-of-type(1) > div:nth-of-type(1) {
-  height: 48px !important;
-}
-
-main#scroll-container:nth-of-type(1) > section:nth-of-type(5) > div:nth-of-type(2) > div#worked-for-grid:nth-of-type(2) > div {
-  font-size: 18px !important;
-}
-
-main#scroll-container:nth-of-type(1) > section:nth-of-type(5) > div:nth-of-type(2) > div#worked-for-grid:nth-of-type(2) {
-  width: 100% !important;
-}
