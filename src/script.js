@@ -63,9 +63,11 @@ const updateNavigationHighlight = () => {
     const el = document.getElementById(ids[seg]);
     if (el && seg !== 'welcome') {
       if (seg === activeSegment) {
-        el.className = "nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm bg-brand-orange text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap";
+        el.classList.add('bg-brand-orange', 'text-brand-orange-light');
+        el.classList.remove('text-zinc-400', 'hover:bg-brand-orange', 'hover:text-brand-orange-light', 'bg-transparent');
       } else {
-        el.className = "nav-anchor transition-all duration-300 py-1.5 px-4 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap";
+        el.classList.add('text-zinc-400', 'hover:bg-brand-orange', 'hover:text-brand-orange-light', 'bg-transparent');
+        el.classList.remove('bg-brand-orange', 'text-brand-orange-light');
       }
     }
   });
@@ -182,6 +184,40 @@ window.closeProjectModal = function() {
   setTimeout(() => {
     modal.classList.add('hidden');
   }, 500);
+};
+
+window.toggleMobileMenu = function() {
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const btn = document.getElementById('mobile-menu-btn');
+
+  if (overlay.classList.contains('hidden')) {
+    overlay.classList.remove('hidden');
+    // slight delay for transition
+    setTimeout(() => {
+      overlay.classList.remove('opacity-0');
+      overlay.classList.add('opacity-100');
+    }, 10);
+    btn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+    lucide.createIcons();
+  } else {
+    window.closeMobileMenu();
+  }
+};
+
+window.closeMobileMenu = function() {
+  const overlay = document.getElementById('mobile-menu-overlay');
+  const btn = document.getElementById('mobile-menu-btn');
+  if (!btn) return;
+  
+  if (!overlay.classList.contains('hidden')) {
+    overlay.classList.remove('opacity-100');
+    overlay.classList.add('opacity-0');
+    setTimeout(() => {
+      overlay.classList.add('hidden');
+    }, 300); // match transition duration
+    btn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+    lucide.createIcons();
+  }
 };
 
 // Title Rotator slider loop
