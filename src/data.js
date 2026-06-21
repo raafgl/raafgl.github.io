@@ -7,6 +7,13 @@ export const PROJECTS = [
     description: 'complete identity reconstruction for a leading publishing house specializing in classic and modern manga. blending modern geometry with traditional Japanese aesthetics.',
     longDescription: 'the torii manga redesign focused on crafting a symbol that of a literal "torii" gate integrated with a stylized open book form. this was achieved by using high-contrast black and orange geometry, referencing raw print ink and neon signage. we established a cohesive design system that scales from tiny book spines to massive convention banners.',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDPR2ceREfrUqOiDOWxvdgBY-t-kaK7N015t8BbT3golrdXt4BPitzPuDmc24DL9GgOUSHBDEl8IH1n-hxg5JNPEYfXiFMr0jxriNoxsKk2AxCJ-Aqnpq_T6AzIHkiHMRvRIZIDhNhL3epqUljB7x6A-VA7LhRBhd8N1O1n4irO11LVBQ2ZD8Z46z5kM--2wQwLGTaXgrTGjB04DwviFZ-pVi8cBzPt02Tuf65MdTUql_WEXneClCGUIRe-Xz8wJk-B5AeqaYJNVdk',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuDPR2ceREfrUqOiDOWxvdgBY-t-kaK7N015t8BbT3golrdXt4BPitzPuDmc24DL9GgOUSHBDEl8IH1n-hxg5JNPEYfXiFMr0jxriNoxsKk2AxCJ-Aqnpq_T6AzIHkiHMRvRIZIDhNhL3epqUljB7x6A-VA7LhRBhd8N1O1n4irO11LVBQ2ZD8Z46z5kM--2wQwLGTaXgrTGjB04DwviFZ-pVi8cBzPt02Tuf65MdTUql_WEXneClCGUIRe-Xz8wJk-B5AeqaYJNVdk',
+      'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=800&q=80'
+    ],
     year: '2025',
     tools: ['Illustrator', 'InDesign', 'Photoshop'],
     features: [
@@ -24,6 +31,13 @@ export const PROJECTS = [
     description: 'visual branding and creative direction for an independent curatorial music platform. centering around typography-driven social sharing cards.',
     longDescription: 'playlist is a community-first audio platform. the challenge was creating a typographic visual engine that lets users generate high-contrast aesthetic playlists to be shared as social media content. we chose a strict carbon-and-white theme paired with electric green neon accents to convey an immediate underground club vibe.',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=800&q=80'
+    ],
     year: '2024',
     tools: ['Figma', 'Illustrator', 'After Effects'],
     features: [
@@ -41,6 +55,13 @@ export const PROJECTS = [
     description: 'visual system and branding guidelines for a high-end custom modular architecture studio based in valencia.',
     longDescription: 'deckcom produces industrial modular structures. we developed a structural grid-based branding system that communicates raw materials, precision assembly, and architectural elegance. the colors are muted earth-and-clay tones representing the physical materials used in building.',
     image: 'https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1603380353725-f864d39cc41a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
+    ],
     year: '2024',
     tools: ['Figma', 'Illustrator', 'Lightroom'],
     features: [
@@ -54,10 +75,17 @@ export const PROJECTS = [
     id: 'layton',
     category: 'interface',
     title: '.layton',
-    subtitle: 'UX/UI digital archive & database interface',
+    subtitle: 'UX/UI digital archive & database ui/ux',
     description: 'aesthetic portal concept for a dedicated archaeological database and riddle inventory system.',
-    longDescription: 'the layton files is a dedicated interactive archive that aggregates complex archeological documentation, riddles, and secret archives. the interface focuses on technical data presentation, incorporating retro scanlines, file cabinet interactions, and micro-animations reminiscent of 90s OS systems.',
+    longDescription: 'the layton files is a dedicated interactive archive that aggregates complex archeological documentation, riddles, and secret archives. the ui/ux focuses on technical data presentation, incorporating retro scanlines, file cabinet interactions, and micro-animations reminiscent of 90s OS systems.',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCjQlGjlj6wqxyQsjIfUz2O88Nlm9hbdwwL95uckVFs40DJd_eZQj9k5JPpLDNfxWHk1GhYM2QrKV2ETWMbuSK6w8txcHcVviWYz-1JzCckJIHykbb1Ytw9yacHO8Ly73ABmRwf8nkh0bHiS48h6MVhMbZLPAmNJx31VygP2RD41mFF7H0TPyWMiIhmFVtCBgMNpptGK8eSilAbzBhHjMVgBu5RkEW6AwWqjRuysAdIiVqthwvJklrq5vODUYhu0eXBbJR8LINc_2o',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuCjQlGjlj6wqxyQsjIfUz2O88Nlm9hbdwwL95uckVFs40DJd_eZQj9k5JPpLDNfxWHk1GhYM2QrKV2ETWMbuSK6w8txcHcVviWYz-1JzCckJIHykbb1Ytw9yacHO8Ly73ABmRwf8nkh0bHiS48h6MVhMbZLPAmNJx31VygP2RD41mFF7H0TPyWMiIhmFVtCBgMNpptGK8eSilAbzBhHjMVgBu5RkEW6AwWqjRuysAdIiVqthwvJklrq5vODUYhu0eXBbJR8LINc_2o',
+      'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=800&q=80'
+    ],
     year: '2025',
     tools: ['Figma', 'React', 'Tailwind CSS', 'Vite'],
     features: [
@@ -73,8 +101,15 @@ export const PROJECTS = [
     title: '.nintendo app',
     subtitle: 'community web platform & retro hub page',
     description: 'aesthetic design proposal showcasing events, modern retro forums, and live tournament brackets for active retro players.',
-    longDescription: 'a custom graphic interface and dashboard proposed for community-led tournaments. the design blends modern clean spacing with nostalgic 8-bit game console grids, centering tournament brackets, match tickers, and retro cartridge animations.',
+    longDescription: 'a custom graphic ui/ux and dashboard proposed for community-led tournaments. the design blends modern clean spacing with nostalgic 8-bit game console grids, centering tournament brackets, match tickers, and retro cartridge animations.',
     image: 'https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1200&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1531525645387-7f14be1bdbbd?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1592155931584-901ac15763e3?auto=format&fit=crop&w=800&q=80'
+    ],
     year: '2023',
     tools: ['Figma', 'After Effects', 'Photoshop'],
     features: [
@@ -92,6 +127,13 @@ export const PROJECTS = [
     description: 'a premium typographic and layout print collection capturing the minimal architecture of Spanish concrete and brutalist facades.',
     longDescription: 'the collection represents a series of limited physical screenprint poster layouts. emphasizing strong vertical layout grids, heavy negative space, and ink bleed simulations on heavy matte cotton paper. each print was meticulously produced by hand at a classic local studio.',
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAaByw4CHO7rq-4v0cLqhiQnlH7Sv5Qk0Oef8lEhiL0l4lgt1XIVg5F7lQPu8ABK6Rvh2AzQJizwxngjn-iMgjp11byFyLw0OzCylXbZbCS6_nx8TfTwJp_W9QW7PCDu2ios8oma5VNGg2bJW4C96O4Y1RRh1R2Ypnjp3J2pA502GgTwFatZjufNZjbodhvb4PMLsv1M0uPjf1vxlZ2JjxCw-z4_KDfcvHH8BZ_PGb3rwxnEnVQIJ_EC_YYpfzJcPcEy9qb1APXjz0',
+    gallery: [
+      'https://lh3.googleusercontent.com/aida-public/AB6AXuAaByw4CHO7rq-4v0cLqhiQnlH7Sv5Qk0Oef8lEhiL0l4lgt1XIVg5F7lQPu8ABK6Rvh2AzQJizwxngjn-iMgjp11byFyLw0OzCylXbZbCS6_nx8TfTwJp_W9QW7PCDu2ios8oma5VNGg2bJW4C96O4Y1RRh1R2Ypnjp3J2pA502GgTwFatZjufNZjbodhvb4PMLsv1M0uPjf1vxlZ2JjxCw-z4_KDfcvHH8BZ_PGb3rwxnEnVQIJ_EC_YYpfzJcPcEy9qb1APXjz0',
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1541829019-259276a7f013?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1554034483-04fda0d3507b?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1502239608882-93b729c6af43?auto=format&fit=crop&w=800&q=80'
+    ],
     year: '2024',
     tools: ['InDesign', 'Photoshop', 'Silkscreen Press'],
     features: [

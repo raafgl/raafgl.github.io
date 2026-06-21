@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>.raf / branding, interface & print</title>
+    <title>.raf / branding, ui/ux & print</title>
     <!-- CSS imports -->
     <link rel="stylesheet" href="src/style.css" />
     <!-- Tailwind CSS modern production browser runtime CDN -->
@@ -51,20 +51,22 @@
         <button 
           onclick="scrollToSegment(1)" 
           id="nav-branding"
+          data-i18n="nav.branding"
           class="hidden md:block nav-anchor transition-all duration-300 py-1.5 px-2 md:px-0 lg:px-2 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap"
         >
           .branding
         </button>
       </div>
 
-      <!-- Col 2: .interface -->
+      <!-- Col 2: .ui/ux -->
       <div class="hidden md:flex items-center justify-start self-center">
         <button 
           onclick="scrollToSegment(2)" 
           id="nav-interface"
+          data-i18n="nav.interface"
           class="nav-anchor transition-all duration-300 py-1.5 px-2 md:px-0 lg:px-2 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap"
         >
-          .interface
+          .ui/ux
         </button>
       </div>
 
@@ -88,6 +90,7 @@
         <button 
           onclick="scrollToSegment(3)" 
           id="nav-print"
+          data-i18n="nav.print"
           class="nav-anchor transition-all duration-300 py-1.5 px-2 md:px-0 lg:px-2 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap"
         >
           .print
@@ -97,13 +100,14 @@
       <!-- Col 5: Mobile Language Toggle / Desktop .worked for -->
       <div class="flex items-center justify-end self-center">
         <div class="md:hidden flex items-center gap-1.5 font-sans text-sm font-bold lowercase">
-          <button class="text-white hover:text-brand-orange transition-colors cursor-pointer focus:outline-none">en</button>
-          <span class="text-zinc-600">/</span>
-          <button class="text-zinc-400 hover:text-white transition-colors cursor-pointer focus:outline-none">es</button>
+          <button onclick="changeLanguage('en')" data-lang="en" class="lang-toggle-btn transition-opacity duration-300 cursor-pointer focus:outline-none bg-transparent border-0 p-0" style="color: #fcfce8; opacity: 1;">en</button>
+          <span style="color: #fcfce8; opacity: 0.5;">/</span>
+          <button onclick="changeLanguage('es')" data-lang="es" class="lang-toggle-btn transition-opacity duration-300 cursor-pointer focus:outline-none bg-transparent border-0 p-0" style="color: #fcfce8; opacity: 0.5;">es</button>
         </div>
         <button 
           onclick="scrollToSegment(4)" 
           id="nav-worked-for"
+          data-i18n="nav.worked_for"
           class="hidden md:block nav-anchor transition-all duration-300 py-1.5 px-2 md:px-0 lg:px-2 rounded-sm text-zinc-400 hover:bg-brand-orange hover:text-brand-orange-light text-sm md:text-base font-bold cursor-pointer bg-transparent border-0 lowercase whitespace-nowrap"
         >
           .worked for
@@ -113,59 +117,82 @@
     </nav>
 
     <!-- Mobile Navigation Overlay (Hidden by default) -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 w-full h-screen bg-brand-surface/98 backdrop-blur-md z-[60] hidden flex-col justify-between px-6 sm:px-12 py-8 font-sans text-xl opacity-0 transition-opacity duration-300">
+    <div id="mobile-menu-overlay" class="fixed inset-0 w-full h-screen bg-brand-surface/98 backdrop-blur-md z-[60] hidden flex-col justify-between font-sans text-xl opacity-0 transition-opacity duration-300">
       
-      <!-- Mobile Overlay Top Header-bar -> mimics top bar but with a clean close X button -->
-      <div class="flex items-center justify-between w-full h-12 border-b border-brand-outline/10 pb-4">
-        <!-- Close Menu Button (in the same upper left space) -->
-        <button onclick="closeMobileMenu()" class="text-white cursor-pointer hover:text-brand-orange bg-transparent border-0 focus:outline-none transition-colors p-2 -ml-2 flex items-center justify-center">
-          <i data-lucide="x" class="w-6 h-6"></i>
-        </button>
-        
-        <!-- Separate Logo Icon Centered -->
-        <div class="h-6 flex items-center justify-center">
-          <img src="raf-logo-1.png" alt="raf-logo-1" class="h-[20px] w-auto object-contain block opacity-40 hover:opacity-100 transition-opacity" />
+      <!-- Mobile Overlay Top Header-bar -> mimics top bar exactly in position and alignment without any separating border line -->
+      <div class="grid grid-cols-3 md:grid-cols-5 items-center w-full px-4 sm:px-6 md:px-12 py-6 font-sans text-sm text-white gap-4 md:gap-x-4">
+        <!-- Col 1: Close X button in the exact same left-aligned position as the hamburger menu -->
+        <div class="flex items-center justify-start self-center">
+          <button onclick="closeMobileMenu()" class="text-white cursor-pointer hover:text-brand-orange bg-transparent border-0 focus:outline-none transition-colors flex items-center justify-center p-1" id="mobile-menu-close-btn">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
         </div>
 
-        <!-- Upper Right Language Selector Row -->
-        <div class="flex items-center gap-1.5 text-sm font-bold lowercase">
-          <button class="text-white hover:text-brand-orange transition-colors cursor-pointer focus:outline-none">en</button>
-          <span class="text-zinc-600">/</span>
-          <button class="text-zinc-400 hover:text-white transition-colors cursor-pointer focus:outline-none">es</button>
+        <!-- Col 2: empty (for alignment mirroring) -->
+        <div class="hidden md:block"></div>
+
+        <!-- Col 3: Brand Logo Centered, matching the home page logo button completely -->
+        <div class="flex items-center justify-center self-center w-full">
+          <button 
+            onclick="scrollToSegment(0); closeMobileMenu()"
+            class="transition-all py-1.5 flex items-center justify-center cursor-pointer bg-transparent border-0 shrink-0 mx-auto"
+          >
+            <img 
+              src="raf-logo-1.png" 
+              alt="raf-logo-1" 
+              class="h-[20px] md:h-[24px] w-auto object-contain block mx-auto" 
+            />
+          </button>
+        </div>
+
+        <!-- Col 4: empty (for alignment mirroring) -->
+        <div class="hidden md:block"></div>
+
+        <!-- Col 5: Language selector on the right-aligned position -->
+        <div class="flex items-center justify-end self-center">
+          <div class="flex items-center gap-1.5 font-sans text-sm font-bold lowercase">
+            <button onclick="changeLanguage('en')" data-lang="en" class="lang-toggle-btn transition-opacity duration-300 cursor-pointer focus:outline-none bg-transparent border-0 p-0" style="color: #fcfce8; opacity: 1;">en</button>
+            <span style="color: #fcfce8; opacity: 0.5;">/</span>
+            <button onclick="changeLanguage('es')" data-lang="es" class="lang-toggle-btn transition-opacity duration-300 cursor-pointer focus:outline-none bg-transparent border-0 p-0" style="color: #fcfce8; opacity: 0.5;">es</button>
+          </div>
         </div>
       </div>
 
       <!-- Vertical list of navigation items stacked in a flexbox with ample room and no overlapping -->
-      <div class="flex flex-col items-start justify-center gap-6 my-auto w-full max-w-lg">
+      <div class="flex flex-col items-start justify-center gap-6 my-auto w-full max-w-lg px-4 sm:px-6 md:px-12 mx-auto">
         <!-- Each menu item is a full row with standard touch heights, left-aligned, and large touch targets with solid orange background on hover/active -->
         <button 
           onclick="scrollToSegment(1); closeMobileMenu()" 
+          data-i18n="nav.branding"
           class="w-full text-zinc-400 hover:text-white hover:bg-brand-orange active:bg-brand-orange active:text-white py-5 px-6 rounded-md transition-all font-bold lowercase bg-transparent border-0 focus:outline-none text-4xl sm:text-5xl flex items-center justify-start min-h-[64px] select-none cursor-pointer text-left"
         >
           .branding
         </button>
         <button 
           onclick="scrollToSegment(2); closeMobileMenu()" 
+          data-i18n="nav.interface"
           class="w-full text-zinc-400 hover:text-white hover:bg-brand-orange active:bg-brand-orange active:text-white py-5 px-6 rounded-md transition-all font-bold lowercase bg-transparent border-0 focus:outline-none text-4xl sm:text-5xl flex items-center justify-start min-h-[64px] select-none cursor-pointer text-left"
         >
-          .interface
+          .ui/ux
         </button>
         <button 
           onclick="scrollToSegment(3); closeMobileMenu()" 
+          data-i18n="nav.print"
           class="w-full text-zinc-400 hover:text-white hover:bg-brand-orange active:bg-brand-orange active:text-white py-5 px-6 rounded-md transition-all font-bold lowercase bg-transparent border-0 focus:outline-none text-4xl sm:text-5xl flex items-center justify-start min-h-[64px] select-none cursor-pointer text-left"
         >
           .print
         </button>
         <button 
           onclick="scrollToSegment(4); closeMobileMenu()" 
+          data-i18n="nav.worked_for"
           class="w-full text-zinc-400 hover:text-white hover:bg-brand-orange active:bg-brand-orange active:text-white py-5 px-6 rounded-md transition-all font-bold lowercase bg-transparent border-0 focus:outline-none text-4xl sm:text-5xl flex items-center justify-start min-h-[64px] select-none cursor-pointer text-left"
         >
           .worked for
         </button>
       </div>
 
-      <!-- Spacing spacer bottom row -->
-      <div class="h-6"></div>
+      <!-- Spacing spacer bottom row mirroring the header height -->
+      <div class="h-16 sm:h-20"></div>
 
     </div>
 
@@ -190,22 +217,22 @@
         <!-- Welcome content padded accurately above footer -->
         <div class="w-full pb-[calc(32px+56px)] grid grid-cols-1 lg:grid-cols-5 lg:items-end gap-8 lg:gap-16 animate-fade-in-up">
           <!-- Dynamic Ticker Titles changing every 3 seconds with vertical slide -->
-          <div class="flex flex-row flex-wrap items-start justify-start gap-x-3 sm:gap-x-5 lg:gap-x-6 lg:col-span-3">
-            <div class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden relative shrink-0" id="hero-title-container">
+          <div id="hero-heading-wrapper" class="flex flex-col items-start justify-end lg:col-span-2 m-0 relative">
+            <div class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden relative shrink-0 w-full" id="hero-title-container">
               <div id="hero-title-slider" class="transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col">
-                <div class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.visual</div>
-                <div class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.branding</div>
-                <div class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.interface</div>
-                <div class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.print</div>
-                <div class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.visual</div>
+                <div data-i18n="hero.ticker0" class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.visual</div>
+                <div data-i18n="hero.ticker1" class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.branding</div>
+                <div data-i18n="hero.ticker2" class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.ui/ux</div>
+                <div data-i18n="hero.ticker3" class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.print</div>
+                <div data-i18n="hero.ticker4" class="h-[48px] sm:h-[72px] md:h-[96px] overflow-hidden flex items-center justify-start font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0">.visual</div>
               </div>
             </div>
-            <h1 class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0 break-words">designer</h1>
+            <h1 data-i18n="hero.designer" class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight leading-none text-brand-text m-0 break-words">designer</h1>
           </div>
           
-          <div class="lg:col-span-2 flex items-center">
-            <p class="font-sans text-[16px] md:text-[22px] text-brand-text-muted lowercase leading-relaxed m-0">
-              spain-based graphic designer with +10 years of experience. worked in advertising for +3 years with both national and international clients.
+          <div class="lg:col-span-3 flex items-center">
+            <p data-i18n="hero.desc" class="font-sans text-[16px] md:text-[22px] text-brand-text-muted lowercase leading-relaxed m-0">
+              spain-based graphic designer with +10 years of experience. work in advertising for +3 years with both national and international clients.
             </p>
           </div>
         </div>
@@ -220,20 +247,21 @@
         ></div>
 
         <div class="w-full pb-[calc(32px+56px)] grid grid-cols-1 lg:grid-cols-5 lg:items-end gap-8 lg:gap-16">
-          <div class="lg:col-span-3 flex items-center shrink-0">
-            <h1 class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words">
-              .branding design
+          <div class="lg:col-span-2 flex flex-col items-start justify-end shrink-0 m-0">
+            <h1 class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start">
+              <span data-i18n="section.branding.line1">.branding</span>
+              <span data-i18n="section.branding.line2">design</span>
             </h1>
           </div>
           
           <!-- Projects stacked vertically as clean horizontal rows -->
-          <div class="flex flex-col gap-1.5 lg:col-span-2 m-0" id="branding-grid">
+          <div class="flex flex-col gap-1.5 lg:col-span-3 m-0" id="branding-grid">
             <!-- Dynamic Category cards go here -->
           </div>
         </div>
       </section>
 
-      <!-- SECTION 3: .interface design -->
+      <!-- SECTION 3: .ui/ux design -->
       <section class="scroll-section px-6 md:px-12">
         <!-- Archaeological UI layout backdrop -->
         <div 
@@ -242,14 +270,15 @@
         ></div>
 
         <div class="w-full pb-[calc(32px+56px)] grid grid-cols-1 lg:grid-cols-5 lg:items-end gap-8 lg:gap-16">
-          <div class="lg:col-span-3 flex items-center shrink-0">
-            <h1 class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words">
-              .interface design
+          <div class="lg:col-span-2 flex flex-col items-start justify-end shrink-0 m-0">
+            <h1 class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start">
+              <span data-i18n="section.interface.line1">.ui/ux</span>
+              <span data-i18n="section.interface.line2">design</span>
             </h1>
           </div>
 
-          <!-- Interface row list -->
-          <div class="flex flex-col gap-1.5 lg:col-span-2 m-0" id="interface-grid">
+          <!-- UI/UX row list -->
+          <div class="flex flex-col gap-1.5 lg:col-span-3 m-0" id="interface-grid">
             <!-- Dynamic interface files cards go here -->
           </div>
         </div>
@@ -264,14 +293,15 @@
         ></div>
 
         <div class="w-full pb-[calc(32px+56px)] grid grid-cols-1 lg:grid-cols-5 lg:items-end gap-8 lg:gap-16">
-          <div class="lg:col-span-3 flex items-center shrink-0">
-            <h1 class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words">
-              .print design
+          <div class="lg:col-span-2 flex flex-col items-start justify-end shrink-0 m-0">
+            <h1 class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start">
+              <span data-i18n="section.print.line1">.print</span>
+              <span data-i18n="section.print.line2">design</span>
             </h1>
           </div>
 
           <!-- Print row list -->
-          <div class="flex flex-col gap-1.5 lg:col-span-2 m-0" id="print-grid">
+          <div class="flex flex-col gap-1.5 lg:col-span-3 m-0" id="print-grid">
             <!-- Dynamic physical print layout goes here -->
           </div>
         </div>
@@ -287,7 +317,7 @@
 
         <div class="w-full pb-[calc(32px+56px)] grid grid-cols-1 lg:grid-cols-5 lg:items-end gap-8 lg:gap-16 mt-12">
           <div class="lg:col-span-2 flex items-center shrink-0 m-0">
-            <h1 class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text leading-none m-0 break-words">
+            <h1 data-i18n="section.worked_for" class="font-sans text-5xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text leading-none m-0 break-words">
               .worked for
             </h1>
           </div>
@@ -307,9 +337,9 @@
       <!-- Col 1: language toggle -->
       <div class="hidden md:flex items-center justify-start self-center">
         <div class="flex items-center gap-1.5 font-sans text-sm md:text-base font-bold lowercase px-2 md:px-0 lg:px-2">
-          <button class="text-white hover:text-brand-orange transition-colors cursor-pointer">en</button>
-          <span class="text-zinc-600">/</span>
-          <button class="text-zinc-400 hover:text-white transition-colors cursor-pointer">es</button>
+          <button onclick="changeLanguage('en')" data-lang="en" class="lang-toggle-btn transition-opacity duration-300 cursor-pointer focus:outline-none bg-transparent border-0 p-0" style="color: #fcfce8; opacity: 1;">en</button>
+          <span style="color: #fcfce8; opacity: 0.5;">/</span>
+          <button onclick="changeLanguage('es')" data-lang="es" class="lang-toggle-btn transition-opacity duration-300 cursor-pointer focus:outline-none bg-transparent border-0 p-0" style="color: #fcfce8; opacity: 0.5;">es</button>
         </div>
       </div>
 
@@ -318,6 +348,7 @@
         <a 
           href="/Rafael_Guerra_Lazaro_CV.pdf"
           download="Rafael_Guerra_Lazaro_CV.pdf"
+          data-i18n="footer.curriculum"
           class="transition-all duration-300 py-1.5 px-2 md:px-0 lg:px-2 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange cursor-pointer bg-transparent border-0 font-bold lowercase tracking-wider whitespace-nowrap block inline-block"
         >
           .curriculum
@@ -331,6 +362,7 @@
       <div class="flex items-center justify-end self-center">
         <a 
           href="mailto:guerralazarorafael@gmail.com"
+          data-i18n="footer.mail"
           class="transition-all duration-300 py-1.5 px-2 md:px-0 lg:px-2 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange lowercase tracking-wider font-bold whitespace-nowrap block"
         >
           .mail
@@ -344,6 +376,7 @@
           target="_blank"
           rel="noopener noreferrer"
           id="behance-link"
+          data-i18n="footer.behance"
           class="transition-all duration-300 py-1.5 px-2 md:px-0 lg:px-2 rounded-sm text-brand-orange-light hover:bg-white hover:text-brand-orange lowercase tracking-wider font-bold whitespace-nowrap block"
         >
           .behance
@@ -366,93 +399,84 @@
     <!-- INTERACTIVE CASE STUDY PROJECT DETAIL MODAL -->
     <!-- ========================================== -->
     <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-end bg-black/80 backdrop-blur-sm p-4 overflow-y-auto hidden">
-      <!-- Modal Inner Container -->
-      <div class="relative w-full max-w-2xl bg-brand-surface-card border border-brand-outline/20 p-6 md:p-8 rounded shadow-2xl h-full flex flex-col justify-between overflow-y-auto transform translate-x-full transition-transform duration-500" id="project-modal-content">
+      <!-- Modal Inner Container (No border outline) -->
+      <div class="relative w-full max-w-2xl bg-brand-surface-card p-6 md:p-8 rounded shadow-2xl h-full flex flex-col justify-between overflow-y-auto transform translate-x-full transition-transform duration-500" id="project-modal-content">
         <div>
-          <!-- Header -->
-          <div class="flex justify-between items-center border-b border-brand-outline/10 pb-4 mb-6">
-            <div class="flex items-center space-x-2">
-              <i data-lucide="folder-kanban" class="w-5 h-5 text-brand-orange"></i>
-              <span class="font-sans text-xs md:text-sm uppercase tracking-wider text-brand-text-muted font-bold" id="modal-project-category">
-                case study / BRANDING
-              </span>
+          <!-- Header/Title Row (No separating border line, starts with title on the left and close button on the right) -->
+          <div class="flex justify-between items-start gap-4 mb-6">
+            <div class="flex flex-col">
+              <!-- Project Title with no "/" -->
+              <h2 class="font-sans text-4xl md:text-5xl font-extrabold tracking-tight text-brand-text lowercase mb-2 break-words max-w-full" id="modal-project-title">
+                project title
+              </h2>
+              <p class="font-sans text-lg md:text-xl text-brand-orange font-medium" id="modal-project-subtitle">
+                branding, identity design and guidelines
+              </p>
             </div>
+            <!-- Raw orange close button icon / custom design close button at the top right -->
             <button
               onclick="closeProjectModal()"
-              class="p-2 border border-brand-outline/20 hover:border-brand-orange hover:text-brand-orange transition-colors rounded-sm bg-transparent"
+              class="p-2 text-white hover:text-brand-orange transition-colors bg-transparent border-0 focus:outline-none cursor-pointer self-start -mt-2 -mr-2"
               title="Close Panel"
             >
-              <i data-lucide="x" class="w-4 h-4"></i>
+              <i data-lucide="x" class="w-6 h-6"></i>
             </button>
           </div>
 
-          <!-- Project Title -->
-          <h2 class="font-sans text-4xl md:text-5xl font-extrabold tracking-tight text-brand-text lowercase mb-2 break-words max-w-full">
-            <span id="modal-project-title">project title</span> <span class="text-brand-orange">/</span>
-          </h2>
-          <p class="font-sans text-lg md:text-xl text-brand-orange font-medium mb-6" id="modal-project-subtitle">
-            branding, identity design and guidelines
-          </p>
-
-          <!-- Hero Image -->
-          <div class="relative aspect-video w-full overflow-hidden border border-brand-outline/10 mb-6 rounded-sm group bg-black">
-            <img
-              id="modal-project-image"
-              src=""
-              alt=""
-              referrerpolicy="no-referrer"
-              class="w-full h-full object-cover transition-all duration-700 filter grayscale hover:grayscale-0 scale-100 hover:scale-105"
-            />
-            <div class="absolute top-2 right-2 bg-brand-surface px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider border border-brand-outline/30 rounded-sm pointer-events-none">
-              active preview
+          <!-- Gallery of up to 5 different images for each project -->
+          <div class="mb-8 select-none">
+            <!-- Large Featured Preview Image -->
+            <div class="relative aspect-video w-full overflow-hidden mb-3 rounded-sm bg-black">
+              <img
+                id="modal-project-image"
+                src=""
+                alt=""
+                referrerpolicy="no-referrer"
+                class="w-full h-full object-cover transition-all duration-500 filter grayscale hover:grayscale-0"
+              />
+            </div>
+            <!-- Thumbnails grid for up to 5 images -->
+            <div id="modal-project-gallery-row" class="grid grid-cols-5 gap-2">
+              <!-- Clickable thumbnails go here -->
             </div>
           </div>
 
-          <!-- Overview & stats -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-base md:text-lg">
-            <div class="md:col-span-2">
-              <h3 class="font-sans text-sm md:text-base uppercase text-brand-orange mb-2 tracking-wider font-bold">.the overview</h3>
-              <p class="font-sans text-brand-text-muted leading-relaxed lowercase" id="modal-project-desc">
+          <!-- Overview & stats (Smaller description text) -->
+          <div class="flex flex-col gap-6 mb-8 text-sm">
+            <!-- Full width overview section -->
+            <div class="w-full">
+              <h3 data-i18n="modal.overview" class="font-sans text-xs md:text-sm uppercase text-brand-orange mb-2 tracking-wider font-bold">.the overview</h3>
+              <p class="font-sans text-brand-text-muted leading-relaxed lowercase text-xs sm:text-sm" id="modal-project-desc">
                 full comprehensive overview
               </p>
             </div>
-            <div class="space-y-4">
+            
+            <!-- Horizontal structure underneath: timeline left, toolkit right -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 class="font-sans text-sm md:text-base uppercase text-brand-orange tracking-wider flex items-center gap-1 font-bold">
-                  <i data-lucide="calendar" class="w-4 h-4"></i> .timeline
+                <h4 data-i18n="modal.timeline" class="font-sans text-xs md:text-sm uppercase text-brand-orange tracking-wider flex items-center gap-1 font-bold">
+                  <i data-lucide="calendar" class="w-3.5 h-3.5 animate-pulse"></i> .timeline
                 </h4>
-                <p class="font-sans text-brand-text lowercase" id="modal-project-year">2025 / completed</p>
+                <p class="font-sans text-brand-text-muted lowercase text-xs sm:text-sm mt-1" id="modal-project-year">2025 / completed</p>
               </div>
               <div>
-                <h4 class="font-sans text-sm md:text-base uppercase text-brand-orange tracking-wider flex items-center gap-1 font-bold">
-                  <i data-lucide="wrench" class="w-4 h-4"></i> .toolkit
+                <h4 data-i18n="modal.toolkit" class="font-sans text-xs md:text-sm uppercase text-brand-orange tracking-wider flex items-center gap-1 font-bold">
+                  <i data-lucide="wrench" class="w-3.5 h-3.5"></i> .toolkit
                 </h4>
-                <div class="flex flex-wrap gap-1 mt-1" id="modal-project-toolkit">
+                <div class="flex flex-wrap gap-1.5 mt-1.5" id="modal-project-toolkit">
                   <!-- Tools pill tags go here -->
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Custom Deliverables checklist list -->
-          <div class="border-t border-brand-outline/10 pt-6 mb-6">
-            <h3 class="font-sans text-sm md:text-base uppercase text-brand-orange tracking-wider mb-4 flex items-center gap-1 font-bold">
-              <i data-lucide="sparkles" class="w-4 h-4"></i> .designed deliverables
-            </h3>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="modal-project-features">
-              <!-- Feature list elements list -->
-            </ul>
-          </div>
         </div>
 
-        <!-- Footer -->
-        <div class="border-t border-brand-outline/10 pt-6 mt-8 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
-          <div class="font-sans text-xs md:text-sm text-brand-text-muted/60 lowercase">
-            ® 2026. all digital files secure.
-          </div>
+        <!-- Footer (No border line, no copyright text, solid orange close button) -->
+        <div class="mt-8 flex justify-center items-center w-full">
           <button
             onclick="closeProjectModal()"
-            class="px-6 py-2 bg-brand-orange hover:bg-brand-orange-hover text-brand-orange-light font-sans text-sm font-semibold uppercase tracking-wider rounded-sm transition-colors text-center cursor-pointer border-0"
+            data-i18n="modal.close"
+            class="w-full px-6 py-3 bg-brand-orange hover:bg-brand-orange-hover text-brand-orange-light font-sans text-sm font-bold uppercase tracking-wider rounded-sm transition-colors text-center cursor-pointer border-0"
           >
             .close publication view
           </button>
