@@ -22,11 +22,14 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
 }
 
 /* Scroll Snap custom utilities */
 .scroll-container {
   height: 100vh;
+  height: 100dvh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -40,6 +43,7 @@ body {
 
 .scroll-section {
   height: 100vh;
+  height: 100dvh;
   width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -47,6 +51,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  box-sizing: border-box;
 }
 
 /* Unified CRT Scanline styling overlay */
@@ -175,9 +180,74 @@ main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(
   font-size: 18px !important;
 }
 
+/* Safe areas, mobile header/footer heights and vertical centering */
+nav.fixed,
+#mobile-menu-header {
+  padding-top: calc(1rem + env(safe-area-inset-top, 0px)) !important;
+  padding-bottom: 1rem !important;
+}
+
+footer.fixed {
+  padding-top: 0.625rem !important;
+  padding-bottom: calc(0.625rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+@media (min-width: 768px) {
+  nav.fixed,
+  #mobile-menu-header {
+    padding-top: calc(1.5rem + env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: 1.5rem !important;
+  }
+}
+
+/* Screen Pagination indicator height fallback */
+.fixed.right-0.top-0 {
+  height: 100vh !important;
+  height: 100dvh !important;
+}
+
+/* Mobile-specific layout rebalancing and safe constraints */
 @media (max-width: 767px) {
+  .scroll-section {
+    padding-top: calc(72px + env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+    justify-content: center !important;
+  }
+  
+  /* Prevent inner content containers from double padding-bottom and correct gap */
+  .scroll-section > div.w-full {
+    padding-bottom: 0px !important;
+    margin-top: 0px !important;
+    gap: 1.25rem !important; /* tighter gap for perfect fit */
+  }
+
+  /* Compact hero elements to guarantee they fit in initial viewport */
+  #hero-title-container {
+    height: 40px !important;
+  }
+  
+  #hero-title-container [data-i18n^="hero.ticker"] {
+    height: 40px !important;
+    font-size: 2.25rem !important; /* text-4xl (36px) */
+    line-height: 40px !important;
+  }
+  
+  #hero-heading-wrapper h1[data-i18n="hero.designer"] {
+    font-size: 2.25rem !important; /* text-4xl (36px) */
+    line-height: 1 !important;
+  }
+
+  /* Compact section headers */
+  .scroll-section h1 {
+    font-size: 2.25rem !important; /* text-4xl */
+    line-height: 1 !important;
+  }
+
+  /* Adjust description paragraph font and alignment */
+  .scroll-section p[data-i18n="hero.desc"],
   main#scroll-container:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > p:nth-of-type(1) {
-    font-size: 16px !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
   }
 }
 

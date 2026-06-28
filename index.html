@@ -117,10 +117,10 @@
     </nav>
 
     <!-- Mobile Navigation Overlay (Hidden by default) -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 w-full h-screen bg-brand-surface/98 backdrop-blur-md z-[60] hidden flex-col justify-between font-sans text-xl opacity-0 transition-opacity duration-300">
+    <div id="mobile-menu-overlay" class="fixed inset-0 w-full h-[100dvh] bg-brand-surface/98 backdrop-blur-md z-[60] hidden flex-col justify-between font-sans text-xl opacity-0 transition-opacity duration-300">
       
       <!-- Mobile Overlay Top Header-bar -> mimics top bar exactly in position and alignment without any separating border line -->
-      <div class="grid grid-cols-3 md:grid-cols-5 items-center w-full px-4 sm:px-6 md:px-12 py-6 font-sans text-sm text-white gap-4 md:gap-x-4">
+      <div id="mobile-menu-header" class="grid grid-cols-3 md:grid-cols-5 items-center w-full px-4 sm:px-6 md:px-12 py-6 font-sans text-sm text-white gap-4 md:gap-x-4">
         <!-- Col 1: Close X button in the exact same left-aligned position as the hamburger menu -->
         <div class="flex items-center justify-start self-center">
           <button onclick="closeMobileMenu()" class="text-white cursor-pointer hover:text-brand-orange bg-transparent border-0 focus:outline-none transition-colors flex items-center justify-center p-1" id="mobile-menu-close-btn">
