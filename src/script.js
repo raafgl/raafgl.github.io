@@ -504,7 +504,7 @@ const initHeroTitleSlider = () => {
 };
 
 // Main setup initialization block
-document.addEventListener('DOMContentLoaded', () => {
+const initializePortfolio = () => {
   // --- Mobile Chrome Viewport Fix ---
   // Ensure the section height does not change during scroll when the address bar hides.
   const setStableViewportHeight = () => {
@@ -539,9 +539,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateCvDownloadAttribute = () => {
     const cvLink = document.querySelector('a[data-i18n="footer.curriculum"]');
     if (cvLink) {
-      // Resolve to fully qualified absolute URL so that opening in target="_blank"
-      // works properly even inside nested/sandboxed iframes (e.g., on Android Chrome).
-      cvLink.href = new URL('Rafael_Guerra_Lazaro_CV.pdf', window.location.href).href;
+      // Resolve to fully qualified absolute URL based on the window's origin
+      // to avoid any sub-path issues or sandboxed iframe relative path lookup bugs.
+      cvLink.href = new URL('Rafael_Guerra_Lazaro_CV.pdf', window.location.origin).href;
 
       const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
       if (isMobile) {
@@ -622,4 +622,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render Lucide SVGs initially
   lucide.createIcons();
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializePortfolio);
+} else {
+  initializePortfolio();
+}
