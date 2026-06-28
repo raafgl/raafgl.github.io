@@ -177,12 +177,14 @@ window.scrollToSegment = function(index) {
 };
 
 // Scroll listener handler for active navigation highlighting and vertical tracking
+let scrollEndTimeout;
 const handleScrollTracker = () => {
   const container = document.getElementById('scroll-container');
   if (!container) return;
   
   const scrollY = container.scrollTop;
-  const height = window.innerHeight;
+  // Use clientHeight instead of innerHeight to be safe with address bar
+  const height = container.clientHeight;
   const index = Math.round(scrollY / height);
   
   const segments = ['welcome', 'branding', 'interface', 'print', 'worked-for'];
@@ -200,6 +202,29 @@ const handleScrollTracker = () => {
   const indicator = document.getElementById('scroll-indicator');
   if (indicator) {
     indicator.style.transform = `translateY(${ (percent / 100) * 400 }%)`;
+  }
+
+  // Post-gesture section alignment for mobile (hybrid model)
+  if (window.innerWidth <= 768) {
+    clearTimeout(scrollEndTimeout);
+    scrollEndTimeout = setTimeout(() => {
+      const sections = document.querySelectorAll('.scroll-section');
+      
+      let closestSection = sections[0];
+      let minDistance = Infinity;
+      
+      sections.forEach(section => {
+        const distance = Math.abs(section.offsetTop - container.scrollTop);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestSection = section;
+        }
+      });
+      
+      if (minDistance > 5) {
+        closestSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 150);
   }
 };
 
@@ -500,43 +525,6 @@ document.addEventListener('DOMContentLoaded', () => {
         isWheeling = false;
       }, 450);
     }, { passive: false });
-
-    // Touch scrolling interceptor for mobile
-    let touchStartY = 0;
-    let isTouching = false;
-    
-    container.addEventListener('touchstart', (e) => {
-      touchStartY = e.changedTouches[0].screenY;
-    }, { passive: true });
-
-    container.addEventListener('touchmove', (e) => {
-      if (window.innerWidth <= 768) {
-        if (e.cancelable) e.preventDefault();
-      }
-    }, { passive: false });
-
-    container.addEventListener('touchend', (e) => {
-      if (window.innerWidth > 768) return;
-      
-      const touchEndY = e.changedTouches[0].screenY;
-      const deltaY = touchStartY - touchEndY;
-      
-      if (Math.abs(deltaY) < 40) return;
-      
-      if (isTouching) return;
-      isTouching = true;
-      
-      const direction = Math.sign(deltaY);
-      const currentIndex = Math.round(container.scrollTop / container.clientHeight);
-      const sections = document.querySelectorAll('.scroll-section');
-      const nextIndex = Math.max(0, Math.min(currentIndex + direction, sections.length - 1));
-      
-      window.scrollToSegment(nextIndex);
-      
-      setTimeout(() => {
-        isTouching = false;
-      }, 500);
-    }, { passive: true });
   }
 
   // Interactive spotlight tracking logic for section backgrounds
