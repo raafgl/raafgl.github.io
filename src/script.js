@@ -539,9 +539,16 @@ const initializePortfolio = () => {
   const updateCvDownloadAttribute = () => {
     const cvLink = document.querySelector('a[data-i18n="footer.curriculum"]');
     if (cvLink) {
-      // Resolve to fully qualified absolute URL based on the window's origin
-      // to avoid any sub-path issues or sandboxed iframe relative path lookup bugs.
-      cvLink.href = new URL('Rafael_Guerra_Lazaro_CV.pdf', window.location.origin).href;
+      // Resolve to fully qualified absolute URL, supporting subdirectories (like GitHub Pages repositories)
+      // regardless of trailing slashes or index.html in the address bar.
+      let path = window.location.pathname;
+      if (path.endsWith('.html') || path.endsWith('.htm')) {
+        path = path.substring(0, path.lastIndexOf('/'));
+      }
+      if (!path.endsWith('/')) {
+        path += '/';
+      }
+      cvLink.href = window.location.origin + path + 'Rafael_Guerra_Lazaro_CV.pdf';
 
       const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
       if (isMobile) {
