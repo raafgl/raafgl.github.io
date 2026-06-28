@@ -165,15 +165,48 @@ export function playHover() {}
 window.playTick = playTick;
 window.playHover = playHover;
 
-// Scroll to segment index logic
+// Scroll to segment index logic with premium requestAnimationFrame easing
 window.scrollToSegment = function(index) {
   const container = document.getElementById('scroll-container');
-  if (container) {
+  if (!container) return;
+  
+  const sections = document.querySelectorAll('.scroll-section');
+  if (index < 0 || index >= sections.length) return;
+  
+  const targetY = index * container.clientHeight;
+  const startY = container.scrollTop;
+  const distance = targetY - startY;
+  
+  // Skip if already at target
+  if (Math.abs(distance) < 5) return;
+  
+  const duration = 400; // Smooth premium duration
+  let start = null;
+
+  // Premium easing: easeInOutQuart
+  const easing = (t) => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
+
+  // Temporarily disable CSS snap to prevent conflicts during JS animation
+  container.style.scrollSnapType = 'none';
+
+  const step = (timestamp) => {
+    if (!start) start = timestamp;
+    const progress = Math.min((timestamp - start) / duration, 1);
+    
     container.scrollTo({
-      top: index * window.innerHeight,
-      behavior: 'smooth'
+      top: startY + distance * easing(progress),
+      behavior: 'auto'
     });
-  }
+
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      // Re-enable snap after transition completes
+      container.style.scrollSnapType = 'y mandatory';
+    }
+  };
+
+  window.requestAnimationFrame(step);
 };
 
 // Scroll listener handler for active navigation highlighting and vertical tracking
@@ -476,6 +509,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('scroll-container');
   if (container) {
     container.addEventListener('scroll', handleScrollTracker, { passive: true });
+    
+    // Smooth wheel scrolling interceptor
+    let isWheeling = false;
+    container.addEventListener('wheel', (e) => {
+      // Only intercept discrete mouse wheels to preserve native trackpad feel
+      if (Math.abs(e.deltaY) < 40) return;
+      
+      e.preventDefault();
+      
+      if (isWheeling) return;
+      isWheeling = true;
+      
+      const direction = Math.sign(e.deltaY);
+      const currentIndex = Math.round(container.scrollTop / container.clientHeight);
+      const sections = document.querySelectorAll('.scroll-section');
+      const nextIndex = Math.max(0, Math.min(currentIndex + direction, sections.length - 1));
+      
+      window.scrollToSegment(nextIndex);
+      
+      // Debounce window to match easing duration
+      setTimeout(() => {
+        isWheeling = false;
+      }, 450);
+    }, { passive: false });
   }
 
   // Interactive spotlight tracking logic for section backgrounds

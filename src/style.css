@@ -209,37 +209,37 @@ footer.fixed {
 /* Mobile-specific layout rebalancing and safe constraints */
 @media (max-width: 767px) {
   .scroll-section {
-    padding-top: calc(72px + env(safe-area-inset-top, 0px)) !important;
-    padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
-    justify-content: center !important;
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    justify-content: flex-end !important;
   }
   
-  /* Prevent inner content containers from double padding-bottom and correct gap */
+  /* Anchor to bottom just above footer with consistent, desktop-mirroring gap spacing */
   .scroll-section > div.w-full {
-    padding-bottom: 0px !important;
+    padding-bottom: calc(44px + 1.5rem + env(safe-area-inset-bottom, 0px)) !important;
     margin-top: 0px !important;
-    gap: 1.25rem !important; /* tighter gap for perfect fit */
+    gap: 1.5rem !important;
   }
 
   /* Compact hero elements to guarantee they fit in initial viewport */
   #hero-title-container {
-    height: 40px !important;
+    height: 60px !important;
   }
   
   #hero-title-container [data-i18n^="hero.ticker"] {
-    height: 40px !important;
-    font-size: 2.25rem !important; /* text-4xl (36px) */
-    line-height: 40px !important;
+    height: 60px !important;
+    font-size: 3.75rem !important; /* text-6xl (60px) */
+    line-height: 60px !important;
   }
   
   #hero-heading-wrapper h1[data-i18n="hero.designer"] {
-    font-size: 2.25rem !important; /* text-4xl (36px) */
+    font-size: 3.75rem !important; /* text-6xl (60px) */
     line-height: 1 !important;
   }
 
   /* Compact section headers */
   .scroll-section h1 {
-    font-size: 2.25rem !important; /* text-4xl */
+    font-size: 3.75rem !important; /* text-6xl */
     line-height: 1 !important;
   }
 
