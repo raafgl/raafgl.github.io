@@ -1,19 +1,5 @@
 import { PROJECTS, WORKED_FOR_BRANDS } from './data.js';
 
-// Temporarily disable scroll snapping on resize to prevent mobile browser jumping
-// when the address bar hides/shows and 100dvh resizes the sections.
-let snapTimeout;
-window.addEventListener('resize', () => {
-  const container = document.getElementById('scroll-container');
-  if (container) {
-    container.style.scrollSnapType = 'none';
-    clearTimeout(snapTimeout);
-    snapTimeout = setTimeout(() => {
-      container.style.scrollSnapType = '';
-    }, 150);
-  }
-});
-
 // State Management
 let activeSegment = 'welcome';
 
@@ -179,48 +165,15 @@ export function playHover() {}
 window.playTick = playTick;
 window.playHover = playHover;
 
-// Scroll to segment index logic with premium requestAnimationFrame easing
+// Scroll to segment index logic using scrollIntoView
 window.scrollToSegment = function(index) {
-  const container = document.getElementById('scroll-container');
-  if (!container) return;
-  
   const sections = document.querySelectorAll('.scroll-section');
   if (index < 0 || index >= sections.length) return;
   
-  const targetY = index * container.clientHeight;
-  const startY = container.scrollTop;
-  const distance = targetY - startY;
-  
-  // Skip if already at target
-  if (Math.abs(distance) < 5) return;
-  
-  const duration = 400; // Smooth premium duration
-  let start = null;
-
-  // Premium easing: easeInOutQuart
-  const easing = (t) => t < 0.5 ? 8 * t * t * t * t : 1 - Math.pow(-2 * t + 2, 4) / 2;
-
-  // Temporarily disable CSS snap to prevent conflicts during JS animation
-  container.style.scrollSnapType = 'none';
-
-  const step = (timestamp) => {
-    if (!start) start = timestamp;
-    const progress = Math.min((timestamp - start) / duration, 1);
-    
-    container.scrollTo({
-      top: startY + distance * easing(progress),
-      behavior: 'auto'
-    });
-
-    if (progress < 1) {
-      window.requestAnimationFrame(step);
-    } else {
-      // Re-enable snap after transition completes
-      container.style.scrollSnapType = 'y mandatory';
-    }
-  };
-
-  window.requestAnimationFrame(step);
+  const targetSection = sections[index];
+  if (targetSection) {
+    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 };
 
 // Scroll listener handler for active navigation highlighting and vertical tracking
@@ -547,6 +500,43 @@ document.addEventListener('DOMContentLoaded', () => {
         isWheeling = false;
       }, 450);
     }, { passive: false });
+
+    // Touch scrolling interceptor for mobile
+    let touchStartY = 0;
+    let isTouching = false;
+    
+    container.addEventListener('touchstart', (e) => {
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e) => {
+      if (window.innerWidth <= 768) {
+        if (e.cancelable) e.preventDefault();
+      }
+    }, { passive: false });
+
+    container.addEventListener('touchend', (e) => {
+      if (window.innerWidth > 768) return;
+      
+      const touchEndY = e.changedTouches[0].screenY;
+      const deltaY = touchStartY - touchEndY;
+      
+      if (Math.abs(deltaY) < 40) return;
+      
+      if (isTouching) return;
+      isTouching = true;
+      
+      const direction = Math.sign(deltaY);
+      const currentIndex = Math.round(container.scrollTop / container.clientHeight);
+      const sections = document.querySelectorAll('.scroll-section');
+      const nextIndex = Math.max(0, Math.min(currentIndex + direction, sections.length - 1));
+      
+      window.scrollToSegment(nextIndex);
+      
+      setTimeout(() => {
+        isTouching = false;
+      }, 500);
+    }, { passive: true });
   }
 
   // Interactive spotlight tracking logic for section backgrounds

@@ -37,6 +37,14 @@ body {
   scrollbar-width: none; /* Firefox */
 }
 
+@media (max-width: 768px) {
+  .scroll-container {
+    scroll-snap-type: none;
+    overflow-y: hidden;
+    touch-action: none; /* Prevent native touch scrolling which triggers address bar hide/show */
+  }
+}
+
 .scroll-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
