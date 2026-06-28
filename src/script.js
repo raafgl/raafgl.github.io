@@ -533,6 +533,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   // ----------------------------------
 
+  // --- Mobile PDF Open Behavior ---
+  // Ensure the curriculum PDF link opens in a new tab on mobile without forcing a download,
+  // while preserving the download attribute behavior on desktop.
+  const updateCvDownloadAttribute = () => {
+    const cvLink = document.querySelector('a[data-i18n="footer.curriculum"]');
+    if (cvLink) {
+      const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (isMobile) {
+        cvLink.removeAttribute('download');
+      } else {
+        cvLink.setAttribute('download', 'Rafael_Guerra_Lazaro_CV.pdf');
+      }
+    }
+  };
+
+  updateCvDownloadAttribute();
+  window.addEventListener('resize', updateCvDownloadAttribute);
+  // ----------------------------------
+
   const initLang = localStorage.getItem('portfolio_lang') || 'en';
   window.changeLanguage(initLang);
   initHeroTitleSlider();
