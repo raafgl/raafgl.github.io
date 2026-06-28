@@ -202,7 +202,7 @@ window.scrollToSegment = function(index) {
       window.requestAnimationFrame(step);
     } else {
       // Re-enable snap after transition completes
-      container.style.scrollSnapType = 'y mandatory';
+      container.style.removeProperty('scroll-snap-type');
     }
   };
 
