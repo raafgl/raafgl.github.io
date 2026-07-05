@@ -337,12 +337,74 @@ const renderProjectsLists = () => {
 };
 
 // Interactive Case Study details view
+let currentGalleryIndex = 0;
+let currentGalleryImages = [];
+
+window.setModalActiveImageIndex = function(index) {
+  if (!currentGalleryImages || currentGalleryImages.length === 0) return;
+
+  if (index < 0) {
+    index = currentGalleryImages.length - 1;
+  } else if (index >= currentGalleryImages.length) {
+    index = 0;
+  }
+
+  currentGalleryIndex = index;
+  const imgUrl = currentGalleryImages[currentGalleryIndex];
+
+  const mainImg = document.getElementById('modal-project-image');
+  if (mainImg) {
+    mainImg.src = imgUrl;
+  }
+
+  // Highlight active desktop thumbnail
+  const row = document.getElementById('modal-project-gallery-row');
+  if (row) {
+    const buttons = row.querySelectorAll('button');
+    buttons.forEach((btn, idx) => {
+      if (idx === index) {
+        btn.classList.remove('opacity-50');
+        btn.classList.add('opacity-100');
+      } else {
+        btn.classList.add('opacity-50');
+        btn.classList.remove('opacity-100');
+      }
+    });
+  }
+
+  // Highlight active mobile segment indicator
+  const dotsContainer = document.getElementById('modal-project-gallery-dots');
+  if (dotsContainer) {
+    const dots = dotsContainer.querySelectorAll('button');
+    dots.forEach((dot, idx) => {
+      if (idx === index) {
+        dot.classList.remove('bg-white/20');
+        dot.classList.add('bg-brand-orange');
+      } else {
+        dot.classList.add('bg-white/20');
+        dot.classList.remove('bg-brand-orange');
+      }
+    });
+  }
+};
+
+window.navigateModalGallery = function(direction) {
+  window.setModalActiveImageIndex(currentGalleryIndex + direction);
+};
+
 window.changeModalActiveImage = function(imgUrl, el) {
   const mainImg = document.getElementById('modal-project-image');
   if (mainImg) {
     mainImg.src = imgUrl;
   }
   
+  if (currentGalleryImages && currentGalleryImages.length > 0) {
+    const idx = currentGalleryImages.indexOf(imgUrl);
+    if (idx !== -1) {
+      currentGalleryIndex = idx;
+    }
+  }
+
   // Highlight active thumbnail
   const row = document.getElementById('modal-project-gallery-row');
   if (row) {
@@ -355,6 +417,21 @@ window.changeModalActiveImage = function(imgUrl, el) {
   if (el) {
     el.classList.remove('opacity-50');
     el.classList.add('opacity-100');
+  }
+
+  // Sync mobile indicators
+  const dotsContainer = document.getElementById('modal-project-gallery-dots');
+  if (dotsContainer) {
+    const dots = dotsContainer.querySelectorAll('button');
+    dots.forEach((dot, idx) => {
+      if (idx === currentGalleryIndex) {
+        dot.classList.remove('bg-white/20');
+        dot.classList.add('bg-brand-orange');
+      } else {
+        dot.classList.add('bg-white/20');
+        dot.classList.remove('bg-brand-orange');
+      }
+    });
   }
 };
 
@@ -376,11 +453,15 @@ window.openProjectModal = function(id) {
   document.getElementById('modal-project-desc').innerText = desc;
   document.getElementById('modal-project-year').innerText = proj.year;
 
+  // Initialize gallery arrays
+  currentGalleryImages = proj.gallery || [proj.image];
+  currentGalleryIndex = 0;
+
   const img = document.getElementById('modal-project-image');
   img.src = proj.image;
   img.alt = title;
 
-  // Populate interactive gallery of up to 5 images
+  // Populate interactive gallery of up to 5 images (Desktop thumbnail grid)
   const galleryContainer = document.getElementById('modal-project-gallery-row');
   if (proj.gallery && proj.gallery.length > 0) {
     galleryContainer.innerHTML = proj.gallery.map((imgUrl, idx) => `
@@ -393,6 +474,20 @@ window.openProjectModal = function(id) {
     `).join('');
   } else {
     galleryContainer.innerHTML = '';
+  }
+
+  // Populate indicator segments (for mobile/tablets)
+  const dotsContainer = document.getElementById('modal-project-gallery-dots');
+  if (dotsContainer && proj.gallery && proj.gallery.length > 0) {
+    dotsContainer.innerHTML = proj.gallery.map((imgUrl, idx) => `
+      <button 
+        onclick="setModalActiveImageIndex(${idx})" 
+        class="h-[3px] rounded-sm flex-1 transition-all duration-300 cursor-pointer focus:outline-none ${idx === 0 ? 'bg-brand-orange' : 'bg-white/20 hover:bg-white/40'}"
+        aria-label="Go to image ${idx + 1}"
+      ></button>
+    `).join('');
+  } else if (dotsContainer) {
+    dotsContainer.innerHTML = '';
   }
 
   const kitContainer = document.getElementById('modal-project-toolkit');
@@ -602,6 +697,31 @@ const initializePortfolio = () => {
   const initLang = localStorage.getItem('portfolio_lang') || 'en';
   window.changeLanguage(initLang);
   initHeroTitleSlider();
+
+  // --- Modal Gallery Touch Swipe Support ---
+  const modalMainImg = document.getElementById('modal-project-image');
+  if (modalMainImg) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    modalMainImg.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    modalMainImg.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diffX = touchEndX - touchStartX;
+      if (Math.abs(diffX) > 40) { // minimum swipe threshold
+        if (diffX > 0) {
+          // swipe right -> previous image
+          window.navigateModalGallery(-1);
+        } else {
+          // swipe left -> next image
+          window.navigateModalGallery(1);
+        }
+      }
+    }, { passive: true });
+  }
   
   const container = document.getElementById('scroll-container');
   if (container) {
