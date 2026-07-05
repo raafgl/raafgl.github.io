@@ -98,9 +98,9 @@ const translations = {
     "modal.behance": ".proyecto en behance",
     // Projects Spanish content
     "project.torii-manga.title": ".torii manga",
-    "project.torii-manga.subtitle": "Branding and visual identity",
-    "project.torii-manga.desc": "Torii Manga is a publishing project with three business areas: label, specialized magazine, and bookstore. It establishes its brand proposal in the discovery, sale, and dissemination of Japanese manga works that encourage personal disruption, awaken an unique interest, and promote an open attitude to new experiences.",
-    "project.torii-manga.longDesc": "Torii Manga is a publishing project with three business areas: label, specialized magazine, and bookstore. It establishes its brand proposal in the discovery, sale, and dissemination of Japanese manga works that encourage personal disruption, awaken an unique interest, and promote an open attitude to new experiences.",
+    "project.torii-manga.subtitle": "branding e identidad visual",
+    "project.torii-manga.desc": "torii manga es un proyecto editorial con tres áreas de negocio: sello discográfico, revista especializada y librería. establece su propuesta de marca en el descubrimiento, venta y difusión de obras de manga japonés que fomentan la disrupción personal, despiertan un interés único y promueven una actitud abierta hacia nuevas experiencias.",
+    "project.torii-manga.longDesc": "torii manga es un proyecto editorial con tres áreas de negocio: sello discográfico, revista especializada y librería. establece su propuesta de marca en el descubrimiento, venta y difusión de obras de manga japonés que fomentan la disrupción personal, despiertan un interés único y promueven una actitud abierta hacia nuevas experiencias.",
     
     "project.playlist.title": ".playlist app",
     "project.playlist.subtitle": "diseño de identidad y curación de audio social",
@@ -358,14 +358,17 @@ window.changeModalActiveImage = function(imgUrl, el) {
   }
 };
 
+let activeProjectId = null;
+
 window.openProjectModal = function(id) {
   const proj = PROJECTS.find(p => p.id === id);
   if (!proj) return;
 
+  activeProjectId = id;
+
   const title = getTranslation(`project.${proj.id}.title`);
   const subtitle = getTranslation(`project.${proj.id}.subtitle`);
   const desc = getTranslation(`project.${proj.id}.longDesc`) || getTranslation(`project.${proj.id}.desc`);
-  const completedLabel = getTranslation('modal.completed');
 
   // Insert items securely
   document.getElementById('modal-project-title').innerText = title;
@@ -423,6 +426,7 @@ window.openProjectModal = function(id) {
 };
 
 window.closeProjectModal = function() {
+  activeProjectId = null;
   const modal = document.getElementById('project-modal');
   const inner = document.getElementById('project-modal-content');
   inner.classList.add('translate-x-full');
@@ -450,6 +454,21 @@ window.changeLanguage = function(lang) {
   // Programmatically translate other items
   translateContent();
   renderProjectsLists();
+
+  // If there is an active project modal open, translate its contents dynamically
+  if (activeProjectId) {
+    const proj = PROJECTS.find(p => p.id === activeProjectId);
+    if (proj) {
+      const title = getTranslation(`project.${proj.id}.title`);
+      const subtitle = getTranslation(`project.${proj.id}.subtitle`);
+      const desc = getTranslation(`project.${proj.id}.longDesc`) || getTranslation(`project.${proj.id}.desc`);
+
+      document.getElementById('modal-project-title').innerText = title;
+      document.getElementById('modal-project-subtitle').innerText = subtitle;
+      document.getElementById('modal-project-desc').innerText = desc;
+      document.getElementById('modal-project-year').innerText = proj.year;
+    }
+  }
   
   if (window.applyRevealAnimations) {
     window.applyRevealAnimations();

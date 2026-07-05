@@ -411,9 +411,9 @@
     <!-- ========================================== -->
     <!-- INTERACTIVE CASE STUDY PROJECT DETAIL MODAL -->
     <!-- ========================================== -->
-    <div id="project-modal" onclick="closeProjectModal()" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto hidden">
+    <div id="project-modal" onclick="closeProjectModal()" class="fixed inset-0 z-50 flex items-start lg:items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto hidden">
       <!-- Modal Inner Container (No border outline) -->
-      <div onclick="event.stopPropagation()" class="relative w-full max-w-2xl lg:max-w-[90vw] xl:max-w-7xl bg-brand-surface-card p-6 md:p-8 lg:p-10 rounded shadow-2xl flex flex-col transform translate-x-full transition-transform duration-500 max-h-full overflow-y-auto lg:overflow-hidden lg:max-h-[85vh] lg:h-auto" id="project-modal-content">
+      <div onclick="event.stopPropagation()" class="relative w-full max-w-2xl lg:max-w-[90vw] xl:max-w-7xl bg-brand-surface-card py-8 px-6 md:py-10 md:px-8 lg:p-10 rounded shadow-2xl flex flex-col transform translate-x-full transition-transform duration-500 my-8 lg:my-0 h-auto lg:max-h-[85vh] lg:h-auto lg:overflow-hidden" id="project-modal-content">
         
         <div class="flex flex-col lg:flex-row gap-12 md:gap-14 lg:gap-16 lg:flex-1 lg:overflow-hidden min-h-0">
           
@@ -470,7 +470,7 @@
                     <h3 data-i18n="modal.timeline" class="font-sans text-xs md:text-sm lowercase text-brand-text tracking-wider flex items-center gap-1 font-bold">
                       <i data-lucide="calendar" class="w-3.5 h-3.5 animate-pulse"></i> .timeline
                     </h3>
-                    <p class="font-sans text-brand-text-muted lowercase text-xs sm:text-sm lg:text-base mt-1" id="modal-project-year">2025 / completed</p>
+                    <p class="font-sans text-brand-text-muted lowercase text-xs sm:text-sm lg:text-base mt-1" id="modal-project-year">2025</p>
                   </div>
                   <div>
                     <h3 data-i18n="modal.toolkit" class="font-sans text-xs md:text-sm lowercase text-brand-text tracking-wider flex items-center gap-1 font-bold">
