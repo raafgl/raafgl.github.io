@@ -451,6 +451,23 @@ window.openProjectModal = function(id) {
   document.getElementById('modal-project-title').innerText = title;
   document.getElementById('modal-project-subtitle').innerText = subtitle;
   document.getElementById('modal-project-desc').innerText = desc;
+  
+  const descMobile = document.getElementById('modal-project-desc-mobile');
+  if (descMobile) {
+    descMobile.innerText = desc;
+  }
+
+  // Reset mobile overview accordion state to closed
+  const mobileDescContainer = document.getElementById('modal-project-desc-mobile-container');
+  if (mobileDescContainer) {
+    mobileDescContainer.classList.add('max-h-0');
+    mobileDescContainer.classList.remove('max-h-[500px]');
+  }
+  const mobileChevron = document.getElementById('modal-overview-chevron');
+  if (mobileChevron) {
+    mobileChevron.classList.remove('rotate-180');
+  }
+
   document.getElementById('modal-project-year').innerText = proj.year;
 
   // Initialize gallery arrays
@@ -530,6 +547,26 @@ window.closeProjectModal = function() {
   }, 500);
 };
 
+window.toggleMobileOverview = function() {
+  const container = document.getElementById('modal-project-desc-mobile-container');
+  const chevron = document.getElementById('modal-overview-chevron');
+  if (container) {
+    if (container.classList.contains('max-h-0')) {
+      container.classList.remove('max-h-0');
+      container.classList.add('max-h-[500px]');
+      if (chevron) {
+        chevron.classList.add('rotate-180');
+      }
+    } else {
+      container.classList.add('max-h-0');
+      container.classList.remove('max-h-[500px]');
+      if (chevron) {
+        chevron.classList.remove('rotate-180');
+      }
+    }
+  }
+};
+
 // Global interactive language selection state and updater
 window.changeLanguage = function(lang) {
   localStorage.setItem('portfolio_lang', lang);
@@ -561,6 +598,12 @@ window.changeLanguage = function(lang) {
       document.getElementById('modal-project-title').innerText = title;
       document.getElementById('modal-project-subtitle').innerText = subtitle;
       document.getElementById('modal-project-desc').innerText = desc;
+      
+      const descMobile = document.getElementById('modal-project-desc-mobile');
+      if (descMobile) {
+        descMobile.innerText = desc;
+      }
+
       document.getElementById('modal-project-year').innerText = proj.year;
     }
   }
