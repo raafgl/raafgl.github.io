@@ -6,16 +6,17 @@ export const PROJECTS = [
     subtitle: 'Branding, logo design & brand book',
     description: 'complete identity reconstruction for a leading publishing house specializing in classic and modern manga. blending modern geometry with traditional Japanese aesthetics.',
     longDescription: 'the torii manga redesign focused on crafting a symbol that of a literal "torii" gate integrated with a stylized open book form. this was achieved by using high-contrast black and orange geometry, referencing raw print ink and neon signage. we established a cohesive design system that scales from tiny book spines to massive convention banners.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDPR2ceREfrUqOiDOWxvdgBY-t-kaK7N015t8BbT3golrdXt4BPitzPuDmc24DL9GgOUSHBDEl8IH1n-hxg5JNPEYfXiFMr0jxriNoxsKk2AxCJ-Aqnpq_T6AzIHkiHMRvRIZIDhNhL3epqUljB7x6A-VA7LhRBhd8N1O1n4irO11LVBQ2ZD8Z46z5kM--2wQwLGTaXgrTGjB04DwviFZ-pVi8cBzPt02Tuf65MdTUql_WEXneClCGUIRe-Xz8wJk-B5AeqaYJNVdk',
+    image: './assets/torii/torii-1.jpg',
     gallery: [
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDPR2ceREfrUqOiDOWxvdgBY-t-kaK7N015t8BbT3golrdXt4BPitzPuDmc24DL9GgOUSHBDEl8IH1n-hxg5JNPEYfXiFMr0jxriNoxsKk2AxCJ-Aqnpq_T6AzIHkiHMRvRIZIDhNhL3epqUljB7x6A-VA7LhRBhd8N1O1n4irO11LVBQ2ZD8Z46z5kM--2wQwLGTaXgrTGjB04DwviFZ-pVi8cBzPt02Tuf65MdTUql_WEXneClCGUIRe-Xz8wJk-B5AeqaYJNVdk',
-      'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1560942485-b2a11cc13456?auto=format&fit=crop&w=800&q=80'
+      './assets/torii/torii-1.jpg',
+      './assets/torii/torii-2.jpg',
+      './assets/torii/torii-3.jpg',
+      './assets/torii/torii-4.jpg',
+      './assets/torii/torii-5.jpg'
     ],
-    year: '2025',
-    tools: ['Illustrator', 'InDesign', 'Photoshop'],
+    year: '2025-2026',
+    tools: ['photoshop', 'illustrator', 'after effects'],
+    behanceUrl: 'https://www.behance.net/gallery/241669657/Torii-Manga',
     features: [
       'custom logo design with high-contrast geometric glyphs',
       'full color system with premium copper-red and carbon-slate tones',

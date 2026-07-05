@@ -100,6 +100,18 @@ body {
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+.reveal-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-text.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Scrollbar styling for modal timeline scroll area */
 .scrollbar-thin::-webkit-scrollbar {
   width: 4px;
@@ -255,5 +267,41 @@ footer.fixed {
 }
 
 
+/* Custom Cursor styling */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, [role="button"], input, select, textarea, .cursor-pointer, .nav-anchor {
+    cursor: none !important;
+  }
+}
 
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-brand-orange);
+  pointer-events: none;
+  z-index: 999999;
+  opacity: 0;
+  transform: translate3d(var(--cx, -100px), var(--cy, -100px), 0) translate(-50%, -50%);
+  transition: width 0.15s ease-out, height 0.15s ease-out, background-color 0.15s ease-out, border 0.15s ease-out, opacity 0.15s ease-out;
+  will-change: transform, width, height, opacity;
+}
 
+#custom-cursor.cursor-hover {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: 2px solid var(--color-brand-orange);
+}
+
+#custom-cursor.cursor-over-orange {
+  background-color: white;
+}
+
+#custom-cursor.cursor-hover.cursor-over-orange {
+  background-color: transparent;
+  border: 2px solid white;
+}

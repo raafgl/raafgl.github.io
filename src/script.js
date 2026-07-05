@@ -33,12 +33,13 @@ const translations = {
     "modal.timeline": ".timeline",
     "modal.toolkit": ".toolkit",
     "modal.completed": "completed",
-    "modal.close": ".close publication view",
+    "modal.close": ".close view",
+    "modal.behance": ".behance project",
     // Projects English content
     "project.torii-manga.title": ".torii manga",
-    "project.torii-manga.subtitle": "Branding, logo design & brand book",
-    "project.torii-manga.desc": "complete identity reconstruction for a leading publishing house specializing in classic and modern manga. blending modern geometry with traditional Japanese aesthetics.",
-    "project.torii-manga.longDesc": "the torii manga redesign focused on crafting a symbol that of a literal \"torii\" gate integrated with a stylized open book form. this was achieved by using high-contrast black and orange geometry, referencing raw print ink and neon signage. we established a cohesive design system that scales from tiny book spines to massive convention banners.",
+    "project.torii-manga.subtitle": "Branding and visual identity",
+    "project.torii-manga.desc": "Torii Manga is a publishing project with three business areas: label, specialized magazine, and bookstore. It establishes its brand proposal in the discovery, sale, and dissemination of Japanese manga works that encourage personal disruption, awaken an unique interest, and promote an open attitude to new experiences.",
+    "project.torii-manga.longDesc": "Torii Manga is a publishing project with three business areas: label, specialized magazine, and bookstore. It establishes its brand proposal in the discovery, sale, and dissemination of Japanese manga works that encourage personal disruption, awaken an unique interest, and promote an open attitude to new experiences.",
     
     "project.playlist.title": ".playlist app",
     "project.playlist.subtitle": "identity design & social audio curation",
@@ -93,12 +94,13 @@ const translations = {
     "modal.timeline": ".cronología",
     "modal.toolkit": ".herramientas",
     "modal.completed": "completado",
-    "modal.close": ".cerrar publicación",
+    "modal.close": ".cerrar vista",
+    "modal.behance": ".proyecto en behance",
     // Projects Spanish content
     "project.torii-manga.title": ".torii manga",
-    "project.torii-manga.subtitle": "diseño de branding, logotipo y libro de marca",
-    "project.torii-manga.desc": "reconstrucción completa de identidad para una editorial líder especializada en manga clásico y moderno. fusionando geometría moderna con estética tradicional japonesa.",
-    "project.torii-manga.longDesc": "el rediseño de torii manga se centró en esculpir un símbolo formado por una puerta \"torii\" literal integrada con un libro abierto estilizado. esto se logró utilizando geometría de alto contraste negro y naranja, que evoca tinta de impresión cruda y letreros de neón. creamos un sistema de diseño cohesivo aplicable desde lomos de libros hasta grandes lonas de convenciones.",
+    "project.torii-manga.subtitle": "Branding and visual identity",
+    "project.torii-manga.desc": "Torii Manga is a publishing project with three business areas: label, specialized magazine, and bookstore. It establishes its brand proposal in the discovery, sale, and dissemination of Japanese manga works that encourage personal disruption, awaken an unique interest, and promote an open attitude to new experiences.",
+    "project.torii-manga.longDesc": "Torii Manga is a publishing project with three business areas: label, specialized magazine, and bookstore. It establishes its brand proposal in the discovery, sale, and dissemination of Japanese manga works that encourage personal disruption, awaken an unique interest, and promote an open attitude to new experiences.",
     
     "project.playlist.title": ".playlist app",
     "project.playlist.subtitle": "diseño de identidad y curación de audio social",
@@ -346,13 +348,13 @@ window.changeModalActiveImage = function(imgUrl, el) {
   if (row) {
     const buttons = row.querySelectorAll('button');
     buttons.forEach(btn => {
-      btn.classList.add('border-transparent', 'opacity-60');
-      btn.classList.remove('border-brand-orange', 'scale-95', 'opacity-100');
+      btn.classList.add('opacity-50');
+      btn.classList.remove('opacity-100');
     });
   }
   if (el) {
-    el.classList.remove('border-transparent', 'opacity-60');
-    el.classList.add('border-brand-orange', 'scale-95', 'opacity-100');
+    el.classList.remove('opacity-50');
+    el.classList.add('opacity-100');
   }
 };
 
@@ -369,7 +371,7 @@ window.openProjectModal = function(id) {
   document.getElementById('modal-project-title').innerText = title;
   document.getElementById('modal-project-subtitle').innerText = subtitle;
   document.getElementById('modal-project-desc').innerText = desc;
-  document.getElementById('modal-project-year').innerText = `${proj.year} / ${completedLabel}`;
+  document.getElementById('modal-project-year').innerText = proj.year;
 
   const img = document.getElementById('modal-project-image');
   img.src = proj.image;
@@ -381,7 +383,7 @@ window.openProjectModal = function(id) {
     galleryContainer.innerHTML = proj.gallery.map((imgUrl, idx) => `
       <button 
         onclick="changeModalActiveImage('${imgUrl}', this)" 
-        class="aspect-video w-full overflow-hidden rounded-sm bg-black border-2 transition-all duration-300 relative focus:outline-none cursor-pointer ${idx === 0 ? 'border-brand-orange scale-95 opacity-100' : 'border-transparent opacity-60 hover:opacity-100'}"
+        class="aspect-video w-full overflow-hidden bg-black transition-all duration-300 relative focus:outline-none cursor-pointer ${idx === 0 ? 'opacity-100' : 'opacity-50 hover:opacity-100'}"
       >
         <img src="${imgUrl}" alt="${title} thumbnail ${idx + 1}" referrerpolicy="no-referrer" class="w-full h-full object-cover" />
       </button>
@@ -396,6 +398,17 @@ window.openProjectModal = function(id) {
       ${tool}
     </span>
   `).join('');
+
+  const behanceLink = document.getElementById('modal-behance-link');
+  if (behanceLink) {
+    if (proj.behanceUrl) {
+      behanceLink.href = proj.behanceUrl;
+      behanceLink.classList.remove('hidden');
+    } else {
+      behanceLink.classList.add('hidden');
+      behanceLink.href = '';
+    }
+  }
 
   const modal = document.getElementById('project-modal');
   const inner = document.getElementById('project-modal-content');
@@ -437,6 +450,10 @@ window.changeLanguage = function(lang) {
   // Programmatically translate other items
   translateContent();
   renderProjectsLists();
+  
+  if (window.applyRevealAnimations) {
+    window.applyRevealAnimations();
+  }
 };
 
 window.toggleMobileMenu = function() {
@@ -629,6 +646,86 @@ const initializePortfolio = () => {
 
   // Render Lucide SVGs initially
   lucide.createIcons();
+
+  // --- Scroll Text Reveal Animations ---
+  if (!window.textRevealObserver) {
+    window.textRevealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        } else {
+          // Optional: remove if you want them to hide again when scrolled out
+          entry.target.classList.remove('in-view');
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.1
+    });
+  }
+
+  window.applyRevealAnimations = () => {
+    const textElementsToReveal = document.querySelectorAll('h1, h2, h3, p, li, span.reveal-target');
+    textElementsToReveal.forEach(el => {
+      // Avoid adding reveal to navigation elements, buttons, modal texts, welcome section (already animated), etc.
+      if (!el.closest('nav') && 
+          !el.closest('#project-modal') && 
+          !el.closest('button') && 
+          !el.closest('a') &&
+          !el.closest('#section-welcome') &&
+          !el.classList.contains('reveal-text')) {
+        el.classList.add('reveal-text');
+        window.textRevealObserver.observe(el);
+      }
+    });
+  };
+
+  window.applyRevealAnimations();
+
+  // --- Custom Cursor ---
+  const cursor = document.getElementById('custom-cursor');
+  if (cursor && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.setProperty('--cx', `${e.clientX}px`);
+      cursor.style.setProperty('--cy', `${e.clientY}px`);
+      cursor.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      cursor.style.opacity = '1';
+    });
+
+    const updateCursorHoverState = (e) => {
+      const target = e.target;
+      if (!target || !target.closest) return;
+      
+      const isClickable = target.closest('a, button, input, select, textarea, [role="button"], .cursor-pointer, .nav-anchor');
+      if (isClickable) {
+        cursor.classList.add('cursor-hover');
+      } else {
+        cursor.classList.remove('cursor-hover');
+      }
+
+      // Detect if we are over an orange background
+      // Footer and explicitly styled elements
+      const isOrangeBg = target.closest('footer, .bg-brand-orange');
+      // Elements that turn orange on hover
+      const isOrangeHover = target.closest('.hover\\:bg-brand-orange, .hover\\:bg-brand-orange-hover');
+      
+      if (isOrangeBg || isOrangeHover) {
+        cursor.classList.add('cursor-over-orange');
+      } else {
+        cursor.classList.remove('cursor-over-orange');
+      }
+    };
+
+    document.addEventListener('mouseover', updateCursorHoverState);
+  }
 };
 
 if (document.readyState === 'loading') {
