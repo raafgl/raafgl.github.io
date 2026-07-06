@@ -4,8 +4,8 @@ export const PROJECTS = [
     category: 'branding',
     title: '.torii manga',
     subtitle: 'Branding, logo design & brand book',
-    description: 'complete identity reconstruction for a leading publishing house specializing in classic and modern manga. blending modern geometry with traditional Japanese aesthetics.',
-    longDescription: 'the torii manga redesign focused on crafting a symbol that of a literal "torii" gate integrated with a stylized open book form. this was achieved by using high-contrast black and orange geometry, referencing raw print ink and neon signage. we established a cohesive design system that scales from tiny book spines to massive convention banners.',
+    description: 'torii manga has three business areas: a publishing label, a magazine, and a bookstore. it establishes its brand proposition in the discovery, sale, and dissemination of japanese manga to encourage personal disruption, awaken a unique interest, and promote an open attitude towards new experiences.',
+    longDescription: 'torii manga has three business areas: a publishing label, a magazine, and a bookstore. it establishes its brand proposition in the discovery, sale, and dissemination of japanese manga to encourage personal disruption, awaken a unique interest, and promote an open attitude towards new experiences.',
     image: './assets/torii/torii-1.jpg',
     gallery: [
       './assets/torii/torii-1.jpg',

@@ -38,8 +38,8 @@ const translations = {
     // Projects English content
     "project.torii-manga.title": ".torii manga",
     "project.torii-manga.subtitle": "Branding and visual identity",
-    "project.torii-manga.desc": "Torii Manga is a publishing project with three business areas: label, specialized magazine, and bookstore. It establishes its brand proposal in the discovery, sale, and dissemination of Japanese manga works that encourage personal disruption, awaken an unique interest, and promote an open attitude to new experiences.",
-    "project.torii-manga.longDesc": "Torii Manga is a publishing project with three business areas: label, specialized magazine, and bookstore. It establishes its brand proposal in the discovery, sale, and dissemination of Japanese manga works that encourage personal disruption, awaken an unique interest, and promote an open attitude to new experiences.",
+    "project.torii-manga.desc": "torii manga has three business areas: a publishing label, a magazine, and a bookstore. it establishes its brand proposition in the discovery, sale, and dissemination of japanese manga to encourage personal disruption, awaken a unique interest, and promote an open attitude towards new experiences.",
+    "project.torii-manga.longDesc": "torii manga has three business areas: a publishing label, a magazine, and a bookstore. it establishes its brand proposition in the discovery, sale, and dissemination of japanese manga to encourage personal disruption, awaken a unique interest, and promote an open attitude towards new experiences.",
     
     "project.playlist.title": ".playlist app",
     "project.playlist.subtitle": "identity design & social audio curation",
@@ -99,8 +99,8 @@ const translations = {
     // Projects Spanish content
     "project.torii-manga.title": ".torii manga",
     "project.torii-manga.subtitle": "branding e identidad visual",
-    "project.torii-manga.desc": "torii manga es un proyecto editorial con tres áreas de negocio: sello discográfico, revista especializada y librería. establece su propuesta de marca en el descubrimiento, venta y difusión de obras de manga japonés que fomentan la disrupción personal, despiertan un interés único y promueven una actitud abierta hacia nuevas experiencias.",
-    "project.torii-manga.longDesc": "torii manga es un proyecto editorial con tres áreas de negocio: sello discográfico, revista especializada y librería. establece su propuesta de marca en el descubrimiento, venta y difusión de obras de manga japonés que fomentan la disrupción personal, despiertan un interés único y promueven una actitud abierta hacia nuevas experiencias.",
+    "project.torii-manga.desc": "torii manga posee tres áreas de negocio: sello editorial, revista y librería. establece su propuesta de marca en el descubrimiento, venta y difusión de manga japonés para fomentar la disrupción personal, despertar un interés único y promover una actitud abierta hacia nuevas experiencias.",
+    "project.torii-manga.longDesc": "torii manga posee tres áreas de negocio: sello editorial, revista y librería. establece su propuesta de marca en el descubrimiento, venta y difusión de manga japonés para fomentar la disrupción personal, despertar un interés único y promover una actitud abierta hacia nuevas experiencias.",
     
     "project.playlist.title": ".playlist app",
     "project.playlist.subtitle": "diseño de identidad y curación de audio social",
@@ -375,16 +375,12 @@ window.setModalActiveImageIndex = function(index) {
   // Highlight active mobile segment indicator
   const dotsContainer = document.getElementById('modal-project-gallery-dots');
   if (dotsContainer) {
-    const dots = dotsContainer.querySelectorAll('button');
-    dots.forEach((dot, idx) => {
-      if (idx === index) {
-        dot.classList.remove('bg-white/20');
-        dot.classList.add('bg-brand-orange');
-      } else {
-        dot.classList.add('bg-white/20');
-        dot.classList.remove('bg-brand-orange');
-      }
-    });
+    // Note: progress bar widths are managed by the story auto-slide loop
+    // But we still update the active state visually if needed, or checkAndStartStory takes care of it
+  }
+  
+  if (typeof window.checkAndStartStory === 'function') {
+    window.checkAndStartStory();
   }
 };
 
@@ -420,22 +416,80 @@ window.changeModalActiveImage = function(imgUrl, el) {
   }
 
   // Sync mobile indicators
-  const dotsContainer = document.getElementById('modal-project-gallery-dots');
-  if (dotsContainer) {
-    const dots = dotsContainer.querySelectorAll('button');
-    dots.forEach((dot, idx) => {
-      if (idx === currentGalleryIndex) {
-        dot.classList.remove('bg-white/20');
-        dot.classList.add('bg-brand-orange');
+  if (typeof window.checkAndStartStory === 'function') {
+    window.checkAndStartStory();
+  }
+};
+
+let activeProjectId = null;
+let storyTimeout = null;
+
+window.checkAndStartStory = function() {
+  clearTimeout(storyTimeout);
+  
+  if (window.innerWidth < 1024) {
+    if (!currentGalleryImages || currentGalleryImages.length <= 1) return;
+    
+    // Update progress bars visually
+    currentGalleryImages.forEach((_, idx) => {
+      const bar = document.getElementById(`modal-gallery-progress-${idx}`);
+      if (!bar) return;
+      
+      bar.style.transition = 'none'; // clear transitions
+      
+      if (idx < currentGalleryIndex) {
+        bar.style.width = '100%';
+      } else if (idx > currentGalleryIndex) {
+        bar.style.width = '0%';
       } else {
-        dot.classList.add('bg-white/20');
-        dot.classList.remove('bg-brand-orange');
+        bar.style.width = '0%';
+        void bar.offsetWidth; // trigger reflow
+        bar.style.transition = 'width 3s linear';
+        bar.style.width = '100%';
+      }
+    });
+
+    // Schedule next slide
+    storyTimeout = setTimeout(() => {
+      window.navigateModalGallery(1);
+    }, 3000);
+  } else {
+    // Reset widths if on desktop
+    currentGalleryImages.forEach((_, idx) => {
+      const bar = document.getElementById(`modal-gallery-progress-${idx}`);
+      if (bar) {
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
       }
     });
   }
 };
 
-let activeProjectId = null;
+window.slideMobileInfo = function(pageIndex) {
+  const slider = document.getElementById('mobile-info-slider');
+  if (slider) {
+    slider.style.transform = `translateX(-${pageIndex * 50}%)`;
+  }
+
+  const arrowIcon = document.getElementById('mobile-nav-arrow-icon');
+  const arrowBtn = document.getElementById('mobile-nav-arrow-btn');
+  if (arrowIcon && arrowBtn) {
+    if (pageIndex === 0) {
+      arrowIcon.setAttribute('data-lucide', 'arrow-right');
+      arrowBtn.onclick = () => window.slideMobileInfo(1);
+    } else {
+      arrowIcon.setAttribute('data-lucide', 'arrow-left');
+      arrowBtn.onclick = () => window.slideMobileInfo(0);
+    }
+    lucide.createIcons();
+  }
+};
+
+window.addEventListener('resize', () => {
+  if (typeof window.checkAndStartStory === 'function') {
+    window.checkAndStartStory();
+  }
+});
 
 window.openProjectModal = function(id) {
   const proj = PROJECTS.find(p => p.id === id);
@@ -451,22 +505,6 @@ window.openProjectModal = function(id) {
   document.getElementById('modal-project-title').innerText = title;
   document.getElementById('modal-project-subtitle').innerText = subtitle;
   document.getElementById('modal-project-desc').innerText = desc;
-  
-  const descMobile = document.getElementById('modal-project-desc-mobile');
-  if (descMobile) {
-    descMobile.innerText = desc;
-  }
-
-  // Reset mobile overview accordion state to closed
-  const mobileDescContainer = document.getElementById('modal-project-desc-mobile-container');
-  if (mobileDescContainer) {
-    mobileDescContainer.classList.add('max-h-0');
-    mobileDescContainer.classList.remove('max-h-[500px]');
-  }
-  const mobileChevron = document.getElementById('modal-overview-chevron');
-  if (mobileChevron) {
-    mobileChevron.classList.remove('rotate-180');
-  }
 
   document.getElementById('modal-project-year').innerText = proj.year;
 
@@ -497,11 +535,13 @@ window.openProjectModal = function(id) {
   const dotsContainer = document.getElementById('modal-project-gallery-dots');
   if (dotsContainer && proj.gallery && proj.gallery.length > 0) {
     dotsContainer.innerHTML = proj.gallery.map((imgUrl, idx) => `
-      <button 
+      <div 
         onclick="setModalActiveImageIndex(${idx})" 
-        class="h-[3px] rounded-sm flex-1 transition-all duration-300 cursor-pointer focus:outline-none ${idx === 0 ? 'bg-brand-orange' : 'bg-white/20 hover:bg-white/40'}"
+        class="h-[3px] rounded-sm flex-1 bg-white/20 relative overflow-hidden cursor-pointer"
         aria-label="Go to image ${idx + 1}"
-      ></button>
+      >
+        <div id="modal-gallery-progress-${idx}" class="absolute top-0 left-0 bottom-0 bg-brand-orange w-0"></div>
+      </div>
     `).join('');
   } else if (dotsContainer) {
     dotsContainer.innerHTML = '';
@@ -534,37 +574,29 @@ window.openProjectModal = function(id) {
     inner.classList.remove('translate-x-full');
   }, 50);
 
+  // Reset mobile info slider to first card
+  window.slideMobileInfo(0);
+
+  // Start story if needed
+  if (typeof window.checkAndStartStory === 'function') {
+    // slightly delay so DOM calculates correctly
+    setTimeout(() => {
+      window.checkAndStartStory();
+    }, 50);
+  }
+
   lucide.createIcons();
 };
 
 window.closeProjectModal = function() {
   activeProjectId = null;
+  clearTimeout(storyTimeout);
   const modal = document.getElementById('project-modal');
   const inner = document.getElementById('project-modal-content');
   inner.classList.add('translate-x-full');
   setTimeout(() => {
     modal.classList.add('hidden');
   }, 500);
-};
-
-window.toggleMobileOverview = function() {
-  const container = document.getElementById('modal-project-desc-mobile-container');
-  const chevron = document.getElementById('modal-overview-chevron');
-  if (container) {
-    if (container.classList.contains('max-h-0')) {
-      container.classList.remove('max-h-0');
-      container.classList.add('max-h-[500px]');
-      if (chevron) {
-        chevron.classList.add('rotate-180');
-      }
-    } else {
-      container.classList.add('max-h-0');
-      container.classList.remove('max-h-[500px]');
-      if (chevron) {
-        chevron.classList.remove('rotate-180');
-      }
-    }
-  }
 };
 
 // Global interactive language selection state and updater

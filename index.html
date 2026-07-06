@@ -415,13 +415,13 @@
       <!-- Modal Inner Container (No border outline) -->
       <div onclick="event.stopPropagation()" class="relative w-full max-w-2xl lg:max-w-[90vw] xl:max-w-7xl bg-brand-surface-card py-8 px-6 md:py-10 md:px-8 lg:p-10 rounded shadow-2xl flex flex-col transform translate-x-full transition-transform duration-500 my-8 lg:my-0 h-auto lg:max-h-[85vh] lg:h-auto lg:overflow-hidden" id="project-modal-content">
         
-        <div class="flex flex-col lg:flex-row items-center justify-center gap-12 md:gap-14 lg:gap-16 lg:flex-1 lg:overflow-hidden min-h-0 w-full mx-auto">
+        <div class="flex flex-col lg:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 lg:flex-1 lg:overflow-hidden min-h-0 w-full mx-auto">
           
           <!-- Left side: Gallery (Images below large image) -->
           <div class="w-full lg:w-7/12 flex flex-col lg:h-full lg:overflow-hidden min-h-0">
             <div class="select-none flex flex-col lg:h-full min-h-0 justify-center">
               <!-- Large Featured Preview Image -->
-              <div class="relative w-full overflow-hidden mb-3 rounded-sm bg-black aspect-video shrink-0 group">
+              <div class="relative w-full overflow-hidden mb-1.5 rounded-sm bg-black aspect-video shrink-0 group cursor-pointer" onclick="navigateModalGallery(1)">
                 <img
                   id="modal-project-image"
                   src=""
@@ -435,95 +435,98 @@
                 <!-- Clickable thumbnails go here -->
               </div>
               <!-- Highlight dots indicators for mobile/tablet -->
-              <div id="modal-project-gallery-dots" class="flex lg:hidden justify-center items-center gap-1 mt-3 shrink-0 w-full max-w-[240px] mx-auto">
+              <div id="modal-project-gallery-dots" class="flex lg:hidden justify-center items-center gap-1 mt-1.5 shrink-0 w-full max-w-[240px] mx-auto">
                 <!-- Clickable indicator dots go here -->
               </div>
             </div>
           </div>
 
           <!-- Right side: Content (Title, Description, Stats) -->
-          <div class="w-full lg:w-5/12 flex flex-col justify-between lg:h-full lg:overflow-y-auto lg:pr-4 min-h-0 scrollbar-thin">
+          <div class="w-full lg:w-5/12 flex flex-col lg:h-full lg:overflow-y-auto lg:pr-4 min-h-0 scrollbar-thin relative overflow-hidden lg:overflow-visible">
             
-            <div class="flex flex-col">
-              <!-- Header/Title Row -->
-              <div class="flex justify-between items-start gap-4 mb-6 lg:mb-8 lg:mt-2">
-                <div class="flex flex-col">
-                  <!-- Project Title with no "/" -->
-                  <h2 class="font-sans text-4xl md:text-5xl lg:text-4xl font-extrabold tracking-tight text-brand-text lowercase mb-2 break-words max-w-full" id="modal-project-title">
-                    project title
-                  </h2>
-                  <p class="font-sans text-lg md:text-xl lg:text-2xl text-brand-orange font-medium" id="modal-project-subtitle">
-                    branding, identity design and guidelines
-                  </p>
-                </div>
-              </div>
-
-              <!-- Overview & stats (Smaller description text) -->
-              <div class="flex flex-col gap-6 mb-0 text-sm">
-                <!-- Full width overview section (Desktop view only) -->
-                <div class="w-full hidden lg:block">
-                  <h3 data-i18n="modal.overview" class="font-sans text-xs md:text-sm lowercase text-brand-text mb-2 tracking-wider font-bold">.the overview</h3>
-                  <p class="font-sans text-brand-text-muted leading-relaxed lowercase text-xs sm:text-sm lg:text-base" id="modal-project-desc">
-                    full comprehensive overview
-                  </p>
-                </div>
-
-                <!-- Full width overview section (Mobile/Tablet Accordion view only) -->
-                <div class="w-full lg:hidden border-b border-white/10 pb-4">
-                  <button 
-                    onclick="toggleMobileOverview()"
-                    class="w-full flex justify-between items-center py-2 text-left focus:outline-none cursor-pointer"
-                  >
-                    <h3 data-i18n="modal.overview" class="font-sans text-xs md:text-sm lowercase text-brand-text tracking-wider font-bold flex items-center gap-1.5">
-                      .the overview
-                    </h3>
-                    <i data-lucide="chevron-down" id="modal-overview-chevron" class="w-4 h-4 text-brand-orange transition-transform duration-300"></i>
-                  </button>
-                  <div id="modal-project-desc-mobile-container" class="max-h-0 overflow-hidden transition-all duration-300">
-                    <p class="font-sans text-brand-text-muted leading-relaxed lowercase text-xs sm:text-sm pt-2" id="modal-project-desc-mobile">
-                      full comprehensive overview
-                    </p>
+            <div id="mobile-info-slider" class="flex lg:flex-col transition-transform duration-500 w-[200%] lg:w-full transform translate-x-0 h-full lg:h-auto">
+              
+              <!-- Card 1 -->
+              <div class="w-1/2 lg:w-full shrink-0 flex flex-col justify-between lg:block h-full lg:h-auto">
+                <div class="flex-1 overflow-y-auto lg:overflow-visible scrollbar-none flex flex-col">
+                  <!-- Header/Title Row -->
+                  <div class="flex justify-between items-start gap-4 mb-6 lg:mb-8 lg:mt-2 shrink-0">
+                    <div class="flex flex-col">
+                      <!-- Project Title with no "/" -->
+                      <h2 class="font-sans text-4xl md:text-5xl lg:text-4xl font-extrabold tracking-tight text-brand-text lowercase mb-0 break-words max-w-full" id="modal-project-title">
+                        project title
+                      </h2>
+                      <p class="font-sans text-lg md:text-xl lg:text-2xl text-brand-orange font-medium" id="modal-project-subtitle">
+                        branding, identity design and guidelines
+                      </p>
+                    </div>
                   </div>
-                </div>
-                
-                <!-- Horizontal structure underneath: timeline left, toolkit right -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 lg:mt-4">
-                  <div>
-                    <h3 data-i18n="modal.timeline" class="font-sans text-xs md:text-sm lowercase text-brand-text tracking-wider flex items-center gap-1 font-bold">
-                      <i data-lucide="calendar" class="w-3.5 h-3.5 animate-pulse"></i> .timeline
-                    </h3>
-                    <p class="font-sans text-brand-text-muted lowercase text-xs sm:text-sm lg:text-base mt-1" id="modal-project-year">2025</p>
-                  </div>
-                  <div>
-                    <h3 data-i18n="modal.toolkit" class="font-sans text-xs md:text-sm lowercase text-brand-text tracking-wider flex items-center gap-1 font-bold">
-                      <i data-lucide="wrench" class="w-3.5 h-3.5"></i> .toolkit
-                    </h3>
-                    <div class="flex flex-wrap gap-1.5 mt-1.5" id="modal-project-toolkit">
-                      <!-- Tools pill tags go here -->
+
+                  <!-- Overview -->
+                  <div class="flex flex-col gap-6 mb-0 text-sm shrink-0">
+                    <div class="w-full">
+                      <h3 data-i18n="modal.overview" class="font-sans text-xs md:text-sm lowercase text-brand-text mb-2 tracking-wider font-bold">.the overview</h3>
+                      <p class="font-sans text-brand-text-muted leading-relaxed lowercase text-xs sm:text-sm lg:text-base" id="modal-project-desc">
+                        full comprehensive overview
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
+
+              <!-- Card 2 -->
+              <div class="w-1/2 lg:w-full shrink-0 flex flex-col justify-between lg:block lg:mt-8 h-full lg:h-auto">
+                <div class="flex-1 overflow-y-auto lg:overflow-visible scrollbar-none flex flex-col">
+                  <!-- Horizontal structure underneath: timeline left, toolkit right -->
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                    <div>
+                      <h3 data-i18n="modal.timeline" class="font-sans text-xs md:text-sm lowercase text-brand-text tracking-wider flex items-center gap-1 font-bold">
+                        <i data-lucide="calendar" class="w-3.5 h-3.5 animate-pulse"></i> .timeline
+                      </h3>
+                      <p class="font-sans text-brand-text-muted lowercase text-xs sm:text-sm lg:text-base mt-1" id="modal-project-year">2025</p>
+                    </div>
+                    <div>
+                      <h3 data-i18n="modal.toolkit" class="font-sans text-xs md:text-sm lowercase text-brand-text tracking-wider flex items-center gap-1 font-bold">
+                        <i data-lucide="wrench" class="w-3.5 h-3.5"></i> .toolkit
+                      </h3>
+                      <div class="flex flex-wrap gap-1.5 mt-1.5" id="modal-project-toolkit">
+                        <!-- Tools pill tags go here -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="mt-4 lg:mt-8 flex flex-col lg:flex-row justify-center items-center w-full lg:pb-2 gap-3 shrink-0">
+                  <a
+                    id="modal-behance-link"
+                    href=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-i18n="modal.behance"
+                    class="w-full lg:w-auto lg:flex-1 px-6 py-3 bg-[#053eff] hover:bg-[#002fcc] text-white font-sans text-sm font-bold lowercase tracking-wider rounded-sm transition-colors text-center cursor-pointer border-0 hidden"
+                  >
+                    .behance project
+                  </a>
+                  <!-- Desktop close -->
+                  <button
+                    onclick="closeProjectModal()"
+                    data-i18n="modal.close"
+                    class="w-full lg:w-auto lg:flex-1 px-6 py-3 bg-brand-orange hover:bg-brand-orange-hover text-white font-sans text-sm font-bold lowercase tracking-wider rounded-sm transition-colors text-center cursor-pointer border-0 hidden lg:block"
+                  >
+                    .close view
+                  </button>
+                </div>
+              </div>
             </div>
 
-            <!-- Footer -->
-            <div class="mt-6 lg:mt-8 flex flex-col md:flex-row justify-center items-center w-full lg:pb-2 gap-3">
-              <a
-                id="modal-behance-link"
-                href=""
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n="modal.behance"
-                class="w-full md:w-auto md:flex-1 px-6 py-3 bg-[#053eff] hover:bg-[#002fcc] text-white font-sans text-sm font-bold lowercase tracking-wider rounded-sm transition-colors text-center cursor-pointer border-0 hidden"
-              >
-                .behance project
-              </a>
-              <button
-                onclick="closeProjectModal()"
-                data-i18n="modal.close"
-                class="w-full md:w-auto md:flex-1 px-6 py-3 bg-brand-orange hover:bg-brand-orange-hover text-white font-sans text-sm font-bold lowercase tracking-wider rounded-sm transition-colors text-center cursor-pointer border-0"
-              >
-                .close view
+            <!-- Shared Mobile Action Buttons -->
+            <div class="flex gap-3 mt-4 shrink-0 lg:hidden w-full">
+              <button id="mobile-nav-arrow-btn" onclick="slideMobileInfo(1)" class="flex-1 bg-brand-surface hover:bg-white/5 py-3 flex justify-center items-center rounded-sm text-brand-orange transition-colors cursor-pointer">
+                <i id="mobile-nav-arrow-icon" data-lucide="arrow-right" class="w-5 h-5"></i>
+              </button>
+              <button onclick="closeProjectModal()" class="flex-1 bg-brand-surface hover:bg-white/5 py-3 flex justify-center items-center rounded-sm text-brand-text transition-colors cursor-pointer">
+                <i data-lucide="x" class="w-5 h-5"></i>
               </button>
             </div>
           </div>
