@@ -27,74 +27,61 @@ export const PROJECTS = [
   {
     id: 'playlist',
     category: 'branding',
-    title: '.playlist app',
-    subtitle: 'identity design & social audio curation',
-    description: 'visual branding and creative direction for an independent curatorial music platform. centering around typography-driven social sharing cards.',
-    longDescription: 'playlist is a community-first audio platform. the challenge was creating a typographic visual engine that lets users generate high-contrast aesthetic playlists to be shared as social media content. we chose a strict carbon-and-white theme paired with electric green neon accents to convey an immediate underground club vibe.',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+    title: '.playlist',
+    subtitle: 'Branding & website',
+    description: 'playlist is a social network and library focused on gaming and videogames for users to interact, share, and record their most outstanding achievements',
+    longDescription: 'playlist is a social network and library focused on gaming and videogames for users to interact, share, and record their most outstanding achievements',
+    image: './assets/playlist/playlist-1.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=800&q=80'
+      './assets/playlist/playlist-1.jpg',
+      './assets/playlist/playlist-2.jpg',
+      './assets/playlist/playlist-3.jpg',
+      './assets/playlist/playlist-4.jpg'
     ],
-    year: '2024',
-    tools: ['Figma', 'Illustrator', 'After Effects'],
-    features: [
-      'highly flexible layout engine for user-generated posters',
-      'custom interactive web player design templates',
-      'social asset toolkit with 40+ modular typography structures',
-      'motion branding trailer showcasing transitions and audio waves'
-    ]
+    year: '2023-2024',
+    tools: ['Photoshop', 'Illustrator', 'After Effects', 'Figma'],
+    features: [],
+    behanceUrl: 'https://www.behance.net/gallery/194449707/PLAYLIST'
   },
   {
     id: 'deckcom',
     category: 'branding',
     title: '.deckdom',
-    subtitle: 'Branding architectural development & web UI',
-    description: 'visual system and branding guidelines for a high-end custom modular architecture studio based in valencia.',
-    longDescription: 'deckcom produces industrial modular structures. we developed a structural grid-based branding system that communicates raw materials, precision assembly, and architectural elegance. the colors are muted earth-and-clay tones representing the physical materials used in building.',
-    image: 'https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&w=1200&q=80',
+    subtitle: 'Branding',
+    description: 'deckdom is a local card store chain based in elegance and royalty identities, representative of their quality and assurance',
+    longDescription: 'deckdom is a local card store chain based in elegance and royalty identities, representative of their quality and assurance',
+    image: './assets/deckdom/deckdom-1.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1541462608143-67571c6738dd?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1603380353725-f864d39cc41a?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80'
+      './assets/deckdom/deckdom-1.jpg',
+      './assets/deckdom/deckdom-2.jpg',
+      './assets/deckdom/deckdom-3.jpg',
+      './assets/deckdom/deckdom-4.jpg',
+      './assets/deckdom/deckdom-5.jpg'
     ],
-    year: '2024',
-    tools: ['Figma', 'Illustrator', 'Lightroom'],
-    features: [
-      'grid-locked responsive layout system representing physical panels',
-      'identity system utilizing sustainable wood and industrial bronze colors',
-      'digital portal and interactive 3D modular selector',
-      'fully vector stationery suite and blueprints branding'
-    ]
+    year: '2022-2023',
+    tools: ['Photoshop', 'Illustrator'],
+    features: [],
+    behanceUrl: 'https://www.behance.net/gallery/167633823/Deckdom'
   },
   {
     id: 'layton',
     category: 'interface',
     title: '.layton',
-    subtitle: 'UX/UI digital archive & database ui/ux',
-    description: 'aesthetic portal concept for a dedicated archaeological database and riddle inventory system.',
-    longDescription: 'the layton files is a dedicated interactive archive that aggregates complex archeological documentation, riddles, and secret archives. the ui/ux focuses on technical data presentation, incorporating retro scanlines, file cabinet interactions, and micro-animations reminiscent of 90s OS systems.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCjQlGjlj6wqxyQsjIfUz2O88Nlm9hbdwwL95uckVFs40DJd_eZQj9k5JPpLDNfxWHk1GhYM2QrKV2ETWMbuSK6w8txcHcVviWYz-1JzCckJIHykbb1Ytw9yacHO8Ly73ABmRwf8nkh0bHiS48h6MVhMbZLPAmNJx31VygP2RD41mFF7H0TPyWMiIhmFVtCBgMNpptGK8eSilAbzBhHjMVgBu5RkEW6AwWqjRuysAdIiVqthwvJklrq5vODUYhu0eXBbJR8LINc_2o',
+    subtitle: 'Website & app design',
+    description: 'layton is an online puzzle-solving platform based on the Professor Layton video games, with daily puzzles, rankings, achievements and much more',
+    longDescription: 'layton is an online puzzle-solving platform based on the Professor Layton video games, with daily puzzles, rankings, achievements and much more',
+    image: './assets/layton/layton-1.jpg',
     gallery: [
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCjQlGjlj6wqxyQsjIfUz2O88Nlm9hbdwwL95uckVFs40DJd_eZQj9k5JPpLDNfxWHk1GhYM2QrKV2ETWMbuSK6w8txcHcVviWYz-1JzCckJIHykbb1Ytw9yacHO8Ly73ABmRwf8nkh0bHiS48h6MVhMbZLPAmNJx31VygP2RD41mFF7H0TPyWMiIhmFVtCBgMNpptGK8eSilAbzBhHjMVgBu5RkEW6AwWqjRuysAdIiVqthwvJklrq5vODUYhu0eXBbJR8LINc_2o',
-      'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=800&q=80'
+      './assets/layton/layton-1.jpg',
+      './assets/layton/layton-2.jpg',
+      './assets/layton/layton-3.jpg',
+      './assets/layton/layton-4.jpg',
+      './assets/layton/layton-5.jpg'
     ],
-    year: '2025',
-    tools: ['Figma', 'React', 'Tailwind CSS', 'Vite'],
-    features: [
-      'complex data filtering system with smooth list sorting transitions',
-      'aesthetic terminal HUD overlay with a responsive canvas',
-      'interactive cipher decrypter mini-widget',
-      'monochrome color scheme with deep orange accenting'
-    ]
+    year: '2020-2021',
+    tools: ['Photoshop', 'Illustrator'],
+    features: [],
+    behanceUrl: 'https://www.behance.net/gallery/120765667/LAYTON-Platform'
   },
   {
     id: 'nintendo-comm',
