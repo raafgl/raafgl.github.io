@@ -3,7 +3,7 @@ export const PROJECTS = [
     id: 'torii-manga',
     category: 'branding',
     title: '.torii manga',
-    subtitle: 'Branding, logo design & brand book',
+    subtitle: 'branding and visual identity',
     description: 'torii manga has three business areas: a publishing label, a magazine, and a bookstore. it establishes its brand proposition in the discovery, sale, and dissemination of japanese manga to encourage personal disruption, awaken a unique interest, and promote an open attitude towards new experiences.',
     longDescription: 'torii manga has three business areas: a publishing label, a magazine, and a bookstore. it establishes its brand proposition in the discovery, sale, and dissemination of japanese manga to encourage personal disruption, awaken a unique interest, and promote an open attitude towards new experiences.',
     image: './assets/torii/torii-1.jpg',
@@ -28,7 +28,7 @@ export const PROJECTS = [
     id: 'playlist',
     category: 'branding',
     title: '.playlist',
-    subtitle: 'Branding & website',
+    subtitle: 'branding & website',
     description: 'playlist is a social network and library focused on gaming and videogames for users to interact, share, and record their most outstanding achievements',
     longDescription: 'playlist is a social network and library focused on gaming and videogames for users to interact, share, and record their most outstanding achievements',
     image: './assets/playlist/playlist-1.jpg',
@@ -47,7 +47,7 @@ export const PROJECTS = [
     id: 'deckcom',
     category: 'branding',
     title: '.deckdom',
-    subtitle: 'Branding',
+    subtitle: 'branding',
     description: 'deckdom is a local card store chain based in elegance and royalty identities, representative of their quality and assurance',
     longDescription: 'deckdom is a local card store chain based in elegance and royalty identities, representative of their quality and assurance',
     image: './assets/deckdom/deckdom-1.jpg',
@@ -67,7 +67,7 @@ export const PROJECTS = [
     id: 'layton',
     category: 'interface',
     title: '.layton',
-    subtitle: 'Website & app design',
+    subtitle: 'website & app design',
     description: 'layton is an online puzzle-solving platform based on the Professor Layton video games, with daily puzzles, rankings, achievements and much more',
     longDescription: 'layton is an online puzzle-solving platform based on the Professor Layton video games, with daily puzzles, rankings, achievements and much more',
     image: './assets/layton/layton-1.jpg',
@@ -87,49 +87,40 @@ export const PROJECTS = [
     id: 'nintendo-comm',
     category: 'interface',
     title: '.nintendo app',
-    subtitle: 'community web platform & retro hub page',
-    description: 'aesthetic design proposal showcasing events, modern retro forums, and live tournament brackets for active retro players.',
-    longDescription: 'a custom graphic ui/ux and dashboard proposed for community-led tournaments. the design blends modern clean spacing with nostalgic 8-bit game console grids, centering tournament brackets, match tickers, and retro cartridge animations.',
-    image: 'https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1200&q=80',
+    subtitle: 'app design',
+    description: 'Nintendo community is a fan-focused platform to discover games, news, people and content for fans, by fans',
+    longDescription: 'Nintendo community is a fan-focused platform to discover games, news, people and content for fans, by fans',
+    image: './assets/nintendo/nintendo-1.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1531525645387-7f14be1bdbbd?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1592155931584-901ac15763e3?auto=format&fit=crop&w=800&q=80'
+      './assets/nintendo/nintendo-1.jpg',
+      './assets/nintendo/nintendo-2.jpg',
+      './assets/nintendo/nintendo-3.jpg',
+      './assets/nintendo/nintendo-4.jpg',
+      './assets/nintendo/nintendo-5.jpg'
     ],
-    year: '2023',
-    tools: ['Figma', 'After Effects', 'Photoshop'],
-    features: [
-      'full custom-themed brackets visualizer matching retro game palettes',
-      'sound effect alerts triggers for interactive visual feeds',
-      'highly tailored profile status cards that function offline',
-      'smooth scroll custom panels with responsive layout grids'
-    ]
+    year: '2020-2021',
+    tools: ['Photoshop'],
+    features: [],
+    behanceUrl: 'https://www.behance.net/gallery/112464123/Nintendo-Community'
   },
   {
     id: 'collection',
     category: 'print',
-    title: '.poster series',
-    subtitle: 'limited screenprint series & typographic study',
-    description: 'a premium typographic and layout print collection capturing the minimal architecture of Spanish concrete and brutalist facades.',
-    longDescription: 'the collection represents a series of limited physical screenprint poster layouts. emphasizing strong vertical layout grids, heavy negative space, and ink bleed simulations on heavy matte cotton paper. each print was meticulously produced by hand at a classic local studio.',
-    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAaByw4CHO7rq-4v0cLqhiQnlH7Sv5Qk0Oef8lEhiL0l4lgt1XIVg5F7lQPu8ABK6Rvh2AzQJizwxngjn-iMgjp11byFyLw0OzCylXbZbCS6_nx8TfTwJp_W9QW7PCDu2ios8oma5VNGg2bJW4C96O4Y1RRh1R2Ypnjp3J2pA502GgTwFatZjufNZjbodhvb4PMLsv1M0uPjf1vxlZ2JjxCw-z4_KDfcvHH8BZ_PGb3rwxnEnVQIJ_EC_YYpfzJcPcEy9qb1APXjz0',
+    title: '.print series',
+    subtitle: 'poster & print studies',
+    description: 'a collection of personal poster and print studies: grids, typography work, advertisement, maximalism, all with focus on my own hobbies and tastes',
+    longDescription: 'a collection of personal poster and print studies: grids, typography work, advertisement, maximalism, all with focus on my own hobbies and tastes',
+    image: './assets/print/print-1.jpg',
     gallery: [
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuAaByw4CHO7rq-4v0cLqhiQnlH7Sv5Qk0Oef8lEhiL0l4lgt1XIVg5F7lQPu8ABK6Rvh2AzQJizwxngjn-iMgjp11byFyLw0OzCylXbZbCS6_nx8TfTwJp_W9QW7PCDu2ios8oma5VNGg2bJW4C96O4Y1RRh1R2Ypnjp3J2pA502GgTwFatZjufNZjbodhvb4PMLsv1M0uPjf1vxlZ2JjxCw-z4_KDfcvHH8BZ_PGb3rwxnEnVQIJ_EC_YYpfzJcPcEy9qb1APXjz0',
-      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1541829019-259276a7f013?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1554034483-04fda0d3507b?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1502239608882-93b729c6af43?auto=format&fit=crop&w=800&q=80'
+      './assets/print/print-1.jpg',
+      './assets/print/print-2.jpg',
+      './assets/print/print-3.jpg',
+      './assets/print/print-4.jpg',
+      './assets/print/print-5.jpg'
     ],
-    year: '2024',
-    tools: ['InDesign', 'Photoshop', 'Silkscreen Press'],
-    features: [
-      '50 x 70 cm limited physical prints on 300gsm raw cotton paper',
-      'hand-inked typographic locks with extreme ink density',
-      'photographic halftone and low-frequency grain detailing',
-      'exhibited in multiple visual galleries in Valencia and Madrid'
-    ]
+    year: '2024-2026',
+    tools: ['Photoshop', 'Illustrator'],
+    features: []
   }
 ];
 

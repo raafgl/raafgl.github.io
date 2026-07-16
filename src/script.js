@@ -37,34 +37,34 @@ const translations = {
     "modal.behance": ".behance project",
     // Projects English content
     "project.torii-manga.title": ".torii manga",
-    "project.torii-manga.subtitle": "Branding and visual identity",
+    "project.torii-manga.subtitle": "branding and visual identity",
     "project.torii-manga.desc": "torii manga has three business areas: a publishing label, a magazine, and a bookstore. it establishes its brand proposition in the discovery, sale, and dissemination of japanese manga to encourage personal disruption, awaken a unique interest, and promote an open attitude towards new experiences.",
     "project.torii-manga.longDesc": "torii manga has three business areas: a publishing label, a magazine, and a bookstore. it establishes its brand proposition in the discovery, sale, and dissemination of japanese manga to encourage personal disruption, awaken a unique interest, and promote an open attitude towards new experiences.",
     
     "project.playlist.title": ".playlist",
-    "project.playlist.subtitle": "Branding & website",
+    "project.playlist.subtitle": "branding & website",
     "project.playlist.desc": "playlist is a social network and library focused on gaming and videogames for users to interact, share, and record their most outstanding achievements",
     "project.playlist.longDesc": "playlist is a social network and library focused on gaming and videogames for users to interact, share, and record their most outstanding achievements",
     
     "project.deckcom.title": ".deckdom",
-    "project.deckcom.subtitle": "Branding",
+    "project.deckcom.subtitle": "branding",
     "project.deckcom.desc": "deckdom is a local card store chain based in elegance and royalty identities, representative of their quality and assurance",
     "project.deckcom.longDesc": "deckdom is a local card store chain based in elegance and royalty identities, representative of their quality and assurance",
 
     "project.layton.title": ".layton",
-    "project.layton.subtitle": "Website & app design",
+    "project.layton.subtitle": "website & app design",
     "project.layton.desc": "layton is an online puzzle-solving platform based on the Professor Layton video games, with daily puzzles, rankings, achievements and much more",
     "project.layton.longDesc": "layton is an online puzzle-solving platform based on the Professor Layton video games, with daily puzzles, rankings, achievements and much more",
 
     "project.nintendo-comm.title": ".nintendo app",
-    "project.nintendo-comm.subtitle": "community web platform & retro hub page",
-    "project.nintendo-comm.desc": "aesthetic design proposal showcasing events, modern retro forums, and live tournament brackets for active retro players.",
-    "project.nintendo-comm.longDesc": "a custom graphic ui/ux and dashboard proposed for community-led tournaments. the design blends modern clean spacing with nostalgic 8-bit game console grids, centering tournament brackets, match tickers, and retro cartridge animations.",
+    "project.nintendo-comm.subtitle": "app design",
+    "project.nintendo-comm.desc": "Nintendo community is a fan-focused platform to discover games, news, people and content for fans, by fans",
+    "project.nintendo-comm.longDesc": "Nintendo community is a fan-focused platform to discover games, news, people and content for fans, by fans",
 
-    "project.collection.title": ".poster series",
-    "project.collection.subtitle": "limited screenprint series & typographic study",
-    "project.collection.desc": "a premium typographic and layout print collection capturing the minimal architecture of Spanish concrete and brutalist facades.",
-    "project.collection.longDesc": "the collection represents a series of limited physical screenprint poster layouts. emphasizing strong vertical layout grids, heavy negative space, and ink bleed simulations on heavy matte cotton paper. each print was meticulously produced by hand at a classic local studio."
+    "project.collection.title": ".print series",
+    "project.collection.subtitle": "poster & print studies",
+    "project.collection.desc": "a collection of personal poster and print studies: grids, typography work, advertisement, maximalism, all with focus on my own hobbies and tastes",
+    "project.collection.longDesc": "a collection of personal poster and print studies: grids, typography work, advertisement, maximalism, all with focus on my own hobbies and tastes"
   },
   es: {
     "nav.branding": ".branding",
@@ -103,29 +103,29 @@ const translations = {
     "project.torii-manga.longDesc": "torii manga posee tres áreas de negocio: sello editorial, revista y librería. establece su propuesta de marca en el descubrimiento, venta y difusión de manga japonés para fomentar la disrupción personal, despertar un interés único y promover una actitud abierta hacia nuevas experiencias.",
     
     "project.playlist.title": ".playlist",
-    "project.playlist.subtitle": "Branding y sitio web",
+    "project.playlist.subtitle": "branding y sitio web",
     "project.playlist.desc": "playlist es una red social y biblioteca enfocada en videojuegos para que los usuarios interactúen, compartan y registren sus logros más destacados",
     "project.playlist.longDesc": "playlist es una red social y biblioteca enfocada en videojuegos para que los usuarios interactúen, compartan y registren sus logros más destacados",
     
     "project.deckcom.title": ".deckdom",
-    "project.deckcom.subtitle": "Branding",
+    "project.deckcom.subtitle": "branding",
     "project.deckcom.desc": "deckdom es una cadena local de tiendas de cartas basada en identidades de elegancia y realeza, representativas de su calidad y garantía",
     "project.deckcom.longDesc": "deckdom es una cadena local de tiendas de cartas basada en identidades de elegancia y realeza, representativas de su calidad y garantía",
 
     "project.layton.title": ".layton",
-    "project.layton.subtitle": "Diseño de sitio web y aplicación",
+    "project.layton.subtitle": "diseño de sitio web y aplicación",
     "project.layton.desc": "layton es una plataforma de resolución de rompecabezas en línea basada en los videojuegos del Profesor Layton, con rompecabezas diarios, clasificaciones, logros y mucho más",
     "project.layton.longDesc": "layton es una plataforma de resolución de rompecabezas en línea basada en los videojuegos del Profesor Layton, con rompecabezas diarios, clasificaciones, logros y mucho más",
 
     "project.nintendo-comm.title": ".nintendo app",
-    "project.nintendo-comm.subtitle": "plataforma web comunitaria y página de inicio retro",
-    "project.nintendo-comm.desc": "propuesta de diseño estético que muestra eventos, foros retro modernos y cuadros de torneos en vivo para jugadores retro activos.",
-    "project.nintendo-comm.longDesc": "un diseño de ui/ux interactivo y un panel personalizados propuestos para torneos organizados por la comunidad. el diseño combina espacios limpios modernos con rejillas nostálgicas de consolas de 8 bits, integrando cuadros de torneo, marcadores en vivo y animaciones de cartuchos retro.",
+    "project.nintendo-comm.subtitle": "diseño de aplicación",
+    "project.nintendo-comm.desc": "Nintendo community es una plataforma enfocada en los fanáticos para descubrir juegos, noticias, personas y contenido para fans, por fans",
+    "project.nintendo-comm.longDesc": "Nintendo community es una plataforma enfocada en los fanáticos para descubrir juegos, noticias, personas y contenido para fans, por fans",
 
-    "project.collection.title": ".poster series",
-    "project.collection.subtitle": "serie limitada de serigrafía y estudio tipográfico",
-    "project.collection.desc": "una colección premium de diseño impreso y tipográfico que captura la arquitectura minimalista de las fachadas de hormigón españolas y el brutalismo.",
-    "project.collection.longDesc": "la colección representa una serie de diseños de carteles de serigrafía artística física limitada. destaca por sus rejillas de diseño vertical fuerte, abundante espacio negativo y simulaciones de sangrado de tinta sobre papel de algodón mate grueso. cada impresión fue realizada meticulosamente a mano en un estudio local clásico."
+    "project.collection.title": ".print series",
+    "project.collection.subtitle": "estudios de póster e impresión",
+    "project.collection.desc": "una colección de estudios personales de póster e impresión: cuadrículas, trabajo tipográfico, publicidad, maximalismo, todo enfocado en mis propios gustos y pasatiempos",
+    "project.collection.longDesc": "una colección de estudios personales de póster e impresión: cuadrículas, trabajo tipográfico, publicidad, maximalismo, todo enfocado en mis propios gustos y pasatiempos"
   }
 };
 
