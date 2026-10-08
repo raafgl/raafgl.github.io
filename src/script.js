@@ -1150,64 +1150,7 @@ const initializePortfolio = () => {
   };
 
   updateCvDownloadAttribute();
-
-  // --- Mobile Dynamic Viewport & Chrome Address Bar Retraction Fix ---
-  // Keeps sections, background videos, and containers dynamically synced when the URL bar collapses or expands
-  const setStableViewportHeight = () => {
-    const vh = window.innerHeight;
-    document.documentElement.style.setProperty('--stable-vh', `${vh}px`);
-  };
-  
-  setStableViewportHeight();
-
-  let isTouching = false;
-  let resizeDebounce = null;
-  const segmentsList = ['welcome', 'branding', 'interface', 'print', 'worked-for'];
-
-  const handleViewportResize = () => {
-    setStableViewportHeight();
-    updateCvDownloadAttribute();
-
-    // Re-align active scroll section seamlessly if URL bar collapsed or expanded
-    if (!isTouching) {
-      clearTimeout(resizeDebounce);
-      resizeDebounce = setTimeout(() => {
-        const container = document.getElementById('scroll-container');
-        if (!container) return;
-        const idx = segmentsList.indexOf(activeSegment);
-        if (idx >= 0) {
-          const sections = container.querySelectorAll('.scroll-section');
-          if (sections[idx]) {
-            const currentTargetY = idx * container.clientHeight;
-            if (Math.abs(container.scrollTop - currentTargetY) > 2) {
-              container.scrollTo({
-                top: currentTargetY,
-                behavior: 'auto'
-              });
-            }
-          }
-        }
-      }, 60);
-    }
-  };
-
-  window.addEventListener('resize', handleViewportResize);
-  if (window.visualViewport) {
-    window.visualViewport.addEventListener('resize', handleViewportResize);
-  }
-
-  const containerEl = document.getElementById('scroll-container');
-  if (containerEl) {
-    containerEl.addEventListener('touchstart', () => {
-      isTouching = true;
-    }, { passive: true });
-
-    containerEl.addEventListener('touchend', () => {
-      isTouching = false;
-      setTimeout(handleViewportResize, 100);
-    }, { passive: true });
-  }
-  // ----------------------------------
+  window.addEventListener('resize', updateCvDownloadAttribute);
 
   const initLang = localStorage.getItem('portfolio_lang') || 'en';
   window.changeLanguage(initLang);
