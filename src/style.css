@@ -305,3 +305,63 @@ footer.fixed {
   background-color: transparent;
   border: 2px solid white;
 }
+
+/* ============================================================ */
+/* NEW INLINE PROJECT DISPLAY: DIMMED B&W VIDEO & AUTO-GALLERY */
+/* ============================================================ */
+
+/* Background Video dimmed black and white state */
+.section-bg-video {
+  transition: filter 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, opacity;
+}
+
+.section-bg-video.is-dimmed {
+  filter: grayscale(100%) contrast(1.15) brightness(0.65) !important;
+  opacity: 0.12 !important;
+}
+
+/* Auto-moving horizontal gallery container without boxes or frames */
+.auto-gallery-container {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  scroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.auto-gallery-container::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.cursor-grabbing {
+  cursor: grabbing !important;
+}
+
+/* Mobile-only scrollable description with upper and lower fade effect */
+@media (max-width: 639px) {
+  .mobile-desc-scroll-box {
+    position: relative;
+    max-height: 5.5rem; /* ~4 lines of text */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    /* CSS mask for smooth upper and lower fade effect */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%);
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .mobile-desc-scroll-box::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .mobile-desc-scroll-box::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+  }
+}
+

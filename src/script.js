@@ -35,6 +35,8 @@ const translations = {
     "modal.completed": "completed",
     "modal.close": ".close view",
     "modal.behance": ".behance project",
+    "project.back": ".back to projects",
+    "project.postcards": "postcards",
     // Projects English content
     "project.torii-manga.title": ".torii manga",
     "project.torii-manga.subtitle": "branding and visual identity",
@@ -96,6 +98,8 @@ const translations = {
     "modal.completed": "completado",
     "modal.close": ".cerrar vista",
     "modal.behance": ".proyecto en behance",
+    "project.back": ".volver a proyectos",
+    "project.postcards": "postales",
     // Projects Spanish content
     "project.torii-manga.title": ".torii manga",
     "project.torii-manga.subtitle": "branding e identidad visual",
@@ -278,7 +282,7 @@ const renderProjectsLists = () => {
       const title = getTranslation(`project.${proj.id}.title`);
       return `
         <div 
-          onclick="openProjectModal('${proj.id}')"
+          onclick="handleProjectClick('${proj.id}')"
           class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-2 sm:px-4 transition-all duration-300 cursor-pointer rounded-sm group flex flex-wrap sm:flex-nowrap justify-between items-baseline sm:items-center w-full gap-2"
         >
           <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight break-words max-w-full">${title}</h3>
@@ -295,7 +299,7 @@ const renderProjectsLists = () => {
       const title = getTranslation(`project.${proj.id}.title`);
       return `
         <div 
-          onclick="openProjectModal('${proj.id}')"
+          onclick="handleProjectClick('${proj.id}')"
           class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-2 sm:px-4 transition-all duration-300 cursor-pointer rounded-sm group flex flex-wrap sm:flex-nowrap justify-between items-baseline sm:items-center w-full gap-2"
         >
           <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight break-words max-w-full">${title}</h3>
@@ -312,7 +316,7 @@ const renderProjectsLists = () => {
       const title = getTranslation(`project.${proj.id}.title`);
       return `
         <div 
-          onclick="openProjectModal('${proj.id}')"
+          onclick="handleProjectClick('${proj.id}')"
           class="bg-transparent border-0 hover:bg-white text-brand-text hover:text-brand-surface py-3 px-2 sm:px-4 transition-all duration-300 cursor-pointer rounded-sm group flex flex-wrap sm:flex-nowrap justify-between items-baseline sm:items-center w-full gap-2"
         >
           <h3 class="font-sans text-xl md:text-2xl font-bold lowercase tracking-tight break-words max-w-full">${title}</h3>
@@ -599,6 +603,387 @@ window.closeProjectModal = function() {
   }, 500);
 };
 
+// ==========================================================================
+// INLINE PROJECT VIEW DISPLAY SYSTEM (CAN BE TOGGLED BACK TO MODAL IF NEEDED)
+// ==========================================================================
+// Set to true to use the new inline project display
+// Set to false to revert back to the pop-up modal
+export const USE_INLINE_PROJECT_VIEW = true;
+
+const activeInlineProjects = {
+  branding: null,
+  interface: null,
+  print: null
+};
+
+window.handleProjectClick = function(id) {
+  if (USE_INLINE_PROJECT_VIEW) {
+    window.openInlineProject(id);
+  } else {
+    window.openProjectModal(id);
+  }
+};
+
+window.openInlineProject = function(id) {
+  const proj = PROJECTS.find(p => p.id === id);
+  if (!proj) return;
+
+  const category = proj.category;
+  
+  // Close any already open project in other categories to keep focus clear
+  Object.keys(activeInlineProjects).forEach(cat => {
+    if (cat !== category && activeInlineProjects[cat]) {
+      window.closeInlineProject(cat);
+    }
+  });
+
+  activeInlineProjects[category] = id;
+
+  // 1. Background video goes black and white and very low opacity
+  const video = document.getElementById(`video-${category}`);
+  if (video) {
+    video.classList.add('is-dimmed');
+  }
+
+  // 2. Section title changes to the project title with a transition
+  const headingWrapper = document.getElementById(`heading-wrapper-${category}`);
+  const heading = document.getElementById(`heading-${category}`);
+  if (headingWrapper && heading) {
+      headingWrapper.style.transition = 'opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1)';
+      headingWrapper.style.opacity = '0';
+      headingWrapper.style.transform = 'translateY(-10px)';
+
+      setTimeout(() => {
+        const projTitle = getTranslation(`project.${proj.id}.title`);
+        const subtitle = getTranslation(`project.${proj.id}.subtitle`);
+
+        heading.innerHTML = `
+          <div class="flex flex-col items-start gap-1 sm:gap-2 w-full">
+            <span class="font-sans text-sm sm:text-base md:text-lg lg:text-xl text-brand-orange font-bold lowercase tracking-normal">
+              ${subtitle}
+            </span>
+            <span class="font-sans text-5xl sm:text-6xl md:text-7xl lg:text-[84px] font-black lowercase tracking-tight text-brand-text m-0 leading-[0.95] break-words">
+              ${projTitle}
+            </span>
+          </div>
+        `;
+        headingWrapper.style.opacity = '1';
+        headingWrapper.style.transform = 'translateY(0)';
+      }, 220);
+    }
+
+    // 3 & 4. Project list disappears simultaneously to give way to project description, info, buttons & auto-moving gallery images
+    const listView = document.getElementById(`${category}-list-view`);
+    const detailView = document.getElementById(`${category}-detail-view`);
+
+    if (listView && detailView) {
+      listView.style.transition = 'opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s cubic-bezier(0.16, 1, 0.3, 1)';
+      listView.style.opacity = '0';
+      listView.style.transform = 'translateX(-16px)';
+      listView.style.pointerEvents = 'none';
+
+      setTimeout(() => {
+        listView.classList.add('hidden');
+
+        renderInlineDetailContent(category, proj);
+
+        detailView.classList.remove('hidden');
+        detailView.style.transition = 'opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), transform 0.32s cubic-bezier(0.16, 1, 0.3, 1)';
+        detailView.style.opacity = '0';
+        detailView.style.transform = 'translateX(16px)';
+
+        requestAnimationFrame(() => {
+          detailView.style.opacity = '1';
+          detailView.style.transform = 'translateX(0)';
+          initAutoGallery(category);
+        });
+      }, 220);
+    }
+  };
+
+  window.closeInlineProject = function(category) {
+    activeInlineProjects[category] = null;
+
+    if (activeGalleryCleanups[category]) {
+      activeGalleryCleanups[category]();
+      activeGalleryCleanups[category] = null;
+    }
+
+    // 1. Background video returns to normal
+    const video = document.getElementById(`video-${category}`);
+    if (video) {
+      video.classList.remove('is-dimmed');
+    }
+
+    // 2. Title transitions back to category title
+    const headingWrapper = document.getElementById(`heading-wrapper-${category}`);
+    const heading = document.getElementById(`heading-${category}`);
+    if (headingWrapper && heading) {
+      headingWrapper.style.transition = 'opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      headingWrapper.style.opacity = '0';
+      headingWrapper.style.transform = 'translateY(-10px)';
+
+      setTimeout(() => {
+        const line1 = getTranslation(`section.${category}.line1`);
+        const line2 = getTranslation(`section.${category}.line2`);
+
+        heading.innerHTML = `
+          <span data-i18n="section.${category}.line1">${line1}</span>
+          <span data-i18n="section.${category}.line2">${line2}</span>
+        `;
+        headingWrapper.style.opacity = '1';
+        headingWrapper.style.transform = 'translateY(0)';
+      }, 190);
+    }
+
+    // 3. Detail view fades out, list view fades in simultaneously
+    const listView = document.getElementById(`${category}-list-view`);
+    const detailView = document.getElementById(`${category}-detail-view`);
+
+    if (listView && detailView) {
+      detailView.style.transition = 'opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+      detailView.style.opacity = '0';
+      detailView.style.transform = 'translateX(16px)';
+
+      setTimeout(() => {
+        detailView.classList.add('hidden');
+        detailView.innerHTML = '';
+
+        listView.classList.remove('hidden');
+        listView.style.transition = 'opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        listView.style.opacity = '0';
+        listView.style.transform = 'translateX(-16px)';
+        listView.style.pointerEvents = 'auto';
+
+        requestAnimationFrame(() => {
+          listView.style.opacity = '1';
+          listView.style.transform = 'translateX(0)';
+        });
+      }, 190);
+    }
+  };
+
+  const activeGalleryCleanups = {
+    branding: null,
+    interface: null,
+    print: null
+  };
+
+  function initAutoGallery(category) {
+    if (activeGalleryCleanups[category]) {
+      activeGalleryCleanups[category]();
+      activeGalleryCleanups[category] = null;
+    }
+
+    const container = document.getElementById(`auto-gallery-track-${category}`);
+    if (!container) return;
+
+    let isDown = false;
+    let isHovered = false;
+    let startX = 0;
+    let scrollLeftStart = 0;
+    let rafId = null;
+    const speed = 0.85; // smooth auto-drift speed
+
+    const step = () => {
+      if (!isDown && !isHovered && container) {
+        container.scrollLeft += speed;
+        const halfWidth = container.scrollWidth / 2;
+        if (halfWidth > 0 && container.scrollLeft >= halfWidth) {
+          container.scrollLeft -= halfWidth;
+        }
+      }
+      rafId = requestAnimationFrame(step);
+    };
+    rafId = requestAnimationFrame(step);
+
+    const onMouseEnter = () => { isHovered = true; };
+    const onMouseLeave = () => { if (!isDown) isHovered = false; };
+    const onTouchStart = () => { isHovered = true; };
+    const onTouchEnd = () => { 
+      setTimeout(() => { isHovered = false; }, 800); 
+    };
+
+    container.addEventListener('mouseenter', onMouseEnter);
+    container.addEventListener('mouseleave', onMouseLeave);
+    container.addEventListener('touchstart', onTouchStart, { passive: true });
+    container.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    const onWheel = (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+        const halfWidth = container.scrollWidth / 2;
+        if (halfWidth > 0) {
+          if (container.scrollLeft >= halfWidth) {
+            container.scrollLeft -= halfWidth;
+          } else if (container.scrollLeft <= 0) {
+            container.scrollLeft += halfWidth;
+          }
+        }
+      }
+    };
+    container.addEventListener('wheel', onWheel, { passive: false });
+
+    const onMouseDown = (e) => {
+      isDown = true;
+      isHovered = true;
+      startX = e.pageX - container.offsetLeft;
+      scrollLeftStart = container.scrollLeft;
+      container.classList.add('cursor-grabbing');
+    };
+
+    const onMouseUp = () => {
+      if (isDown) {
+        isDown = false;
+        container.classList.remove('cursor-grabbing');
+        setTimeout(() => { isHovered = false; }, 400);
+      }
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      container.scrollLeft = scrollLeftStart - walk;
+      const halfWidth = container.scrollWidth / 2;
+      if (halfWidth > 0) {
+        if (container.scrollLeft >= halfWidth) {
+          container.scrollLeft -= halfWidth;
+          scrollLeftStart -= halfWidth;
+        } else if (container.scrollLeft <= 0) {
+          container.scrollLeft += halfWidth;
+          scrollLeftStart += halfWidth;
+        }
+      }
+    };
+
+    container.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+    container.addEventListener('mousemove', onMouseMove);
+
+    activeGalleryCleanups[category] = () => {
+      cancelAnimationFrame(rafId);
+      container.removeEventListener('mouseenter', onMouseEnter);
+      container.removeEventListener('mouseleave', onMouseLeave);
+      container.removeEventListener('touchstart', onTouchStart);
+      container.removeEventListener('touchend', onTouchEnd);
+      container.removeEventListener('wheel', onWheel);
+      container.removeEventListener('mousedown', onMouseDown);
+      container.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }
+
+  function renderInlineDetailContent(category, proj) {
+    const detailView = document.getElementById(`${category}-detail-view`);
+    if (!detailView) return;
+
+    const projTitle = getTranslation(`project.${proj.id}.title`);
+    const desc = getTranslation(`project.${proj.id}.longDesc`) || getTranslation(`project.${proj.id}.desc`);
+    const gallery = (proj.gallery && proj.gallery.length > 0) ? proj.gallery : [proj.image];
+    const loopImages = [...gallery, ...gallery];
+    const timelineLabel = getTranslation('modal.timeline');
+    const toolkitLabel = getTranslation('modal.toolkit');
+    const behanceLabel = getTranslation('modal.behance');
+    const backLabel = getTranslation('project.back');
+
+    detailView.innerHTML = `
+      <!-- TOP: Images moving horizontally automatically across whole width without boxes or frames -->
+      <div class="w-full overflow-hidden select-none">
+        <div 
+          id="auto-gallery-track-${category}"
+          class="auto-gallery-container flex gap-3 sm:gap-4 overflow-x-auto select-none py-1 cursor-grab"
+        >
+          ${loopImages.map((imgUrl, idx) => `
+            <img 
+              src="${imgUrl}" 
+              alt="${projTitle} ${idx + 1}" 
+              referrerpolicy="no-referrer"
+              loading="eager"
+              class="h-40 sm:h-52 md:h-60 lg:h-64 aspect-[16/10] object-cover shrink-0 select-none block rounded-sm pointer-events-none"
+            />
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- BELOW IMAGES: Description, info & respective action buttons -->
+      <div class="flex flex-col gap-3.5 sm:gap-5 w-full">
+        <!-- Description: on mobile, a smaller scrollable box with upper and lower fade effect; on desktop, standard text -->
+        <div class="mobile-desc-scroll-box w-full">
+          <p class="font-sans text-xs sm:text-lg md:text-xl text-brand-text-muted lowercase leading-relaxed m-0">
+            ${desc}
+          </p>
+        </div>
+
+        <!-- Info Row: Timeline & Toolkit with unboxed clean typography (2-column layout on mobile, inline on desktop) -->
+        <div class="border-t border-white/10 pt-2.5 sm:pt-3">
+          <!-- Mobile layout: 2 columns (labels in line 1, values in line 2) -->
+          <div class="grid grid-cols-2 gap-x-4 gap-y-1 sm:hidden font-sans text-xs text-brand-text-muted lowercase">
+            <span class="text-white/50">${timelineLabel}</span>
+            <span class="text-white/50">${toolkitLabel}</span>
+            <span class="text-brand-text font-semibold">${proj.year}</span>
+            <span class="text-brand-text font-semibold">${proj.tools && proj.tools.length > 0 ? proj.tools.join(', ') : '-'}</span>
+          </div>
+
+          <!-- Desktop layout: clean inline flow unchanged -->
+          <div class="hidden sm:flex flex-wrap items-center gap-x-6 gap-y-1.5 font-sans text-base text-brand-text-muted lowercase">
+            <div>
+              <span class="text-white/50">${timelineLabel}:</span>
+              <span class="text-brand-text font-semibold ml-1.5">${proj.year}</span>
+            </div>
+            ${proj.tools && proj.tools.length > 0 ? `
+              <div class="text-white/20">/</div>
+              <div>
+                <span class="text-white/50">${toolkitLabel}:</span>
+                <span class="text-brand-text font-semibold ml-1.5">${proj.tools.join(', ')}</span>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+
+        <!-- Respective Action Buttons: on mobile in the same horizontal line with 'behance' and 'back'; on desktop unchanged -->
+        <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-4 pt-1 w-full">
+          ${proj.behanceUrl ? `
+            <a
+              href="${proj.behanceUrl}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-full sm:w-auto px-4 sm:px-6 py-2.5 bg-[#053eff] hover:bg-[#002fcc] text-white font-sans text-xs sm:text-base font-bold lowercase tracking-wider rounded-sm transition-colors cursor-pointer inline-flex items-center justify-center border-0 text-center"
+            >
+              <span class="sm:hidden">behance</span>
+              <span class="hidden sm:inline">${behanceLabel}</span>
+            </a>
+          ` : ''}
+          <button
+            onclick="closeInlineProject('${category}')"
+            class="w-full sm:w-auto px-4 sm:px-6 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white font-sans text-xs sm:text-base font-bold lowercase tracking-wider rounded-sm transition-colors cursor-pointer border-0 inline-flex items-center justify-center text-center"
+          >
+            <span class="sm:hidden">back</span>
+            <span class="hidden sm:inline">${backLabel}</span>
+          </button>
+        </div>
+      </div>
+    `;
+
+    lucide.createIcons();
+  }
+
+// Escape key listener to close inline project or modal
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    Object.keys(activeInlineProjects).forEach(cat => {
+      if (activeInlineProjects[cat]) {
+        window.closeInlineProject(cat);
+      }
+    });
+    if (activeProjectId) {
+      window.closeProjectModal();
+    }
+  }
+});
+
 // Global interactive language selection state and updater
 window.changeLanguage = function(lang) {
   localStorage.setItem('portfolio_lang', lang);
@@ -618,6 +1003,33 @@ window.changeLanguage = function(lang) {
   // Programmatically translate other items
   translateContent();
   renderProjectsLists();
+
+  // If there is an active inline project open in any section, translate dynamically
+  Object.keys(activeInlineProjects).forEach(cat => {
+    const activeId = activeInlineProjects[cat];
+    if (activeId) {
+      const proj = PROJECTS.find(p => p.id === activeId);
+      if (proj) {
+        renderInlineDetailContent(cat, proj);
+        initAutoGallery(cat);
+        const heading = document.getElementById(`heading-${cat}`);
+        const projTitle = getTranslation(`project.${proj.id}.title`);
+        const subtitle = getTranslation(`project.${proj.id}.subtitle`);
+        if (heading) {
+          heading.innerHTML = `
+            <div class="flex flex-col items-start gap-1 sm:gap-2 w-full">
+              <span class="font-sans text-sm sm:text-base md:text-lg lg:text-xl text-brand-orange font-bold lowercase tracking-normal">
+                ${subtitle}
+              </span>
+              <span class="font-sans text-5xl sm:text-6xl md:text-7xl lg:text-[84px] font-black lowercase tracking-tight text-brand-text m-0 leading-[0.95] break-words">
+                ${projTitle}
+              </span>
+            </div>
+          `;
+        }
+      }
+    }
+  });
 
   // If there is an active project modal open, translate its contents dynamically
   if (activeProjectId) {

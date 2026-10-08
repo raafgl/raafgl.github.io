@@ -245,79 +245,109 @@
       </section>
 
       <!-- SECTION 2: .branding design -->
-      <section class="scroll-section px-6 md:px-12">
+      <section class="scroll-section px-6 md:px-12" id="section-branding">
         <!-- Branding abstract geometry backdrop -->
         <div class="section-bg spotlight-mask absolute inset-0 pointer-events-none -z-20 overflow-hidden">
           <video 
+            id="video-branding"
             src="./assets/raf-branding-1920x1080.webm" 
-            class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            class="section-bg-video absolute inset-0 w-full h-full object-cover pointer-events-none"
             autoplay loop muted playsinline
           ></video>
         </div>
 
         <div class="w-full pb-[calc(32px+56px)] grid grid-cols-1 lg:grid-cols-5 lg:items-end gap-8 lg:gap-16">
           <div class="lg:col-span-2 flex flex-col items-start justify-end shrink-0 m-0">
-            <h1 class="font-sans text-6xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start">
-              <span data-i18n="section.branding.line1">.branding</span>
-              <span data-i18n="section.branding.line2">design</span>
-            </h1>
+            <div id="heading-wrapper-branding" class="transition-all duration-300 w-full">
+              <h1 class="font-sans text-6xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start" id="heading-branding">
+                <span data-i18n="section.branding.line1">.branding</span>
+                <span data-i18n="section.branding.line2">design</span>
+              </h1>
+            </div>
           </div>
           
-          <!-- Projects stacked vertically as clean horizontal rows -->
-          <div class="flex flex-col gap-1.5 lg:col-span-3 m-0" id="branding-grid">
-            <!-- Dynamic Category cards go here -->
+          <!-- Projects stacked vertically as clean horizontal rows OR Inline Detail -->
+          <div class="lg:col-span-3 m-0 relative" id="pane-container-branding">
+            <div id="branding-list-view" class="flex flex-col gap-1.5 transition-all duration-300">
+              <div class="flex flex-col gap-1.5" id="branding-grid">
+                <!-- Dynamic Category cards go here -->
+              </div>
+            </div>
+            <div id="branding-detail-view" class="hidden opacity-0 flex flex-col gap-5 sm:gap-6 transition-all duration-300 max-h-[calc(100dvh-160px)] overflow-y-auto pr-1 scrollbar-thin">
+              <!-- Inline detail content rendered here -->
+            </div>
           </div>
         </div>
       </section>
 
       <!-- SECTION 3: .ui/ux design -->
-      <section class="scroll-section px-6 md:px-12">
+      <section class="scroll-section px-6 md:px-12" id="section-interface">
         <!-- Archaeological UI layout backdrop -->
         <div class="section-bg spotlight-mask absolute inset-0 pointer-events-none -z-20 overflow-hidden">
           <video 
+            id="video-interface"
             src="./assets/raf-ui-1920x1080.webm" 
-            class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            class="section-bg-video absolute inset-0 w-full h-full object-cover pointer-events-none"
             autoplay loop muted playsinline
           ></video>
         </div>
 
         <div class="w-full pb-[calc(32px+56px)] grid grid-cols-1 lg:grid-cols-5 lg:items-end gap-8 lg:gap-16">
           <div class="lg:col-span-2 flex flex-col items-start justify-end shrink-0 m-0">
-            <h1 class="font-sans text-6xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start">
-              <span data-i18n="section.interface.line1">.ui/ux</span>
-              <span data-i18n="section.interface.line2">design</span>
-            </h1>
+            <div id="heading-wrapper-interface" class="transition-all duration-300 w-full">
+              <h1 class="font-sans text-6xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start" id="heading-interface">
+                <span data-i18n="section.interface.line1">.ui/ux</span>
+                <span data-i18n="section.interface.line2">design</span>
+              </h1>
+            </div>
           </div>
 
-          <!-- UI/UX row list -->
-          <div class="flex flex-col gap-1.5 lg:col-span-3 m-0" id="interface-grid">
-            <!-- Dynamic interface files cards go here -->
+          <!-- UI/UX row list OR Inline Detail -->
+          <div class="lg:col-span-3 m-0 relative" id="pane-container-interface">
+            <div id="interface-list-view" class="flex flex-col gap-1.5 transition-all duration-300">
+              <div class="flex flex-col gap-1.5" id="interface-grid">
+                <!-- Dynamic interface files cards go here -->
+              </div>
+            </div>
+            <div id="interface-detail-view" class="hidden opacity-0 flex flex-col gap-5 sm:gap-6 transition-all duration-300 max-h-[calc(100dvh-160px)] overflow-y-auto pr-1 scrollbar-thin">
+              <!-- Inline detail content rendered here -->
+            </div>
           </div>
         </div>
       </section>
 
       <!-- SECTION 4: .print design -->
-      <section class="scroll-section px-6 md:px-12">
+      <section class="scroll-section px-6 md:px-12" id="section-print">
         <!-- Concrete print tactile backdrop -->
         <div class="section-bg spotlight-mask absolute inset-0 pointer-events-none -z-20 overflow-hidden">
           <video 
+            id="video-print"
             src="./assets/raf-print-1920x1080.webm" 
-            class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            class="section-bg-video absolute inset-0 w-full h-full object-cover pointer-events-none"
             autoplay loop muted playsinline
           ></video>
         </div>
 
         <div class="w-full pb-[calc(32px+56px)] grid grid-cols-1 lg:grid-cols-5 lg:items-end gap-8 lg:gap-16">
           <div class="lg:col-span-2 flex flex-col items-start justify-end shrink-0 m-0">
-            <h1 class="font-sans text-6xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start">
-              <span data-i18n="section.print.line1">.print</span>
-              <span data-i18n="section.print.line2">design</span>
-            </h1>
+            <div id="heading-wrapper-print" class="transition-all duration-300 w-full">
+              <h1 class="font-sans text-6xl sm:text-7xl md:text-[96px] font-black lowercase tracking-tight text-brand-text m-0 leading-none break-words flex flex-col items-start" id="heading-print">
+                <span data-i18n="section.print.line1">.print</span>
+                <span data-i18n="section.print.line2">design</span>
+              </h1>
+            </div>
           </div>
 
-          <!-- Print row list -->
-          <div class="flex flex-col gap-1.5 lg:col-span-3 m-0" id="print-grid">
-            <!-- Dynamic physical print layout goes here -->
+          <!-- Print row list OR Inline Detail -->
+          <div class="lg:col-span-3 m-0 relative" id="pane-container-print">
+            <div id="print-list-view" class="flex flex-col gap-1.5 transition-all duration-300">
+              <div class="flex flex-col gap-1.5" id="print-grid">
+                <!-- Dynamic physical print layout goes here -->
+              </div>
+            </div>
+            <div id="print-detail-view" class="hidden opacity-0 flex flex-col gap-5 sm:gap-6 transition-all duration-300 max-h-[calc(100dvh-160px)] overflow-y-auto pr-1 scrollbar-thin">
+              <!-- Inline detail content rendered here -->
+            </div>
           </div>
         </div>
       </section>
