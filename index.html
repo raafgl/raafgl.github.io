@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,7 +37,7 @@
     <!-- Lucide icons package CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
   </head>
-  <body class="min-h-screen relative overflow-hidden bg-brand-surface text-brand-text flex flex-col justify-between selection:bg-brand-orange selection:text-brand-orange-light" id="body-root">
+  <body class="h-full min-h-full relative overflow-hidden bg-brand-surface text-brand-text flex flex-col justify-between selection:bg-brand-orange selection:text-brand-orange-light" id="body-root">
     <!-- Custom Cursor -->
     <div id="custom-cursor" class="hidden md:block"></div>
 
@@ -436,7 +436,7 @@
     </footer>
 
     <!-- Screen Pagination Indicator active bar on the right extreme -->
-    <div class="fixed right-0 top-0 bottom-0 w-[3px] h-[100vh] bg-white/5 z-50 overflow-hidden m-0 p-0">
+    <div class="fixed right-0 top-0 bottom-0 w-[3px] bg-white/5 z-50 overflow-hidden m-0 p-0">
       <div 
         id="scroll-indicator"
         class="bg-brand-orange w-full rounded-full transition-all duration-75"
